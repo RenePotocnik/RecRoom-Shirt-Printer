@@ -21,6 +21,10 @@ If the image is not converted it will automatically get converted and dithered.
 After the data has been encoded, you will be prompted to import all data to RecRoom.\
 
 
+https://user-images.githubusercontent.com/76653181/179419753-4981f9bb-0b66-47bb-8796-cbedddf5ef56.mp4
+
+
+
 
 #
 If you have any problems with the scripts, the invention or anything else, you can contact me on:
