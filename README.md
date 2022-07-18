@@ -55,7 +55,7 @@ It should look like the picture below.
 Next step is the circuit board named `Shirt Printer`.\
 You will have to change those inputs to suit your imported image\
 There's comments to help you understand better;
-* `Front And Back` - Set this to `True` if you're printing bothsided, set it to `False` if you're printing only one side.
+* `Front And Back` - Set this to `True` if you're printing both-sided, set it to `False` if you're printing only one side.
 * `Variable Import` - If you're importing the image always keep this to `True`. You only set it to `False` if you request me to import an image and let you print it (comes with a fee)
 * `Main Delay` - Controls the speed of the system; if the number is too low you may experience "ghost pixels" (white dots), If so, increase the delay.
 * `Image Width` - The most important one of them all; enter the same number as the width of the image you imported. if it's off even by one it **will mess up**
@@ -64,7 +64,7 @@ There's comments to help you understand better;
 ![ShirtPrinterCircuitboardInputs](https://user-images.githubusercontent.com/76653181/179420840-0fd58e89-7a05-41b3-a81f-efd2e614c3dc.png)
 
 ##
-Incase you're curious, these are all of the markers. It's best you dont touch/move them. 
+Incase you're curious, these are all the markers. It's best you don't touch/move them. 
 
 ![MessyMarkers-NoTouch](https://user-images.githubusercontent.com/76653181/179421202-e1e768c5-be79-4bd1-b5ba-00e6c880b162.png)
 
