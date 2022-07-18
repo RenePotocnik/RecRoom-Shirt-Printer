@@ -3,7 +3,7 @@
 This repository is for converting, encoding and importing a PNG image into a RecRoom invention (`Shirt Printer - Dorm`).\
 Said invention only works in your **Dorm Room** because of the **Shirt Customizer**.
 
-If you're experiencing any mayor problems, message me on Discord: [**McRen#2940**](https://discordapp.com/users/236809680947511297/)
+If you're experiencing any **major** problems, message me on Discord: [**McRen#2940**](https://discordapp.com/users/236809680947511297/)
 
 ## How to use 
 
@@ -13,7 +13,7 @@ If you're experiencing any mayor problems, message me on Discord: [**McRen#2940*
 > and change your `Display resolution` to `1920 x 1080`
 
 ## 
-The invention takes a lot of ink, thus you will need to delete everythin in your dorm room. Don't worry, you can always load the last save of the room in your watch;\
+The invention takes a lot of ink, thus you will need to delete everythin in your dorm room. Don't worry, you can always load the previous saves of the room in your watch;\
 `This Room` -> press the "_round arrow_" button left of the `Save Room` button.
 
 https://user-images.githubusercontent.com/76653181/179421434-a57c714e-b90f-4bf7-a618-e6614ed1c789.mp4
@@ -33,9 +33,10 @@ I suggest the image is already converted into a RecRoom color palette
 If the image is not converted it will automatically get converted and dithered.
 
 ## 
-After the data has been encoded, you will be prompted to import all data to RecRoom.\
+After the data has been encoded, you will be prompted to import it to RecRoom.\
 For this you'll have to **Configure** the `String Variable`. You will have to **replace** the existing one with a new one (see video below)\
-When you see the white `Value` input field, enter `y` in the script, tab back into RecRoom and _wait_
+When you see the white `Value` input field, enter `y` in the script.\
+Tab back into RecRoom and _wait_...
 
 https://user-images.githubusercontent.com/76653181/179419753-4981f9bb-0b66-47bb-8796-cbedddf5ef56.mp4
 
@@ -46,11 +47,14 @@ Spawn the shirt customizer, grab it and push it into the corner _as shown in the
 
 https://user-images.githubusercontent.com/76653181/179420703-911f9aff-a5a3-432a-934f-2ab1b35848b0.mp4
 
+It should look like the picture below.
+
 ![ShrtCutomizerInTheCorner](https://user-images.githubusercontent.com/76653181/179421185-9eff3a75-6e41-43d8-a1ca-a811894f8304.png)
 
 ## 
 Next step is the circuit board named `Shirt Printer`.\
-You will have to change those inputs to suit your imported image;
+You will have to change those inputs to suit your imported image\
+There's comments to help you understand better;
 * `Front And Back` - Set this to `True` if you're printing bothsided, set it to `False` if you're printing only one side.
 * `Variable Import` - If you're importing the image always keep this to `True`. You only set it to `False` if you request me to import an image and let you print it (comes with a fee)
 * `Main Delay` - Controls the speed of the system; if the number is too low you may experience "ghost pixels" (white dots), If so, increase the delay.
