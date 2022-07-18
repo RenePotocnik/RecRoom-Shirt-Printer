@@ -47,7 +47,7 @@ https://user-images.githubusercontent.com/76653181/179421434-a57c714e-b90f-4bf7-
 ##
 
 When spawning the invention you must **spawn it from your watch** and **not** your maker-pen.
-
+![InventionStore](https://user-images.githubusercontent.com/76653181/179567901-62f7d174-b256-40df-ad33-be1a6f080abe.png)
 ![SpawnInvention](https://user-images.githubusercontent.com/76653181/179421897-ecddd84d-d33b-4b5d-aa27-9e1b5735ebed.png)
 
 ##
