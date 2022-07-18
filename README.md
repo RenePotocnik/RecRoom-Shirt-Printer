@@ -3,23 +3,36 @@
 This repository is for converting, encoding and importing a PNG image into a RecRoom invention (`Shirt Printer - Dorm`).\
 Said invention only works in your **Dorm Room** because of the **Shirt Customizer**.
 
-If you're experiencing any **major** problems, message me on Discord: [**McRen#2940**](https://discordapp.com/users/236809680947511297/)
+There are limitations to the printer as it is an invention and not a dedicated, published room.\
+One of these _limitations_ is pixel bleed - because the "Magic Markers" are still in beta, they can't be used in the invention.
 
-## How to use 
+If you're experiencing any problems, try fixing them yourself first, by following these steps:
+* Re-import the image and restart the print (if the print stops midway)
+* Restart your game - sometimes RecRoom just needs a little break
+* Delete the invention (using `Delete Everything` in your maker-pen) and spawn the invention again - maybe you un-wired/deleted something
+
+If none of the steps above work, you can message me on:
+* Discord: [**McRen#2940**](https://discordapp.com/users/236809680947511297/)
+* RecRoom: [**@McReny**](https://rec.net/user/McReny)
+
+----
+## Supported Devices
 
 > **ONLY 16:9 screen ratio supported**\
 > *If you're not sure about your screen ratio, run the script - It'll warn you if your monitor isn't supported*\
 > If you really want to import, yet you don't have the acceptable screen ratio, got to `Setting -> System -> Display` 
 > and change your `Display resolution` to `1920 x 1080`
 
-## 
-The invention takes a lot of ink, thus you will need to delete everythin in your dorm room. Don't worry, you can always load the previous saves of the room in your watch;\
+----
+## The Invention
+The invention is called `"Shirt Printer - Dorm"`\
+It takes a lot of ink, thus you will need to delete everything in your dorm room. Don't worry, you can always load the previous saves of the room in your watch;\
 `This Room` -> press the "_round arrow_" button left of the `Save Room` button.
 
 https://user-images.githubusercontent.com/76653181/179421434-a57c714e-b90f-4bf7-a618-e6614ed1c789.mp4
 
 ##
-When spawning the invention you must spawn it from your watch and not your makerpen.
+When spawning the invention you must **spawn it from your watch** and **not** your maker-pen.
 
 ![SpawnInvention](https://user-images.githubusercontent.com/76653181/179421897-ecddd84d-d33b-4b5d-aa27-9e1b5735ebed.png)
 
@@ -30,7 +43,8 @@ Run `Shirt-Printer.py`.
 In the newly opened window, open a PNG image you want to print.\
 I suggest the image is already converted into a RecRoom color palette 
 (Photoshop ACO swatch files are included), and scaled to the appropriate size.\
-If the image is not converted it will automatically get converted and dithered.
+If the image is not converted it will automatically get converted and dithered.\
+Templates for the shirt are in the `Shirt_Templates` map.
 
 ## 
 After the data has been encoded, you will be prompted to import it to RecRoom.\
