@@ -2,7 +2,8 @@
 
 This repository is for converting, encoding and importing a PNG image into a RecRoom invention (`Shirt Printer - Dorm`)
 .\
-Said invention only works in your **Dorm Room** because of the **Shirt Customizer**.
+Said invention only works in your **Dorm Room** because of the **Shirt Customizer**.\
+It works best if you're the only person in the room.
 
 There are limitations to the printer as it is an invention and not a dedicated, published room.\
 One of these _limitations_ is pixel bleed - because the "Magic Markers" are still in beta, they can't be used in the
@@ -10,6 +11,7 @@ invention.
 
 If you're experiencing any problems, try fixing them yourself first, by following these steps:
 
+* Are you alone in the room? - The print can behave differently if there's more than one person in the room
 * Re-import the image and restart the print (if the print stops midway)
 * Restart your game - sometimes RecRoom just needs a little break
 * Delete the invention (using `Delete Everything` in your maker-pen) and spawn the invention again - maybe you
@@ -84,7 +86,7 @@ It should look like the picture below. _Note one side of the clamp sticking thro
 
 ##   
 
-Next step is the circuit board named `Shirt Printer`.\
+Next step is on the circuit board named `Shirt Printer`.\
 You will have to change those inputs to suit your imported image\
 There's comments to help you understand better;
 
@@ -101,12 +103,10 @@ There's comments to help you understand better;
 ![ShirtPrinterCircuitboardInputs](https://user-images.githubusercontent.com/76653181/179420840-0fd58e89-7a05-41b3-a81f-efd2e614c3dc.png)
 
 ##
+Now press the `Start` button and wait. Preferably alone.
 
-Incase you're curious, these are all the markers. It's best you don't touch/move them.
 
-![MessyMarkers-NoTouch](https://user-images.githubusercontent.com/76653181/179421202-e1e768c5-be79-4bd1-b5ba-00e6c880b162.png)
-
-#
+----
 
 If you have any problems with the scripts, the invention or anything else, you can contact me on:
 
