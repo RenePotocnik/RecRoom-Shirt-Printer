@@ -68,7 +68,8 @@ After the data has been encoded, you will be prompted to import it to RecRoom.\
 For this you'll have to **Configure** the `String Variable`. You will have to **replace** the existing one with a new
 one (see video below)\
 When you see the white `Value` input field, enter `y` in the script.\
-Tab back into RecRoom and _wait_...
+Tab back into RecRoom and _wait_...\
+I strongly recommend doing this step last, because all data gets erased if you save the room or `Reset Gadgets` 
 
 https://user-images.githubusercontent.com/76653181/179419753-4981f9bb-0b66-47bb-8796-cbedddf5ef56.mp4
 
