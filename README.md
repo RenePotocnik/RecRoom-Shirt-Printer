@@ -76,14 +76,24 @@ https://user-images.githubusercontent.com/76653181/179419753-4981f9bb-0b66-47bb-
 ##   
 
 When the importing process is finished, you will have to spawn in your **Shirt Customizer**.\
-The placement is very important! If the canvas is not flush with the wall the print might not work at all.
+The placement is very important! If the canvas is not flush with the wall the print might not work at all.\
 Spawn the shirt customizer, grab it and push it into the corner _as shown in the video_.
 
 https://user-images.githubusercontent.com/76653181/179420703-911f9aff-a5a3-432a-934f-2ab1b35848b0.mp4
 
-It should look like the picture below. _Note one side of the clamp sticking through the board. Don't move the clamp._
+It should look like the picture below.
 
 ![ShrtCutomizerInTheCorner](https://user-images.githubusercontent.com/76653181/179421185-9eff3a75-6e41-43d8-a1ca-a811894f8304.png)
+
+### Alternative method of placing the shirt cutomizer
+Spawn the invention `Board Placement Seat` (**from your watch, not your makerpen**)\
+This will place a seat in the exact position for optimal board placement.
+
+When entering the seat **do not move your mause**. Best way to do this is to look at the seat, lift your mouse of the table, click on the seat and press **TAB** (open your watch menu).\
+Then navigate to your backpack and spawn the Shirt Customizer. You can then leave and delete the seat. 
+
+![Invention image](https://user-images.githubusercontent.com/76653181/180603926-e4006af3-8395-43eb-b3aa-844328399fdd.png)
+
 
 ##   
 
