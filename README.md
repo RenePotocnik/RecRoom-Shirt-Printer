@@ -5,9 +5,7 @@ This repository is for converting, encoding and importing a PNG image into a Rec
 Said invention only works in your **Dorm Room** because of the **Shirt Customizer**.\
 It works best if you're the only person in the room.
 
-There are limitations to the printer as it is an invention and not a dedicated, published room.\
-One of these _limitations_ is pixel bleed - because the "Magic Markers" are still in beta, they can't be used in the
-invention.
+There are limitations to the printer as it is an invention and not a dedicated, published room.
 
 If you're experiencing any problems, try fixing them yourself first, by following these steps:
 
@@ -37,7 +35,7 @@ and change your `Display resolution` to `1920 x 1080` (*it can also be lower, ju
 
 ----
 
-## The Invention
+# The Invention
 
 The invention is called `"Shirt Printer - Dorm"`\
 It takes a lot of ink, thus you will need to delete everything in your dorm room. Don't worry, you can always load the
@@ -46,13 +44,13 @@ previous saves of the room in your watch;\
 
 [Video: How to delete everything in a room using the makerpen](https://user-images.githubusercontent.com/76653181/179421434-a57c714e-b90f-4bf7-a618-e6614ed1c789.mp4)
 
-##
+## Spawning the invention
 
 When spawning the invention you must **spawn it from your watch** and **not** your maker-pen.
 ![InventionStore](https://user-images.githubusercontent.com/76653181/179567901-62f7d174-b256-40df-ad33-be1a6f080abe.png)
 ![SpawnInvention](https://user-images.githubusercontent.com/76653181/179421897-ecddd84d-d33b-4b5d-aa27-9e1b5735ebed.png)
 
-##
+## Running the script
 
 Run `Shirt-Printer.py`.
 
@@ -62,7 +60,7 @@ I suggest the image is already converted into a RecRoom color palette
 If the image is not converted it will automatically get converted and dithered.\
 Templates for the shirt are in the `Shirt_Templates` map.
 
-##   
+## Importing using `String Variable`
 
 After the data has been encoded, you will be prompted to import it to RecRoom.\
 For this you'll have to **Configure** the `String Variable`. You will have to **replace** the existing one with a new
@@ -71,11 +69,31 @@ When you see the white `Value` input field, enter `y` in the script.\
 Tab back into RecRoom and _wait_...\
 I strongly recommend doing this step last, because all data gets erased if you save the room or `Reset Components`
 
-If you want a more robust way of importing, follow [this part](#list-create-importing) and then come back.
+If you want a more robust way of importing, go to [this part](#importing-using-list-create)
+
 
 [Video: replacing the variable and preparing for importing](https://user-images.githubusercontent.com/76653181/179419753-4981f9bb-0b66-47bb-8796-cbedddf5ef56.mp4)
 
-##   
+## Importing using `List Create`
+Unlike the _**Variable**_ import method, using the _**List Create**_ import method you can save the imported image data as an invention, spawn it and connect it to the printer for easy repeated printing.
+
+Unlike the printer itself, this invention _**does not work in your dorm**_.\
+Create a room (or use an existing one) and follow these steps:
+* Spawn the invention called `List Create Importing`
+* Grab the `Trigger Handle` with your _**RIGHT HAND**_ (and do not let go of it)
+* Grab your maker-pen with your _**LEFT HAND**_ 
+* In the maker-pen menu (F), select `Edit`
+* Edit the circuit board named `List Create Data`
+* Take a seat
+* Look at the **center of the first string input** (see image and video below for example)
+* `Alt - Tab` back into the script window, and do as instructed
+
+
+* When the importing is done, save the `List Create Data` circuit board *(ignore the others)* as an invention
+* Go back to your dorm room and spawn the newly created invention
+* Wire the `List Create Data` to the `Image Data Input`
+
+## Spawning the shirt customizer
 
 When the importing process is finished, you will have to spawn in your **Shirt Customizer**.\
 The placement is very important! If the canvas is not flush with the wall the print might not work at all.\
@@ -98,7 +116,7 @@ Then navigate to your backpack and spawn the Shirt Customizer. You can then leav
 ![Invention image](https://user-images.githubusercontent.com/76653181/180603926-e4006af3-8395-43eb-b3aa-844328399fdd.png)
 
 
-##   
+## Adjusting printer settings
 
 Next step is on the circuit board named `Shirt Printer`.\
 You will have to change those inputs to suit your imported image\
@@ -117,24 +135,6 @@ There's comments to help you understand better;
 
 ##
 Now press the `Start` button and wait. Preferably alone.
-
-## List Create Importing
-Compared to the _**Variable Import**_ method, using _**List Create Import**_ method you can save the image data as an invention, spawn it and connect it to the printer for easy repeated printing.
-
-![Image of the invention]()
-
-Unlike the printer itself, this invention _**does not work in your dorm**_.\
-Create a custom room (or use an existing one) spawn the invention and follow these steps:
-* Grab the `Trigger Handle` with your _**RIGHT HAND**_
-* In you makerpen, click `Edit`
-* Edit the circuit board named `List Create Data`
-* Take a seat
-* Look at the **center of the first string input** (see image and video below for example)
-* `Alt - Tab` back into the script and do as instructed
-* When the importing is done, save the `List Create Data` circuit board (ignore the others) as an invention
-* Go back to your dorm room and spawn the newly created invention
-* Wire the `List Create Data` to the `Image Data Input`
-
 
 ----
 
