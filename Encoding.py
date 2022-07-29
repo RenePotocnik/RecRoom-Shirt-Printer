@@ -36,7 +36,6 @@ class ImageCoords(NamedTuple):
     max_x: int
 
 
-ListCreateSize: int = 50  # The max. size of a `List Create`. 50 using `List Add`, 64 using `List Create`
 MaxStringLength: int = 280  # Maximum length string
 
 # Typing alias for color
@@ -253,13 +252,14 @@ def encode(img: Image) -> list[str] or None:
     return img_data
 
 
-def main(output_strings: bool = False, wait_for_input: bool = False):
+def main(list_size: int, output_strings: bool = False, wait_for_input: bool = False) -> Tuple[Image, List[str]]:
     """
     Function to tie together all others.
     Prompt for image, encode and output
 
-    :param wait_for_input: Wait for the user to continue. Useful when running this file directly so that it stays open
+    :param list_size: The max list size; 50 for `Variable` importing, 64 for `List Create` importing
     :param output_strings: Print the encoded image strings into the console
+    :param wait_for_input: Wait for the user to continue. Useful when running this file directly so that it stays open
     """
 
     img: Image = get_image()
@@ -276,12 +276,12 @@ def main(output_strings: bool = False, wait_for_input: bool = False):
 
     # Print amount of {`MaxStringLength`} char long strings, image dimensions and total `List Create`s needed.
     print(f"\nGenerated {len(img_data) + 2} strings for image WxH {img.width}x{img.height}")
-    print(f"Space needed: {len(img_data) // ListCreateSize} List creates (+ {len(img_data) % ListCreateSize})")
+    print(f"Space needed: {len(img_data) // list_size} Lists (+ {len(img_data) % list_size})")
 
     if wait_for_input:
         input("Press enter to continue")
 
-    return img_data
+    return img, img_data
 
 
 if __name__ == '__main__':
