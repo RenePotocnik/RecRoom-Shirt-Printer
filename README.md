@@ -69,7 +69,8 @@ For this you'll have to **Configure** the `String Variable`. You will have to **
 one (see video below)\
 When you see the white `Value` input field, enter `y` in the script.\
 Tab back into RecRoom and _wait_...\
-I strongly recommend doing this step last, because all data gets erased if you save the room or `Reset Components`\
+I strongly recommend doing this step last, because all data gets erased if you save the room or `Reset Components`
+
 If you want a more robust way of importing, follow [this part](#list-create-importing) and then come back.
 
 [Video: replacing the variable and preparing for importing](https://user-images.githubusercontent.com/76653181/179419753-4981f9bb-0b66-47bb-8796-cbedddf5ef56.mp4)
@@ -118,8 +119,21 @@ There's comments to help you understand better;
 Now press the `Start` button and wait. Preferably alone.
 
 ## List Create Importing
-Compared to the _**Variable Import**_ method, using _**List Create Import**_ method you can save the image data as an invention, spawn it and connect it to the printer for easy repeated printing.\
+Compared to the _**Variable Import**_ method, using _**List Create Import**_ method you can save the image data as an invention, spawn it and connect it to the printer for easy repeated printing.
 
+![Image of the invention]()
+
+Unlike the printer itself, this invention _**does not work in your dorm**_.\
+Create a custom room (or use an existing one) spawn the invention and follow these steps:
+* Grab the `Trigger Handle` with your _**RIGHT HAND**_
+* In you makerpen, click `Edit`
+* Edit the circuit board named `List Create Data`
+* Take a seat
+* Look at the **center of the first string input** (see image and video below for example)
+* `Alt - Tab` back into the script and do as instructed
+* When the importing is done, save the `List Create Data` circuit board (ignore the others) as an invention
+* Go back to your dorm room and spawn the newly created invention
+* Wire the `List Create Data` to the `Image Data Input`
 
 
 ----
