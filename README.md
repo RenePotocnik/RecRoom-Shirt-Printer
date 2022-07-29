@@ -33,7 +33,7 @@ I am not responsible for any bans that may occur as a result of using my inventi
 **ONLY 16:9 screen ratio supported**\
 *If you're not sure about your screen ratio, run the script - It'll warn you if your monitor isn't supported*\
 If you really want to import, yet you don't have the acceptable screen ratio, got to `Setting -> System -> Display`
-and change your `Display resolution` to `1920 x 1080`
+and change your `Display resolution` to `1920 x 1080` (*it can also be lower, just make sure it's a 16:9 ratio - google if you're not sure*)
 
 ----
 
@@ -44,7 +44,7 @@ It takes a lot of ink, thus you will need to delete everything in your dorm room
 previous saves of the room in your watch;\
 `This Room` -> press the "_round arrow_" button left of the `Save Room` button.
 
-https://user-images.githubusercontent.com/76653181/179421434-a57c714e-b90f-4bf7-a618-e6614ed1c789.mp4
+[Video: How to delete everything in a room using the makerpen](https://user-images.githubusercontent.com/76653181/179421434-a57c714e-b90f-4bf7-a618-e6614ed1c789.mp4)
 
 ##
 
@@ -69,9 +69,10 @@ For this you'll have to **Configure** the `String Variable`. You will have to **
 one (see video below)\
 When you see the white `Value` input field, enter `y` in the script.\
 Tab back into RecRoom and _wait_...\
-I strongly recommend doing this step last, because all data gets erased if you save the room or `Reset Gadgets` 
+I strongly recommend doing this step last, because all data gets erased if you save the room or `Reset Components`\
+If you want a more robust way of importing, follow [this part](#list-create-importing) and then come back.
 
-https://user-images.githubusercontent.com/76653181/179419753-4981f9bb-0b66-47bb-8796-cbedddf5ef56.mp4
+[Video: replacing the variable and preparing for importing](https://user-images.githubusercontent.com/76653181/179419753-4981f9bb-0b66-47bb-8796-cbedddf5ef56.mp4)
 
 ##   
 
@@ -79,17 +80,18 @@ When the importing process is finished, you will have to spawn in your **Shirt C
 The placement is very important! If the canvas is not flush with the wall the print might not work at all.\
 Spawn the shirt customizer, grab it and push it into the corner _as shown in the video_.
 
-https://user-images.githubusercontent.com/76653181/179420703-911f9aff-a5a3-432a-934f-2ab1b35848b0.mp4
+[Video: placing the shirt customizer in the corner of your dorm](https://user-images.githubusercontent.com/76653181/179420703-911f9aff-a5a3-432a-934f-2ab1b35848b0.mp4)
 
 It should look like the picture below.
 
 ![ShrtCutomizerInTheCorner](https://user-images.githubusercontent.com/76653181/179421185-9eff3a75-6e41-43d8-a1ca-a811894f8304.png)
 
-### Alternative method of placing the shirt cutomizer
+### Alternative method of placing the shirt customizer
 Spawn the invention `Board Placement Seat` (**from your watch, not your makerpen**)\
-This will place a seat in the exact position for optimal board placement.
+This will place a seat in the exact position for optimal board placement.\
+**Spawning the invention has a chance of spawning it at the incorrect angle (it is supposed to be rotated)**
 
-When entering the seat **do not move your mause**. Best way to do this is to look at the seat, lift your mouse of the table, click on the seat and press **TAB** (open your watch menu).\
+When entering the seat **do not move your mouse**. Best way to do this is to look at the seat, lift your mouse of the table, click on the seat and press **TAB** (open your watch menu).\
 Then navigate to your backpack and spawn the Shirt Customizer. You can then leave and delete the seat. 
 
 ![Invention image](https://user-images.githubusercontent.com/76653181/180603926-e4006af3-8395-43eb-b3aa-844328399fdd.png)
@@ -103,8 +105,7 @@ There's comments to help you understand better;
 
 * `Front And Back` - Set this to `True` if you're printing both-sided, set it to `False` if you're printing only one
   side.
-* `Variable Import` - If you're importing the image always keep this to `True`. You only set it to `False` if you
-  request me to import an image and let you print it (comes with a fee)
+* `Variable Import` - If you're importing the image using the included _**Variable Import**_ keep this to `True`. Set it to `False` if you're importing using the _**List Create**_ method
 * `Main Delay` - Controls the speed of the system; if the number is too low you may experience "ghost pixels" (white
   dots), If so, increase the delay.
 * `Image Width` - The most important one of them all; enter the same number as the width of the image you imported. if
@@ -115,6 +116,10 @@ There's comments to help you understand better;
 
 ##
 Now press the `Start` button and wait. Preferably alone.
+
+## List Create Importing
+Compared to the _**Variable Import**_ method, using _**List Create Import**_ method you can save the image data as an invention, spawn it and connect it to the printer for easy repeated printing.\
+
 
 
 ----
