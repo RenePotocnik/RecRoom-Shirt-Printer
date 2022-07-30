@@ -47,7 +47,7 @@ To calibrate successfully, follow all of these steps **exactly**:
 6. When prompted: *"Press ENTER to open RecRoom and press the two arrows facing away from each-other."*
    1. Press ENTER
    2. The RecRoom window will be brought back into focus
-   3. **Click on the two arrows aiming away from each other (second from the right at the top)** ![Where to click on the done button](Tutorials/ClickHere_DoneButton.png)
+   3. **Click on the two arrows aiming away from each other ↕ (second from the right at the top)** ![Where to click on the done button](Tutorials/ClickHere_DoneButton.png)
 
 ----
 
