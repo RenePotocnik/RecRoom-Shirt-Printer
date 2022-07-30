@@ -1,5 +1,6 @@
 import ctypes
-from typing import NamedTuple, Tuple
+import json
+from typing import NamedTuple, Tuple, Dict
 
 import pyautogui
 import pyperclip
@@ -92,16 +93,28 @@ def copy_into_rr_variable(img_data: list[str], delay: float = 0.3, pause_at_50: 
     :param stop_at_500: Should the script full stop every 500 imported strings, and wait for the user to press enter
     (could prevent disconnection)
     """
+    try:
+        # Read the file for coordinates
+        with open("coords_file.json", "r") as coords_file:
+            coords: Dict[str, Tuple[int, int]] = json.load(coords_file)
+    except FileNotFoundError:
+        # If there's no file, the user hasn't calibrated coordinates yet. Ask to continue using preset or exit.
+        if input("`coordinates.json` file not found.\n"
+                 "You didn't calibrate the button coordinates yet.\n"
+                 "Run `Coordinate_Calibration` if you wish to calibrate.\n"
+                 'Enter "y" to exit this script,\n'
+                 'or enter "n" to continue with preset coordinates (only for 16:9 monitor ratio)\n'
+                 '[default: y] > ').lower().find("n") == -1:
+            exit()
+        input_field: Tuple[int, int] = (int(SCREEN_DIMENSIONS[0] * 0.5),
+                                        int(SCREEN_DIMENSIONS[1] * 0.5625))
+        confirm_expand_button: Tuple[int, int] = (int(SCREEN_DIMENSIONS[0] * 0.841015),
+                                                  int(SCREEN_DIMENSIONS[1] * 0.083333))
 
-    input_field: Tuple[int, int] = (int(SCREEN_DIMENSIONS[0] * 0.5),
-                                    int(SCREEN_DIMENSIONS[1] * 0.5625))
-    confirm_expand_button: Tuple[int, int] = (int(SCREEN_DIMENSIONS[0] * 0.841015),
-                                              int(SCREEN_DIMENSIONS[1] * 0.083333))
-
-    color_check = ImageCoords(min_y=int(SCREEN_DIMENSIONS[1] * 0.4611),
-                              min_x=int(SCREEN_DIMENSIONS[0] * 0.1121),
-                              max_x=int(SCREEN_DIMENSIONS[0] * 0.1953),
-                              max_y=int(SCREEN_DIMENSIONS[1] * 0.5208))
+        color_check = ImageCoords(min_y=int(SCREEN_DIMENSIONS[1] * 0.4611),
+                                  min_x=int(SCREEN_DIMENSIONS[0] * 0.1121),
+                                  max_x=int(SCREEN_DIMENSIONS[0] * 0.1953),
+                                  max_y=int(SCREEN_DIMENSIONS[1] * 0.5208))
 
     num_strings: int = len(img_data)
     sec_to_import: float = delay * 3 * num_strings
