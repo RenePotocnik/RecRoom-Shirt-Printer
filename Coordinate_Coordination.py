@@ -1,11 +1,10 @@
 import ctypes
+import json
 import time
 from tkinter import *
 
-
 InputField = None
 DoneButton = None
-
 
 ctypes.windll.shcore.SetProcessDpiAwareness(2)
 
@@ -43,7 +42,7 @@ def coordinate_selection():
 
     for num in range(2):
         if num == 0:
-            input('Press ENTER to open RecRoom and press on the "Input" box.\n> ')
+            input('Press ENTER to open RecRoom and press on the "Input" box (preferably TOP-LEFT corner.\n> ')
         else:
             input('Press ENTER to open RecRoom and press on the "Done" button.\n> ')
         win = init_window()
@@ -52,10 +51,14 @@ def coordinate_selection():
         time.sleep(1)
 
     print(f"Input button: {InputField}\nDone Button: {DoneButton}")
-    coords_file = open("coordinates.txt", "w")
-    coords_file.write(f"File containing the coordinates of important buttons for the importing script.\n"
-                      f"{InputField}\n"
-                      f"{DoneButton}")
+    with open("coordinates.json", "w") as coords_file:
+        json.dump({
+            "InputField": InputField,
+            "DoneButton": DoneButton
+        }, coords_file, indent=4)
+        # coords_file.write(f"File containing the coordinates of important buttons for the importing script.\n"
+        #                   f"{InputField}\n"
+        #                   f"{DoneButton}")
 
 
 if __name__ == '__main__':
