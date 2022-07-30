@@ -252,7 +252,7 @@ def encode(img: Image) -> list[str] or None:
     return img_data
 
 
-def main(list_size: int, output_strings: bool = False, wait_for_input: bool = False) -> Tuple[Image, List[str]]:
+def main(list_size: int, output_strings: bool = False, wait_for_input: bool = False):
     """
     Function to tie together all others.
     Prompt for image, encode and output
@@ -286,6 +286,6 @@ def main(list_size: int, output_strings: bool = False, wait_for_input: bool = Fa
 
 if __name__ == '__main__':
     try:
-        main(output_strings=True, wait_for_input=True)
+        main(output_strings=True, wait_for_input=True, list_size=50)
     except KeyboardInterrupt:
         pass

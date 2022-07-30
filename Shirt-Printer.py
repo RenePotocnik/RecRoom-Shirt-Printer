@@ -3,7 +3,7 @@ import Importing
 
 
 def main():
-    img_data: list[str] = Encoding.main()
+    img_data: list[str] = Encoding.main(list_size=50)
 
     # Insert beginning and end. Required when using my Image Printer Bot
     img_data.insert(0, "BEGIN")
