@@ -26,12 +26,28 @@ I am not responsible for any bans that may occur as a result of using my inventi
 
 ----
 
-## Supported Devices
+## Getting the right coordinates for importing
 
-**ONLY 16:9 screen ratio supported**\
-*If you're not sure about your screen ratio, run the script - It'll warn you if your monitor isn't supported*\
-If you really want to import, yet you don't have the acceptable screen ratio, got to `Setting -> System -> Display`
-and change your `Display resolution` to `1920 x 1080` (*it can also be lower, just make sure it's a 16:9 ratio - google if you're not sure*)
+If you have a monitor with a **16:9 aspect ratio** you can skip the calibration, by just entering "n" when prompted to calibrate.
+
+If your monitor is not a _16:9_ ratio, or if you are not sure about it, calibrate/set your own coordinates by running 
+`Coordinate_Calibration.py` and [following the steps bellow](#prepare-for-successful-calibration).
+
+### Prepare for successful calibration
+
+To calibrate successfully, follow all of these steps **exactly**:
+1. Spawn a `String Variable` using your makerpen.
+2. **Configure** the `String Variable` with your makerpen.
+3. Expand `Chip Settings`, scroll all the way down until you see a `Value` input box.
+4. Run `Coordinate_Calibration.py`
+5. When prompted: *"Press ENTER to open RecRoom and press on the "Value" box (TOP-LEFT corner)."*
+   1. Press ENTER
+   2. The RecRoom window will be brought back into focus
+   3. **Click in the TOP-LEFT corner of the white square UNDER _"Value"_ text**. ![Where to click in the Value input box](Tutorials/ClickHere.png)
+6. When prompted: *"Press ENTER to open RecRoom and press the two arrows facing away from each-other."*
+   1. Press ENTER
+   2. The RecRoom window will be brought back into focus
+   3. **Click on the two arrows aiming away from each other (second from the right at the top)** ![Where to click on the done button](Tutorials/ClickHere_DoneButton.png)
 
 ----
 
@@ -70,6 +86,8 @@ Tab back into RecRoom and _wait_...\
 I strongly recommend doing this step last, because all data gets erased if you save the room or `Reset Components`
 
 If you want a more robust way of importing, go to [this part](#importing-using-list-create)
+
+If you get any messages/errors saying to calibrate your coordinates [follow this tutorial](#prepare-for-successful-calibration)
 
 
 [Video: replacing the variable and preparing for importing](https://user-images.githubusercontent.com/76653181/179419753-4981f9bb-0b66-47bb-8796-cbedddf5ef56.mp4)
