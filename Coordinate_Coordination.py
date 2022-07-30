@@ -52,6 +52,10 @@ def coordinate_selection():
         time.sleep(1)
 
     print(f"Input button: {InputField}\nDone Button: {DoneButton}")
+    coords_file = open("coordinates.txt", "w")
+    coords_file.write(f"File containing the coordinates of important buttons for the importing script.\n"
+                      f"{InputField}\n"
+                      f"{DoneButton}")
 
 
 if __name__ == '__main__':
