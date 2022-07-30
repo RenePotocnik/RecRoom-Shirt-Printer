@@ -110,10 +110,10 @@ def copy_into_rr_variable(img_data: list[str], delay: float = 0.3, pause_at_50: 
             coords: Dict[str, Tuple[int, int]] = json.load(coords_file)
             input_field = coords["InputField"]
             confirm_expand_button = coords["DoneButton"]
-            color_check = ImageCoords(min_x=coords["InputField"][0] - 20,
-                                      max_x=coords["InputField"][0] + 20,
-                                      min_y=coords["InputField"][1] - 20,
-                                      max_y=coords["InputField"][1] - 20,)
+            color_check = ImageCoords(min_x=coords["InputField"][0] - 10,
+                                      max_x=coords["InputField"][0] + 300,
+                                      min_y=coords["InputField"][1] - 10,
+                                      max_y=coords["InputField"][1] + 200,)
 
     except FileNotFoundError:
         # If there's no file, the user hasn't calibrated coordinates yet. Ask to continue using preset or exit.
@@ -121,7 +121,7 @@ def copy_into_rr_variable(img_data: list[str], delay: float = 0.3, pause_at_50: 
                  "You didn't calibrate the button coordinates yet.\n"
                  "Run `Coordinate_Calibration` if you wish to calibrate.\n"
                  'Enter "y" to exit this script,\n'
-                 'or enter "n" to continue with preset coordinates (only for 16:9 monitor ratio)\n'
+                 'or enter "n" to continue with preset coordinates (only for monitors with a 16:9 aspect ratio)\n'
                  '[default: y] > ').lower().find("n") == -1:
             exit()
 
