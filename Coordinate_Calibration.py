@@ -2,6 +2,9 @@ import ctypes
 import json
 import time
 from tkinter import *
+from typing import List, Any
+
+import pyautogui
 
 InputField = None
 DoneButton = None
@@ -40,6 +43,17 @@ def coordinate_selection():
           'Press enter to continue.\n'
           '> ')
 
+    recroom_window: Any = None
+    try:
+        # Is RecRoom launched
+        recroom_window = pyautogui.getWindowsWithTitle("Rec Room")[0]
+
+    except IndexError:
+        # RecRoom is not launched -> exit script
+        exit(input("Launch RecRoom before running the script!\n"
+                   "Press enter to exit.\n"
+                   "> "))
+
     for num in range(2):
         if num == 0:
             input('Press ENTER to open RecRoom and press on the "Value" box (TOP-LEFT corner).\n> ')
@@ -48,7 +62,10 @@ def coordinate_selection():
                   '(look at the GitHub tutorial for reference.\n> ')
         win = init_window()
         win.bind('<Button-1>', set_coords)
+        recroom_window.maximize()
+        time.sleep(1)
         win.mainloop()
+        recroom_window.minimize()
         time.sleep(1)
 
     print(f"Input button: {InputField}\nDone Button (arrows ↕): {DoneButton}")
