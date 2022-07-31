@@ -12,6 +12,24 @@ DoneButton = None
 ctypes.windll.shcore.SetProcessDpiAwareness(2)
 
 
+def is_window_active(window_title: str = "Rec Room") -> bool:
+    """
+    Does not return before `window_title` becomes the active window
+    Returns true when `window_title` becomes the active window
+
+    :param window_title: The title of the window
+    :return: When the window becomes active
+    """
+    if window_title not in (pyautogui.getActiveWindowTitle() or ""):  # getActiveWindowTitle is sometimes `None`
+        print(f"Waiting for {window_title} to become the active window... ", end="\r", flush=True)
+        # While RecRoom window is not active, sleep
+        while window_title not in (pyautogui.getActiveWindowTitle() or ""):
+            time.sleep(0.1)
+        print(" " * 70, end="\r")  # Empty the last line in the console
+        time.sleep(0.5)
+    return True
+
+
 def coordinate_selection():
     global InputField, DoneButton
 
@@ -43,29 +61,20 @@ def coordinate_selection():
           'Press enter to continue.\n'
           '> ')
 
-    recroom_window: Any = None
-    try:
-        # Is RecRoom launched
-        recroom_window = pyautogui.getWindowsWithTitle("Rec Room")[0]
-
-    except IndexError:
-        # RecRoom is not launched -> exit script
-        exit(input("Launch RecRoom before running the script!\n"
-                   "Press enter to exit.\n"
-                   "> "))
-
     for num in range(2):
         if num == 0:
-            input('Press ENTER to open RecRoom and press on the "Value" box (TOP-LEFT corner).\n> ')
+            input('Press ENTER, open RecRoom and press on the "Value" box (TOP-LEFT corner).\n'
+                  '(look at the GitHub tutorial for reference).\n'
+                  '> ')
         else:
-            input('Press ENTER to open RecRoom and press the two arrows facing away from each-other ↕'
-                  '(look at the GitHub tutorial for reference.\n> ')
+            input('Press ENTER, open RecRoom and press the two arrows facing away from each-other ↕.\n'
+                  '(look at the GitHub tutorial for reference).\n'
+                  '> ')
         win = init_window()
         win.bind('<Button-1>', set_coords)
-        recroom_window.maximize()
+        is_window_active()
         time.sleep(1)
         win.mainloop()
-        recroom_window.minimize()
         time.sleep(1)
 
     print(f"Input button: {InputField}\nDone Button (arrows ↕): {DoneButton}")
