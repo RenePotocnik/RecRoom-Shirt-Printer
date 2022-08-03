@@ -120,7 +120,7 @@ Create a room (or use an existing one) and follow these steps:
 * Look at the **center of the first string input** (see image and [video](Tutorials/ListCreateImportingSetup.mp4) below for example) ![First string input](Tutorials/ListCreateImportStringInput.png)
 
 
-https://user-images.githubusercontent.com/76653181/182598067-d859d649-65d3-4742-92c4-75e64d01c3f4.mp4
+[Video: How to prepare for List Create Importing](https://user-images.githubusercontent.com/76653181/182598067-d859d649-65d3-4742-92c4-75e64d01c3f4.mp4)
 
 
 * `Alt - Tab` back into the script window, and do as instructed
@@ -132,7 +132,7 @@ https://user-images.githubusercontent.com/76653181/182598067-d859d649-65d3-4742-
 * On the `Shirt Printer` circuit board, change `Variable Import` from `True` to `False` 
 
 
-https://user-images.githubusercontent.com/76653181/182651483-7bc7728c-663a-405d-aa40-be7bb896ce89.mp4
+[Video: How to connect the List Create Imported data](https://user-images.githubusercontent.com/76653181/182651483-7bc7728c-663a-405d-aa40-be7bb896ce89.mp4)
 
 
 ## Spawning the shirt customizer
