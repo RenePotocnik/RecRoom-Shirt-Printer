@@ -38,6 +38,7 @@ def coordinate_selection():
         win = Tk()
         win.attributes('-alpha', 0.05)
         win.attributes('-fullscreen', True)
+        win.attributes("-topmost", True)
         return win
 
     def set_coords(e):
@@ -73,9 +74,9 @@ def coordinate_selection():
         win = init_window()
         win.bind('<Button-1>', set_coords)
         is_window_active()
-        time.sleep(1)
+        time.sleep(0.1)
         win.mainloop()
-        time.sleep(1)
+        time.sleep(0.1)
 
     print(f"Input button: {InputField}\nDone Button (arrows ↕): {DoneButton}")
     with open("coordinates.json", "w") as coords_file:
@@ -87,3 +88,7 @@ def coordinate_selection():
 
 if __name__ == '__main__':
     coordinate_selection()
+    exit(input("\n"
+               "Coordinate calibration done!\n"
+               "Press ENTER to exit\n"
+               "> "))

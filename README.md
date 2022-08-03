@@ -1,3 +1,9 @@
+# About this release
+The repository you're currently viewing is an experimental version.\
+If you decide to download it and try it, join [this discord server](https://discord.gg/GuzwRMsyW8) and give feedback and report and problems you may experience.
+
+If you want the stable release, tested by hundreds or people, go to [this release](https://github.com/RenePotocnik/RecRoom-Shirt-Printer/tree/v1.0)
+
 # Shirt Printer
 
 This repository is for converting, encoding and importing a PNG image into a RecRoom invention (`Shirt Printer - Dorm`)
@@ -18,6 +24,7 @@ If you're experiencing any problems, try fixing them yourself first, by followin
 If none of the steps above work, you can message me on:
 
 * Discord: [**McRen#2940**](https://discordapp.com/users/236809680947511297/)
+* Discord Server: [**Rec Room Printing**](https://discord.gg/GuzwRMsyW8)
 * RecRoom: [**@McReny**](https://rec.net/user/McReny)
 
 **Respect the [Code of Conduct](https://recroom.com/code-of-conduct)**\
@@ -49,6 +56,8 @@ To calibrate successfully, follow all of these steps **exactly**:
    2. The RecRoom window will be brought back into focus
    3. **Click on the two arrows aiming away from each other ↕ (second from the right at the top)** ![Where to click on the done button](Tutorials/ClickHere_DoneButton.png)
 
+[Video: Coordinate Calibration Tutorial](Tutorials/CoordinateCalibration.mp4)
+
 ----
 
 # The Invention
@@ -68,13 +77,14 @@ When spawning the invention you must **spawn it from your watch** and **not** yo
 
 ## Running the script
 
+Download the ZIP file containing all scripts.\
 Run `Shirt-Printer.py`.
 
 In the newly opened window, open a PNG image you want to print.\
 I suggest the image is already converted into a RecRoom color palette
 (Photoshop ACO swatch files are included), and scaled to the appropriate size.\
 If the image is not converted it will automatically get converted and dithered.\
-Templates for the shirt are in the `Shirt_Templates` map.
+Templates for the shirt are in the included `Shirt_Templates` map.
 
 ## Importing using `String Variable`
 
@@ -93,7 +103,7 @@ If you get any messages/errors saying to calibrate your coordinates [follow this
 [Video: replacing the variable and preparing for importing](https://user-images.githubusercontent.com/76653181/179419753-4981f9bb-0b66-47bb-8796-cbedddf5ef56.mp4)
 
 ## Importing using `List Create`
-Unlike the _**Variable**_ import method, using the _**List Create**_ import method you can save the imported image data as an invention, spawn it and connect it to the printer for easy repeated printing.
+Unlike the _**Variable**_ import method, using the _**List Create**_ import method you can save the imported image data as an invention, spawn it and connect it to the printer for easy repeated and remote printing.
 
 Unlike the printer itself, this invention _**does not work in your dorm**_.\
 Create a room (or use an existing one) and follow these steps:
@@ -103,11 +113,12 @@ Create a room (or use an existing one) and follow these steps:
 * In the maker-pen menu (F), select `Edit`
 * Edit the circuit board named `List Create Data`
 * Take a seat
-* Look at the **center of the first string input** (see image and video below for example)
+* In the maker-pen menu (F), select `Wire`
+* Look at the **center of the first string input** (see image and [video](Tutorials/ListCreateImportingSetup.mp4) below for example) ![First string input](Tutorials/ListCreateImportStringInput.png)
 * `Alt - Tab` back into the script window, and do as instructed
 
 
-* When the importing is done, save the `List Create Data` circuit board *(ignore the others)* as an invention
+* When the importing is done, save the `List Create Data` circuit board *(you can ignore the others)* as an invention
 * Go back to your dorm room and spawn the newly created invention
 * Wire the `List Create Data` to the `Image Data Input`
 

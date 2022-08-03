@@ -94,6 +94,7 @@ def copy_into_rr_variable(img_data: list[str], delay: float = 0.3, pause_at_50: 
     (could prevent disconnection)
     """
 
+    # These are the old, pre-made button coordinates only meant for 16:9 display aspect ratios
     input_field: Tuple[int, int] = (int(SCREEN_DIMENSIONS[0] * 0.5),
                                     int(SCREEN_DIMENSIONS[1] * 0.5625))
     confirm_expand_button: Tuple[int, int] = (int(SCREEN_DIMENSIONS[0] * 0.841015),
@@ -104,6 +105,7 @@ def copy_into_rr_variable(img_data: list[str], delay: float = 0.3, pause_at_50: 
                               max_x=int(SCREEN_DIMENSIONS[0] * 0.1953),
                               max_y=int(SCREEN_DIMENSIONS[1] * 0.5208))
 
+    # Check if there's a `coordinates.json` file; if there is -> use the coords written in there
     try:
         # Read the file for coordinates
         with open("coords_file.json", "r") as coords_file:
