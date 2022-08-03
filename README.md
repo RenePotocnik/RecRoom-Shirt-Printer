@@ -56,7 +56,9 @@ To calibrate successfully, follow all of these steps **exactly**:
    2. The RecRoom window will be brought back into focus
    3. **Click on the two arrows aiming away from each other ↕ (second from the right at the top)** ![Where to click on the done button](Tutorials/ClickHere_DoneButton.png)
 
-[Video: Coordinate Calibration Tutorial](Tutorials/CoordinateCalibration.mp4)
+
+https://user-images.githubusercontent.com/76653181/182597821-a03e5a8b-de1b-4bb6-baab-a938ecc22ab9.mp4
+
 
 ----
 
@@ -102,6 +104,7 @@ If you get any messages/errors saying to calibrate your coordinates [follow this
 
 [Video: replacing the variable and preparing for importing](https://user-images.githubusercontent.com/76653181/179419753-4981f9bb-0b66-47bb-8796-cbedddf5ef56.mp4)
 
+
 ## Importing using `List Create`
 Unlike the _**Variable**_ import method, using the _**List Create**_ import method you can save the imported image data as an invention, spawn it and connect it to the printer for easy repeated and remote printing.
 
@@ -115,9 +118,12 @@ Create a room (or use an existing one) and follow these steps:
 * Take a seat
 * In the maker-pen menu (F), select `Wire`
 * Look at the **center of the first string input** (see image and [video](Tutorials/ListCreateImportingSetup.mp4) below for example) ![First string input](Tutorials/ListCreateImportStringInput.png)
+
+
+https://user-images.githubusercontent.com/76653181/182598067-d859d649-65d3-4742-92c4-75e64d01c3f4.mp4
+
+
 * `Alt - Tab` back into the script window, and do as instructed
-
-
 * When the importing is done, save the `List Create Data` circuit board *(you can ignore the others)* as an invention
 * Go back to your dorm room and spawn the newly created invention
 * Wire the `List Create Data` to the `Image Data Input`
