@@ -96,8 +96,8 @@ def copy_to_recroom(img_data: list[str], delay: float = 0.3, last_successful_str
     num_strings = len(img_data)
 
     # Coordinates for all the buttons
-    input_field: DonePosition = (0, 0)
-    done_button: DonePosition = (0, 0)
+    input_field: DonePosition = (int(SCREEN_DIMENSIONS[0] * 0.5), int(SCREEN_DIMENSIONS[1] * 0.34))
+    done_button: DonePosition = (int(SCREEN_DIMENSIONS[0] * 0.11), int(SCREEN_DIMENSIONS[1] * 0.52))
 
     if input(f"\nProceed to copy all {num_strings} strings to {window_title}? [y/n] ").lower().find("y") != -1:
         time_at_start = time.time()
@@ -128,7 +128,7 @@ def copy_to_recroom(img_data: list[str], delay: float = 0.3, last_successful_str
             time.sleep(delay)
 
             # Click on the input field
-            pyautogui.click(x=1270, y=480)
+            pyautogui.click(input_field)
             time.sleep(delay)
 
             # Paste the string into input field
@@ -136,7 +136,7 @@ def copy_to_recroom(img_data: list[str], delay: float = 0.3, last_successful_str
             time.sleep(delay)
 
             # Click "Done"
-            pyautogui.click(x=280, y=767)
+            pyautogui.click(done_button)
             time.sleep(delay)
 
             # Exit out of the input field menu
