@@ -126,7 +126,10 @@ https://user-images.githubusercontent.com/76653181/182598067-d859d649-65d3-4742-
 * `Alt - Tab` back into the script window, and do as instructed
 * When the importing is done, save the `List Create Data` circuit board *(you can ignore the others)* as an invention
 * Go back to your dorm room and spawn the newly created invention
-* Wire the `List Create Data` to the `Image Data Input`
+* Wire `List Create Data` to the `Image Data Input`
+* Wire `Run` from the delay at the bottom to `Load Data`
+* Wire `Data Loaded` to `Load` in the `Shirt Printer` circuit board
+* On the `Shirt Printer` circuit board, change `Variable Import` from `True` to `False` 
 
 ## Spawning the shirt customizer
 
