@@ -131,6 +131,10 @@ https://user-images.githubusercontent.com/76653181/182598067-d859d649-65d3-4742-
 * Wire `Data Loaded` to `Load` in the `Shirt Printer` circuit board
 * On the `Shirt Printer` circuit board, change `Variable Import` from `True` to `False` 
 
+
+https://user-images.githubusercontent.com/76653181/182651483-7bc7728c-663a-405d-aa40-be7bb896ce89.mp4
+
+
 ## Spawning the shirt customizer
 
 When the importing process is finished, you will have to spawn in your **Shirt Customizer**.\
