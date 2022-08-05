@@ -184,3 +184,9 @@ If you have any problems with the scripts, the invention or anything else, you c
 
 - [Discord: **McRen#2940**](https://discordapp.com/users/236809680947511297/)
 - [RecRoom: **@McReny**](https://rec.net/user/McReny)
+
+----
+
+If you like the printer and would like to support/motivate me to keep updating it, you can:
+* Donate on [my PayPal](https://paypal.me/mcrenRR)
+* Or [buy me a coffee](https://www.buymeacoffee.com/mcren)
