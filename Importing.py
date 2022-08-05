@@ -22,8 +22,6 @@ class ImageCoords(NamedTuple):
 user32 = ctypes.windll.user32
 user32.SetProcessDPIAware()
 SCREEN_DIMENSIONS: Tuple[int, int] = user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)
-if round(SCREEN_DIMENSIONS[0] / SCREEN_DIMENSIONS[1], 2) != 1.78:
-    exit(input("\nScreen dimensions not optimal for importing.\nPress enter to exit"))
 
 
 class Colors(NamedTuple):
@@ -108,7 +106,7 @@ def copy_into_rr_variable(img_data: list[str], delay: float = 0.3, pause_at_50: 
     # Check if there's a `coordinates.json` file; if there is -> use the coords written in there
     try:
         # Read the file for coordinates
-        with open("coords_file.json", "r") as coords_file:
+        with open("coordinates.json", "r") as coords_file:
             coords: Dict[str, Tuple[int, int]] = json.load(coords_file)
             input_field = coords["InputField"]
             confirm_expand_button = coords["DoneButton"]
