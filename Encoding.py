@@ -6,14 +6,14 @@ How is it encoded:
     There's 62 colors including eraser and tan, eraser is not recommended as it leaves an edge
 """
 import os
+import subprocess
 import sys
 import time
 import tkinter
-import subprocess
 from math import sqrt
 from pathlib import Path
 from tkinter import filedialog
-from typing import Tuple, List, NamedTuple
+from typing import Tuple, List
 
 try:
     import pyautogui
@@ -26,15 +26,6 @@ except ModuleNotFoundError:
     if input("Proceed to run the command automatically? [yes/no] ").find("yes") != -1:
         subprocess.call(f"{sys.executable} -m pip install -U PyAutoGUI pyperclip Pillow")
     exit()
-
-
-class ImageCoords(NamedTuple):
-    min_y: int
-    min_x: int
-
-    max_y: int
-    max_x: int
-
 
 MaxStringLength: int = 280  # Maximum length string
 

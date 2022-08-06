@@ -1,21 +1,12 @@
 import ctypes
-from typing import NamedTuple, Tuple, List
+import time
+from typing import Tuple
 
 import pyautogui
 import pyperclip
-from PIL import ImageGrab
 
 import Encoding
-import time
-
-
-class ImageCoords(NamedTuple):
-    min_y: int
-    min_x: int
-
-    max_y: int
-    max_x: int
-
+from common import setup_logger, is_window_active
 
 # Check if the users monitor is 1440p or 1080p
 user32 = ctypes.windll.user32
@@ -26,62 +17,7 @@ if round(SCREEN_DIMENSIONS[0] / SCREEN_DIMENSIONS[1], 2) != 1.78:
                "Press enter to exit\n"
                "> "))
 
-DonePosition = Tuple[int, int]
-
-
-class Colors(NamedTuple):
-    text = (55, 57, 61)  # The color of text in the Variable Input field (black)
-    white = (229, 225, 216)  # The white background of the Variable Input field
-    green = (187, 205, 182)  # The Variable Input field sometimes turns green - this is that color.
-
-
-def is_window_active(window_title: str = "Rec Room") -> bool:
-    """
-    Does not return before `window_title` becomes the active window
-    Returns true when `window_title` becomes the active window
-
-    :param window_title: The title of the window
-    :return: When the window becomes active
-    """
-    if window_title not in (pyautogui.getActiveWindowTitle() or ""):  # getActiveWindowTitle is sometimes `None`
-        print(f"Waiting for {window_title} to be the active window... ", end="\r", flush=True)
-        # While RecRoom window is not active, sleep
-        while window_title not in (pyautogui.getActiveWindowTitle() or ""):
-            time.sleep(0.1)
-        print(" " * 70, end="\r")  # Empty the last line in the console
-        time.sleep(0.5)
-    return True
-
-
-def is_color(compare_color: tuple[int, int, int], main_color: tuple[int, int, int], tolerance: int = 30) -> bool:
-    """
-    Compare `compare_color` to `main_color` with a given tolerance
-
-    :param compare_color: The color that is being compared
-    :param main_color: The color that is being compared
-    :param tolerance: How close the colors can be (1 - 255)
-    :return: Is `compare_color` same/similar as `main_color`
-    """
-    return ((abs(compare_color[0] - main_color[0]) < tolerance)
-            and (abs(compare_color[1] - main_color[1]) < tolerance)
-            and (abs(compare_color[2] - main_color[2]) < tolerance))
-
-
-def found_colors(main_color: tuple[int, int, int], coordinates: ImageCoords) -> bool:
-    """
-    Returns True if `main_color` is found in the given coordinates
-
-    :param main_color: The color to compare the detected color to
-    :param coordinates: Coordinates of the window of pixels to be checked and compared
-    :return: If the color in any of the pixels match the `main_color`
-    """
-    image = ImageGrab.grab()
-
-    for coords_x in range(coordinates.min_x, coordinates.max_x):
-        if is_color(image.getpixel((coords_x, coordinates.min_y)), main_color):
-            return True
-
-    return False
+Coords = Tuple[int, int]
 
 
 def copy_to_recroom(img_data: list[str], delay: float = 0.3, last_successful_string: str or None = None) -> None:
@@ -96,8 +32,8 @@ def copy_to_recroom(img_data: list[str], delay: float = 0.3, last_successful_str
     num_strings = len(img_data)
 
     # Coordinates for all the buttons
-    input_field: DonePosition = (int(SCREEN_DIMENSIONS[0] * 0.5), int(SCREEN_DIMENSIONS[1] * 0.34))
-    done_button: DonePosition = (int(SCREEN_DIMENSIONS[0] * 0.11), int(SCREEN_DIMENSIONS[1] * 0.52))
+    input_field: Coords = (int(SCREEN_DIMENSIONS[0] * 0.5), int(SCREEN_DIMENSIONS[1] * 0.34))
+    done_button: Coords = (int(SCREEN_DIMENSIONS[0] * 0.11), int(SCREEN_DIMENSIONS[1] * 0.52))
 
     if input(f"\nProceed to copy all {num_strings} strings to {window_title}? [y/n] ").lower().find("y") != -1:
         time_at_start = time.time()
@@ -155,7 +91,6 @@ def copy_to_recroom(img_data: list[str], delay: float = 0.3, last_successful_str
 
 
 def main():
-    img_data: List[str] = []
     # Call function for encoding an image
     image, img_data = Encoding.main(list_size=64)
 
@@ -176,5 +111,10 @@ def main():
     copy_to_recroom(img_data=img_data, delay=delay, last_successful_string=last_string)
 
 
+log = setup_logger()
+
 if __name__ == "__main__":
-    main()
+    try:
+        main()
+    except (Exception, KeyboardInterrupt):
+        log.exception("ERROR", exc_info=True)

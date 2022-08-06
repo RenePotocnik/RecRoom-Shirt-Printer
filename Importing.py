@@ -1,22 +1,13 @@
 import ctypes
 import json
+import time
 from typing import NamedTuple, Tuple, Dict
 
 import pyautogui
 import pyperclip
-from PIL import ImageGrab
 
 import Encoding
-import time
-
-
-class ImageCoords(NamedTuple):
-    min_y: int
-    min_x: int
-
-    max_y: int
-    max_x: int
-
+from common import ImageCoords, is_window_active, found_colors
 
 # Check if the users monitor is 1440p or 1080p
 user32 = ctypes.windll.user32
@@ -28,55 +19,6 @@ class Colors(NamedTuple):
     text = (55, 57, 61)  # The color of text in the Variable Input field (black)
     white = (229, 225, 216)  # The white background of the Variable Input field
     green = (187, 205, 182)  # The Variable Input field sometimes turns green - this is that color.
-
-
-def is_window_active(window_title: str = "Rec Room") -> bool:
-    """
-    Does not return before `window_title` becomes the active window
-    Returns true when `window_title` becomes the active window
-
-    :param window_title: The title of the window
-    :return: When the window becomes active
-    """
-    if window_title not in (pyautogui.getActiveWindowTitle() or ""):  # getActiveWindowTitle is sometimes `None`
-        print(f"Waiting for {window_title} to be the active window... ", end="\r", flush=True)
-        # While RecRoom window is not active, sleep
-        while window_title not in (pyautogui.getActiveWindowTitle() or ""):
-            time.sleep(0.1)
-        print(" " * 70, end="\r")  # Empty the last line in the console
-        time.sleep(0.5)
-    return True
-
-
-def is_color(compare_color: tuple[int, int, int], main_color: tuple[int, int, int], tolerance: int = 30) -> bool:
-    """
-    Compare `compare_color` to `main_color` with a given tolerance
-
-    :param compare_color: The color that is being compared
-    :param main_color: The color that is being compared
-    :param tolerance: How close the colors can be (1 - 255)
-    :return: Is `compare_color` same/similar as `main_color`
-    """
-    return ((abs(compare_color[0] - main_color[0]) < tolerance)
-            and (abs(compare_color[1] - main_color[1]) < tolerance)
-            and (abs(compare_color[2] - main_color[2]) < tolerance))
-
-
-def found_colors(main_color: tuple[int, int, int], coordinates: ImageCoords) -> bool:
-    """
-    Returns True if `main_color` is found in the given coordinates
-
-    :param main_color: The color to compare the detected color to
-    :param coordinates: Coordinates of the window of pixels to be checked and compared
-    :return: If the color in any of the pixels match the `main_color`
-    """
-    image = ImageGrab.grab()
-
-    for coords_x in range(coordinates.min_x, coordinates.max_x):
-        if is_color(image.getpixel((coords_x, coordinates.min_y)), main_color):
-            return True
-
-    return False
 
 
 def copy_into_rr_variable(img_data: list[str], delay: float = 0.3, pause_at_50: bool = False,
@@ -113,7 +55,7 @@ def copy_into_rr_variable(img_data: list[str], delay: float = 0.3, pause_at_50: 
             color_check = ImageCoords(min_x=coords["InputField"][0] - 10,
                                       max_x=coords["InputField"][0] + 300,
                                       min_y=coords["InputField"][1] - 10,
-                                      max_y=coords["InputField"][1] + 200,)
+                                      max_y=coords["InputField"][1] + 200, )
 
     except FileNotFoundError:
         # If there's no file, the user hasn't calibrated coordinates yet. Ask to continue using preset or exit.

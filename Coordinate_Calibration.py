@@ -1,10 +1,24 @@
 import ctypes
 import json
+import logging
+import subprocess
+import sys
 import time
 from tkinter import *
-from typing import List, Any
 
-import pyautogui
+from common import setup_logger, is_window_active
+
+try:
+    import pyautogui
+    from PIL import Image, ImageGrab
+except ModuleNotFoundError:
+    print(f'Please execute the following line and run the script again:\n'
+          f'{sys.executable} -m pip install -U PyAutoGUI')
+    # Ask the user to install all the necessary packages automatically
+    if input("Proceed to run the command automatically? [yes/no] ").find("yes") != -1:
+        subprocess.call(f"{sys.executable} -m pip install -U PyAutoGUI")
+    exit()
+
 
 InputField = None
 DoneButton = None
@@ -12,34 +26,16 @@ DoneButton = None
 ctypes.windll.shcore.SetProcessDpiAwareness(2)
 
 
-def is_window_active(window_title: str = "Rec Room") -> bool:
-    """
-    Does not return before `window_title` becomes the active window
-    Returns true when `window_title` becomes the active window
-
-    :param window_title: The title of the window
-    :return: When the window becomes active
-    """
-    if window_title not in (pyautogui.getActiveWindowTitle() or ""):  # getActiveWindowTitle is sometimes `None`
-        print(f"Waiting for {window_title} to become the active window... ", end="\r", flush=True)
-        # While RecRoom window is not active, sleep
-        while window_title not in (pyautogui.getActiveWindowTitle() or ""):
-            time.sleep(0.1)
-        print(" " * 70, end="\r")  # Empty the last line in the console
-        time.sleep(0.5)
-    return True
-
-
 def coordinate_selection():
     global InputField, DoneButton
 
     def init_window() -> Tk:
         # Initialize the Tk window;  Alpha: 0.1, Fullscreen: True
-        win = Tk()
-        win.attributes('-alpha', 0.05)
-        win.attributes('-fullscreen', True)
-        win.attributes("-topmost", True)
-        return win
+        win_ = Tk()
+        win_.attributes('-alpha', 0.05)
+        win_.attributes('-fullscreen', True)
+        win_.attributes("-topmost", True)
+        return win_
 
     def set_coords(e):
         # Triggers when `Left Mouse Button` is pressed on the window
@@ -86,9 +82,15 @@ def coordinate_selection():
         }, coords_file, indent=4)
 
 
+log: logging.Logger = setup_logger()
+
+
 if __name__ == '__main__':
-    coordinate_selection()
-    exit(input("\n"
-               "Coordinate calibration done!\n"
-               "Press ENTER to exit\n"
-               "> "))
+    try:
+        coordinate_selection()
+        exit(input("\n"
+                   "Coordinate calibration done!\n"
+                   "Press ENTER to exit\n"
+                   "> "))
+    except (Exception, KeyboardInterrupt):
+        log.exception("ERROR", exc_info=True)

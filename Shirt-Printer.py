@@ -1,5 +1,8 @@
+import logging
+
 import Encoding
 import Importing
+from common import setup_logger
 
 
 def main():
@@ -11,6 +14,10 @@ def main():
     Importing.copy_into_rr_variable(img_data, delay=0.4, pause_at_50=False, stop_at_500=False)
 
 
-main()
+log: logging.Logger = setup_logger()
 
-input("Press enter to exit")
+try:
+    main()
+    input("Press enter to exit")
+except (KeyboardInterrupt, Exception):
+    log.exception("ERROR", exc_info=True)
