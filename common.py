@@ -21,7 +21,7 @@ def setup_logger(level=logging.DEBUG, disable_imported: bool = False) -> logging
     stream_handler.setFormatter(logging.Formatter("[{asctime}] [{levelname:7}] {message}", style='{'))
     logger_.addHandler(stream_handler)
 
-    filehandler = logging.FileHandler(f"{__file__}_{datetime.datetime.now():%Y%m%d}.log")
+    filehandler = logging.FileHandler(f"{datetime.datetime.now():%Y-%m-%d}.log")
     # noinspection SpellCheckingInspection
     filehandler.setFormatter(logging.Formatter("[{asctime}] [{name}.{funcName}:{lineno}] [{levelname}] {message}",
                                                style='{'))
