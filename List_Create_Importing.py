@@ -90,9 +90,18 @@ def copy_to_recroom(img_data: list[str], delay: float = 0.3, last_successful_str
         print(f"Copying complete. Copied {num_strings} strings in {minutes} min and {seconds:.1f} sec")
 
 
-def main():
-    # Call function for encoding an image
-    image, img_data = Encoding.main(list_size=64)
+def main(from_file: bool = False):
+    if not from_file:
+        # Call function for encoding an image
+        image, img_data = Encoding.main(list_size=64)
+    else:
+        try:
+            with open("image_data.txt", "r") as f:
+                temp: list[str] = f.readlines()
+                img_data = [line.strip() for line in temp]
+        except FileNotFoundError:
+            print("The file `image_data.txt` was not found. ")
+            image, img_data = Encoding.main(list_size=64)
 
     "########### GLOBAL IMPORTING DELAY ############"
     # This is the delay that controls the speed of the importing process
@@ -115,6 +124,6 @@ log = setup_logger()
 
 if __name__ == "__main__":
     try:
-        main()
+        main(from_file="y" in input("Use the encoded data in `image_data.txt`? [yes/no]\n > "))
     except (Exception, KeyboardInterrupt):
         log.exception("ERROR", exc_info=True)

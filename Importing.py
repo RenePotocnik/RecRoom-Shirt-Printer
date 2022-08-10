@@ -137,10 +137,19 @@ def copy_into_rr_variable(img_data: list[str], delay: float = 0.3, pause_at_50: 
         print(f"Copying complete. Copied {num_strings - 1} strings in {minutes} min and {seconds:.1f} sec")
 
 
-def main():
+def main(from_file: bool = False):
     img_data: list[str]
     # Call function for encoding an image
-    image, img_data = Encoding.main(list_size=50)
+    if not from_file:
+        image, img_data = Encoding.main(list_size=50)
+    else:
+        try:
+            with open("image_data.txt", "r") as f:
+                temp: list[str] = f.readlines()
+                img_data = [line.strip() for line in temp]
+        except FileNotFoundError:
+            print("The file `image_data.txt` was not found. ")
+            image, img_data = Encoding.main(list_size=50)
 
     # Insert beginning and end.
     img_data.insert(0, "BEGIN")
@@ -150,4 +159,6 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    print("You're running `Importing.py` directly.\n"
+          "This will take the encoded data in `image_data.txt` and import it.\n")
+    main(from_file=True)
