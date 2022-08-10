@@ -2,3 +2,4 @@ venv/
 .idea/
 coordinates.json
 *.log
+image_data.txt

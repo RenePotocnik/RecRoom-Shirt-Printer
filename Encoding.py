@@ -259,6 +259,9 @@ def main(list_size: int, output_strings: bool = False, wait_for_input: bool = Fa
 
     img_data: list[str] = encode(img)
 
+    with open("image_data.txt", "w") as strings_file:
+        strings_file.writelines("\n".join(img_data))
+
     if output_strings:
         print("Copying strings\n_______________\n")
         time.sleep(2)
@@ -277,6 +280,8 @@ def main(list_size: int, output_strings: bool = False, wait_for_input: bool = Fa
 
 if __name__ == '__main__':
     try:
-        main(output_strings=True, wait_for_input=True, list_size=50)
+        main(output_strings=True,
+             wait_for_input=True,
+             list_size=50 if "1" in input("1. Variable Import\n2. List Create Import\n> ") else 64)
     except KeyboardInterrupt:
         pass
