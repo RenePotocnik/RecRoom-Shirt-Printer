@@ -1,12 +1,13 @@
 import ctypes
 import time
-from typing import Tuple
+from typing import Tuple, List
 
 import pyautogui
 import pyperclip
+from PIL import ImageGrab
 
 import Encoding
-from common import setup_logger, is_window_active
+from common import setup_logger, is_window_active, color_in_coords
 
 # Check if the users monitor is 1440p or 1080p
 user32 = ctypes.windll.user32
@@ -35,6 +36,9 @@ def copy_to_recroom(img_data: list[str], delay: float = 0.3, last_successful_str
     input_field: Coords = (int(SCREEN_DIMENSIONS[0] * 0.5), int(SCREEN_DIMENSIONS[1] * 0.34))
     done_button: Coords = (int(SCREEN_DIMENSIONS[0] * 0.11), int(SCREEN_DIMENSIONS[1] * 0.52))
 
+    color_checking_coords: List[Tuple[int, int]] = [(int(SCREEN_DIMENSIONS[0] * 0.29), int(SCREEN_DIMENSIONS[1] * 0.5)),
+                                                    (int(SCREEN_DIMENSIONS[0] * 0.28), int(SCREEN_DIMENSIONS[1] * 0.5))]
+
     if input(f"\nProceed to copy all {num_strings} strings to {window_title}? [y/n] ").lower().find("y") != -1:
         time_at_start = time.time()
 
@@ -59,25 +63,38 @@ def copy_to_recroom(img_data: list[str], delay: float = 0.3, last_successful_str
             print(f"Copying string #{num + 1}/{num_strings}")
             time.sleep(delay)
 
-            # Click `List Create` string entry
-            pyautogui.click()
-            time.sleep(delay)
+            for _ in range(10):
+                # Click `List Create` string entry
+                pyautogui.click()
+                time.sleep(delay)
 
-            # Click on the input field
-            pyautogui.click(input_field)
-            time.sleep(delay)
+                # Click on the input field
+                pyautogui.click(input_field)
+                time.sleep(delay)
 
-            # Paste the string into input field
-            pyautogui.hotkey("ctrl", "v")
-            time.sleep(delay)
+                # Paste the string into input field
+                pyautogui.hotkey("ctrl", "v")
+                time.sleep(delay)
 
-            # Click "Done"
-            pyautogui.click(done_button)
-            time.sleep(delay)
+                # Click "Done"
+                pyautogui.click(done_button)
+                time.sleep(delay)
 
-            # Exit out of the input field menu
-            pyautogui.press("esc")
-            time.sleep(delay * 2)
+                # Exit out of the input field menu
+                pyautogui.press("esc")
+                time.sleep(delay * 2)
+
+                color_check_image = ImageGrab.grab()
+                # Check for `white` (text) or `purple` (string input background)
+                if color_in_coords(image=color_check_image,
+                                   color=(222, 218, 210),
+                                   coordinates=color_checking_coords) or \
+                        color_in_coords(image=color_check_image,
+                                        color=(80, 96, 139),
+                                        coordinates=color_checking_coords):
+                    break
+                print("Failed")
+                time.sleep(delay)
 
             # Move down using trigger handle in right hand
             pyautogui.click(button='right')

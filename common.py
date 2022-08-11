@@ -2,10 +2,10 @@ import datetime
 import logging
 import sys
 import time
-from typing import NamedTuple
+from typing import NamedTuple, Tuple, List
 
 import pyautogui
-from PIL import ImageGrab
+from PIL import ImageGrab, Image
 
 
 def setup_logger(level=logging.DEBUG, disable_imported: bool = False) -> logging.Logger:
@@ -91,4 +91,42 @@ def found_colors(main_color: tuple[int, int, int], coordinates: ImageCoords) -> 
         if is_color(image.getpixel((coords_x, coordinates.min_y)), main_color):
             return True
 
+    return False
+
+
+def color_in_coords(image: Image, color: Tuple[int, int, int], coordinates: List[Tuple[int, int]],
+                    tolerance: int = 30) -> bool:
+    """
+    Returns True if `main_color` is found in the given coordinates given a tolerance
+
+    :param image: The image from which the colors to compare will be taken
+    :param color: The color to compare the detected color to
+    :param coordinates: Coordinates of the window of pixels to be checked and compared
+    [(top_left_corner), (bottom_right_corner)]
+    :param tolerance: Max variation between colors
+    :return: If the color in any of the pixels match the `main_color`
+    """
+
+    # coordinates: [
+    #   (min_x, min_y)
+    #   (max_x, max_y)
+    # ]
+
+    def is_color(compare_color_: Tuple[int, int, int]) -> bool:
+        """
+        Compare `compare_color` to `main_color` with a given tolerance
+
+        :param compare_color_: The color that is being compared to the `main_color`
+        :return: Is `compare_color` same/+-tolerance as `main_color`
+        """
+        nonlocal color, tolerance
+        return ((abs(compare_color_[0] - color[0]) < tolerance)
+                and (abs(compare_color_[1] - color[1]) < tolerance)
+                and (abs(compare_color_[2] - color[2]) < tolerance))
+
+    for y in range(coordinates[0][1], coordinates[1][1], 1):
+        for x in range(coordinates[0][0], coordinates[1][0], 1):
+            compare_color: Tuple[int, int, int] = image.getpixel((x, y))
+            if is_color(compare_color_=compare_color):
+                return True
     return False
