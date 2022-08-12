@@ -100,7 +100,7 @@ RR_PALETTE: dict = {
 ALL_COLORS = [num for tup in RR_PALETTE.keys() for num in tup]
 
 
-def get_image() -> Image:
+def get_image(check_palette: bool = True) -> Image:
     """
     Open file explorer, wait for user to open a PNG image
     :return: The image
@@ -111,14 +111,17 @@ def get_image() -> Image:
     img_path = filedialog.askopenfilename(filetypes=[("Image", "*.png")])
     root.destroy()
 
-    img = Image.open(img_path)
+    img = None
+    if img_path:
+        img = Image.open(img_path)
 
-    # If the image has attributed `palette` its metadata is a bit different.
-    # To solve this just open the image in paint and save it
-    if img.palette:
-        print("Image has `Palette` attribute. Open it in Paint and save.")
-        os.system(f'mspaint.exe "{Path(img_path)}"')
-        return None
+    if check_palette:
+        # If the image has attributed `palette` its metadata is a bit different.
+        # To solve this just open the image in paint and save it
+        if img.palette:
+            print("Image has `Palette` attribute. Open it in Paint and save.")
+            os.system(f'mspaint.exe "{Path(img_path)}"')
+            return None
 
     return img
 
@@ -162,37 +165,48 @@ def progress_update(y: int, img: Image, prefix='Progress', suffix='', length=50)
         print(" " * (length + 30), end="\r")
 
 
-def quantize(img) -> Image:
+def quantize(img, ask_for_dither: bool = True, dither: int = 0, open_image: bool = True) -> Image:
     img = img.convert("RGB")
+
+    if ask_for_dither:
+        dither = 0 if "n" in input("Dither the image? [y/n] ").lower() else 1
 
     palette_image = Image.new("P", img.size)
     palette_image.putpalette(ALL_COLORS)
     new_image = img.quantize(palette=palette_image,
-                             dither=0 if input("Dither the image? [y/n] ").find("n") != -1 else 1).convert("RGB")
+                             dither=dither).convert("RGB")
 
-    print("Opening the final image...")
-    new_image.show()
+    if open_image:
+        print("Opening the final image...")
+        new_image.show()
 
     return new_image
 
 
-def encode(img: Image) -> list[str] or None:
+def encode(img: Image, vertical_print: bool = False, dither_: bool = True) -> list[str] or None:
     """
     Take an image and encode it into a list of {`MaxStringLength`}-char strings.
     ...[number of pixels][color]...
 
     :param img: The image to be encoded.
+    :param vertical_print: Encode the image vertically (for Ashers printer)
+    :param dither_: Should the image be dithered
     :return: List of {`MaxStringLength`} char long strings
     """
     pixel_color: List[str] = []
     full_image = Image.new("RGB", img.size)
     dither = False
 
-    img = quantize(img)
+    # Just so pycharm doesn't complain
+    x, y = 0, 0
 
+    if dither_:
+        img = quantize(img)
+
+    # `vertical_print` just changes the orientation of the encoding process.
     for y in range(img.height):
         for x in range(img.width):
-            p = img.getpixel((x, y))  # Gets the color of the pixel at `x, y`
+            p = img.getpixel((y, x) if vertical_print else (x, y))  # Gets the color of the pixel at `x, y`
             if len(p) == 4:  # If the value is RGBA, the last `int` is removed
                 p = p[:3]
             try:
@@ -201,14 +215,14 @@ def encode(img: Image) -> list[str] or None:
             except KeyError:
                 dither = True
                 p = closest_color(p)
-                full_image.putpixel((x, y), p)
+                full_image.putpixel((y, x) if vertical_print else (x, y), p)
                 p = RR_PALETTE[p]
                 # closest_color(p)
             pixel_color.append(p)
         # Print the progress
         progress_update(y + 1, img, "Encoding")
 
-    if dither:
+    if dither and dither_:
         full_image.show()
 
     colors: List[Tuple[int, str]] = []

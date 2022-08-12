@@ -9,14 +9,21 @@ from PIL import ImageGrab
 import Encoding
 from common import setup_logger, is_window_active, color_in_coords
 
-# Check if the users monitor is 1440p or 1080p
-user32 = ctypes.windll.user32
-user32.SetProcessDPIAware()
-SCREEN_DIMENSIONS: Tuple[int, int] = user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)
-if round(SCREEN_DIMENSIONS[0] / SCREEN_DIMENSIONS[1], 2) != 1.78:
-    exit(input("\nScreen aspect ratio not optimal for importing.\n"
-               "Press enter to exit\n"
-               "> "))
+
+SCREEN_DIMENSIONS = []
+
+
+def monitor_check():
+    global SCREEN_DIMENSIONS
+    # Check if the users monitor is 1440p or 1080p
+    user32 = ctypes.windll.user32
+    user32.SetProcessDPIAware()
+    SCREEN_DIMENSIONS = user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)
+    if round(SCREEN_DIMENSIONS[0] / SCREEN_DIMENSIONS[1], 2) != 1.78:
+        exit(input("\nScreen aspect ratio not optimal for importing.\n"
+                   "Press enter to exit\n"
+                   "> "))
+
 
 Coords = Tuple[int, int]
 
@@ -108,6 +115,7 @@ def copy_to_recroom(img_data: list[str], delay: float = 0.3, last_successful_str
 
 
 def main(from_file: bool = False):
+    monitor_check()
     if not from_file:
         # Call function for encoding an image
         image, img_data = Encoding.main(list_size=64)
