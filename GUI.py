@@ -158,7 +158,7 @@ def image():
     image_button.grid(row=1, column=0, columnspan=2, sticky=W, rowspan=2)
     
     dither_button.grid(row=2, column=2, sticky=N)
-    keep_detail_button.grid(row=2, column=2, pady=30, sticky=N)
+    keep_detail_button.grid(row=2, column=2, pady=50, sticky=N)
 
     image_info["text"] = f"Width: {IMAGE.width}\nHeight: {IMAGE.height}"
     image_info.grid(row=1, column=2, sticky=N)
