@@ -22,7 +22,8 @@ class Colors(NamedTuple):
 
 
 def copy_into_rr_variable(img_data: list[str], delay: float = 0.3, pause_at_50: bool = False,
-                          stop_at_500: bool = False):
+                          stop_at_500: bool = False, ask_for_coords_calibration: bool = True,
+                          ask_to_continue: bool = True):
     """
     Function copies strings of data into the RecRoom Variable.
 
@@ -32,6 +33,8 @@ def copy_into_rr_variable(img_data: list[str], delay: float = 0.3, pause_at_50: 
     (could prevent disconnection)
     :param stop_at_500: Should the script full stop every 500 imported strings, and wait for the user to press enter
     (could prevent disconnection)
+    :param ask_for_coords_calibration: If there's no `coordinates.json`, remind user
+    :param ask_to_continue: Should the user be asked when they want to continue
     """
 
     # These are the old, pre-made button coordinates only meant for 16:9 display aspect ratios
@@ -58,83 +61,87 @@ def copy_into_rr_variable(img_data: list[str], delay: float = 0.3, pause_at_50: 
                                       max_y=coords["InputField"][1] + 200, )
 
     except FileNotFoundError:
-        # If there's no file, the user hasn't calibrated coordinates yet. Ask to continue using preset or exit.
-        if input("`coordinates.json` file not found.\n"
-                 "You didn't calibrate the button coordinates yet.\n"
-                 "Run `Coordinate_Calibration` if you wish to calibrate.\n"
-                 'Enter "y" to exit this script,\n'
-                 'or enter "n" to continue with preset coordinates (only for monitors with a 16:9 aspect ratio)\n'
-                 '[default: y] > ').lower().find("n") == -1:
-            exit()
+        if ask_for_coords_calibration:
+            # If there's no file, the user hasn't calibrated coordinates yet. Ask to continue using preset or exit.
+            if input("`coordinates.json` file not found.\n"
+                     "You didn't calibrate the button coordinates yet.\n"
+                     "Run `Coordinate_Calibration` if you wish to calibrate.\n"
+                     'Enter "y" to exit this script,\n'
+                     'or enter "n" to continue with preset coordinates (only for monitors with a 16:9 aspect ratio)\n'
+                     '[default: y] > ').lower().find("n") == -1:
+                exit()
 
     num_strings: int = len(img_data)
     sec_to_import: float = delay * 3 * num_strings
     print(f"Minimum time needed for importing: {int(sec_to_import // 60)} minutes, {int(sec_to_import % 60)} seconds")
 
-    if input(f"\nProceed to copy all {num_strings} strings to RecRoom? [y/n] ").lower() == "y":
-        time_at_start = time.time()
+    if ask_to_continue:
+        if input(f"\nProceed to copy all {num_strings} strings to RecRoom? [y/n] ").lower() == "n":
+            return
 
-        "########################CONTINUE###########################"
-        # If you want to continue from an existing string, set `continue_from` to `False`
-        # and enter the string into the bottom `if` statement
-        start_from_beginning: bool = True
-        continue_from_string: str = "|Enter the string here|"
-        "###########################################################"
+    time_at_start = time.time()
 
-        for num, string in enumerate(img_data):
-            is_window_active("Rec Room")
+    "########################CONTINUE###########################"
+    # If you want to continue from an existing string, set `continue_from` to `False`
+    # and enter the string into the bottom `if` statement
+    start_from_beginning: bool = True
+    continue_from_string: str = "|Enter the string here|"
+    "###########################################################"
 
-            if start_from_beginning or continue_from_string in string:
-                start_from_beginning = True
-            else:
-                continue
+    for num, string in enumerate(img_data):
+        is_window_active("Rec Room")
 
-            # Copy current string into clipboard
-            pyperclip.copy(string)
-            print(f"Copying string #{num}/{num_strings - 1}")
+        if start_from_beginning or continue_from_string in string:
+            start_from_beginning = True
+        else:
+            continue
 
-            # In RR, click on the input field
-            pyautogui.click(input_field)
+        # Copy current string into clipboard
+        pyperclip.copy(string)
+        print(f"Copying string #{num}/{num_strings - 1}")
+
+        # In RR, click on the input field
+        pyautogui.click(input_field)
+        time.sleep(delay)
+
+        # Max 10 tries to successfully copy the string
+        for _ in range(10):
+            # Paste the string into input
+            pyautogui.hotkey("ctrl", "v")
             time.sleep(delay)
+            if found_colors(main_color=(55, 57, 61),
+                            coordinates=color_check):
+                break
+            print("Failed copy")
+            pyautogui.click(input_field)
+            pyautogui.hotkey("ctrl", "a")
+            time.sleep(delay * 2)
 
-            # Max 10 tries to successfully copy the string
-            for _ in range(10):
-                # Paste the string into input
-                pyautogui.hotkey("ctrl", "v")
-                time.sleep(delay)
-                if found_colors(main_color=(55, 57, 61),
+        # Max 10 tries to successfully confirm the string
+        for _ in range(10):
+            # Click on the "confirm" area
+            pyautogui.click(confirm_expand_button)
+            time.sleep(delay)
+            if not found_colors(main_color=(55, 57, 61),
                                 coordinates=color_check):
-                    break
-                print("Failed copy")
-                pyautogui.click(input_field)
-                pyautogui.hotkey("ctrl", "a")
-                time.sleep(delay * 2)
+                break
+            print("Failed confirm")
+            time.sleep(delay * 2)
 
-            # Max 10 tries to successfully confirm the string
-            for _ in range(10):
-                # Click on the "confirm" area
-                pyautogui.click(confirm_expand_button)
-                time.sleep(delay)
-                if not found_colors(main_color=(55, 57, 61),
-                                    coordinates=color_check):
-                    break
-                print("Failed confirm")
-                time.sleep(delay * 2)
+        # Optional:
 
-            # Optional:
+        if stop_at_500 and num and num % 500 == 0:
+            # Every 500 entries stop and let the player continue when they see fit
+            input("Stopped. Press enter to continue")
+            continue
+        if pause_at_50 and num and num % 50 == 0:
+            # Every 50 entries give RR some time to process and catch up. Could prevent crashing :shrug:
+            time.sleep(30)
 
-            if stop_at_500 and num and num % 500 == 0:
-                # Every 500 entries stop and let the player continue when they see fit
-                input("Stopped. Press enter to continue")
-                continue
-            if pause_at_50 and num and num % 50 == 0:
-                # Every 50 entries give RR some time to process and catch up. Could prevent crashing :shrug:
-                time.sleep(30)
-
-        time_to_copy = time.time() - time_at_start
-        minutes = time_to_copy // 60
-        seconds = time_to_copy % 60
-        print(f"Copying complete. Copied {num_strings - 1} strings in {minutes} min and {seconds:.1f} sec")
+    time_to_copy = time.time() - time_at_start
+    minutes = time_to_copy // 60
+    seconds = time_to_copy % 60
+    print(f"Copying complete. Copied {num_strings - 1} strings in {minutes} min and {seconds:.1f} sec")
 
 
 def main(from_file: bool = False):

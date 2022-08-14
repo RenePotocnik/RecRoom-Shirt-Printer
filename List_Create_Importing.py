@@ -19,24 +19,27 @@ def monitor_check():
     user32.SetProcessDPIAware()
     SCREEN_DIMENSIONS = user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)
     if round(SCREEN_DIMENSIONS[0] / SCREEN_DIMENSIONS[1], 2) != 1.78:
-        exit(input("\nScreen aspect ratio not optimal for importing.\n"
-                   "Press enter to exit\n"
-                   "> "))
+        return -1
+    return 1
 
 
 Coords = Tuple[int, int]
 
 
-def copy_to_recroom(img_data: list[str], delay: float = 0.3, last_successful_string: str or None = None) -> None:
+def copy_to_recroom(img_data: list[str], delay: float = 0.3, last_successful_string: str or None = None,
+                    ask_to_continue: bool = True) -> None:
     """
     Function copies 512 char string into RecRoom List Creates.
+
+    :param img_data: A list of strings of color data for each pixel
+    :param delay: The main delay between actions
     :param last_successful_string: The last successfully copied string.
            Useful if importing fails somewhere in the middle
-    :param delay: The main delay between actions
-    :param img_data: A list of strings of color data for each pixel
+    :param ask_to_continue: Ask the user for input before starting copying
     """
     window_title = "Rec Room"
     num_strings = len(img_data)
+    monitor_check()
 
     # Coordinates for all the buttons
     input_field: Coords = (int(SCREEN_DIMENSIONS[0] * 0.5), int(SCREEN_DIMENSIONS[1] * 0.34))
@@ -47,74 +50,79 @@ def copy_to_recroom(img_data: list[str], delay: float = 0.3, last_successful_str
                                                     (int(SCREEN_DIMENSIONS[0] * 0.35),
                                                      int(SCREEN_DIMENSIONS[1] * 0.5) + 5)]
 
-    if input(f"\nProceed to copy all {num_strings} strings to {window_title}? [y/n] ").lower().find("y") != -1:
-        time_at_start = time.time()
+    if ask_to_continue:
+        if "n" in input(f"\nProceed to copy all {num_strings} strings to {window_title}? [y/n] ").lower():
+            return
+    time_at_start = time.time()
 
-        for num, string in enumerate(img_data):
-            # Every loop check if RecRoom is the window in focus.
-            is_window_active(window_title)
+    for num, string in enumerate(img_data):
+        # Every loop check if RecRoom is the window in focus.
+        is_window_active(window_title)
 
-            if last_successful_string:
-                # `last_successful_string` is not None
-                if last_successful_string in string:
-                    # `last_successful_string` is in the current string -> set the var. to None
-                    last_successful_string = None
-                else:
-                    # `last_successful_string` is not in the current string -> move to the next string
-                    continue
+        if last_successful_string:
+            # `last_successful_string` is not None
+            if last_successful_string in string:
+                # `last_successful_string` is in the current string -> set the var. to None
+                last_successful_string = None
             else:
-                # `last_successful_string` is None -> user did not enter any string to continue from
-                pass
+                # `last_successful_string` is not in the current string -> move to the next string
+                continue
+        else:
+            # `last_successful_string` is None -> user did not enter any string to continue from
+            pass
 
-            # Copy current string into clipboard
-            pyperclip.copy(string)
-            print(f"Copying string #{num + 1}/{num_strings}")
+        # Copy current string into clipboard
+        pyperclip.copy(string)
+        print(f"Copying string #{num + 1}/{num_strings}")
+        time.sleep(delay)
+
+        for _ in range(10):
+            # Click `List Create` string entry
+            pyautogui.click()
             time.sleep(delay)
 
-            for _ in range(10):
-                # Click `List Create` string entry
-                pyautogui.click()
-                time.sleep(delay)
+            # Click on the input field
+            pyautogui.click(input_field)
+            time.sleep(delay)
 
-                # Click on the input field
-                pyautogui.click(input_field)
-                time.sleep(delay)
+            # Paste the string into input field
+            pyautogui.hotkey("ctrl", "v")
+            time.sleep(delay)
 
-                # Paste the string into input field
-                pyautogui.hotkey("ctrl", "v")
-                time.sleep(delay)
+            # Click "Done"
+            pyautogui.click(done_button)
+            time.sleep(delay)
 
-                # Click "Done"
-                pyautogui.click(done_button)
-                time.sleep(delay)
+            # Exit out of the input field menu
+            pyautogui.press("esc")
+            time.sleep(delay * 2)
 
-                # Exit out of the input field menu
-                pyautogui.press("esc")
-                time.sleep(delay * 2)
+            color_check_image = ImageGrab.grab()
+            # Check for `white` (text) or `purple` (string input background)
+            if color_in_coords(image=color_check_image,
+                               color=(85, 96, 120),
+                               coordinates=color_checking_coords,
+                               tolerance=60):
+                break
+            print("Failed")
+            time.sleep(delay)
 
-                color_check_image = ImageGrab.grab()
-                # Check for `white` (text) or `purple` (string input background)
-                if color_in_coords(image=color_check_image,
-                                   color=(85, 96, 120),
-                                   coordinates=color_checking_coords,
-                                   tolerance=60):
-                    break
-                print("Failed")
-                time.sleep(delay)
+        # Move down using trigger handle in right hand
+        pyautogui.click(button='right')
+        time.sleep(delay / 2)
 
-            # Move down using trigger handle in right hand
-            pyautogui.click(button='right')
-            time.sleep(delay / 2)
-
-        # Print out the time used for importing
-        time_to_copy = time.time() - time_at_start
-        minutes = time_to_copy // 60
-        seconds = time_to_copy % 60
-        print(f"Copying complete. Copied {num_strings} strings in {minutes} min and {seconds:.1f} sec")
+    # Print out the time used for importing
+    time_to_copy = time.time() - time_at_start
+    minutes = time_to_copy // 60
+    seconds = time_to_copy % 60
+    print(f"Copying complete. Copied {num_strings} strings in {minutes} min and {seconds:.1f} sec")
 
 
 def main(from_file: bool = False):
-    monitor_check()
+    if monitor_check() == -1:
+        exit(input("\nScreen aspect ratio not optimal for importing.\n"
+                   "Press enter to exit\n"
+                   "> "))
     if not from_file:
         # Call function for encoding an image
         image, img_data = Encoding.main(list_size=64)
