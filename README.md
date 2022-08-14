@@ -131,6 +131,11 @@ Create a room (or use an existing one) and follow these steps:
 * Wire `Data Loaded` to `Load` in the `Shirt Printer` circuit board
 * On the `Shirt Printer` circuit board, change `Variable Import` from `True` to `False` 
 
+> NOTE: In the newest version, there's color-checking to ensure all the data gets copied successfully.\
+> Due to this, it is recommended you have a `Green Screen` (from your makerpen),\
+> and place it behind **all the `List Create` chips**.\
+> Alternatively you could use the `Skydome Chip` and `Sunlight Gadget` to change the background of your world to black.
+
 
 [Video: How to connect the List Create Imported data](https://user-images.githubusercontent.com/76653181/182651483-7bc7728c-663a-405d-aa40-be7bb896ce89.mp4)
 
