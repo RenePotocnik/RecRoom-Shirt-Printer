@@ -25,6 +25,10 @@ def monitor_check():
 
 Coords = Tuple[int, int]
 
+# Set this to false if you don't want color checking,
+# or if you're not in the `ListCreateImporting` room
+color_checking: bool = True
+
 
 def copy_to_recroom(img_data: list[str], delay: float = 0.3, last_successful_string: str or None = None,
                     ask_to_continue: bool = True) -> None:
@@ -97,15 +101,18 @@ def copy_to_recroom(img_data: list[str], delay: float = 0.3, last_successful_str
             pyautogui.press("esc")
             time.sleep(delay * 2)
 
-            color_check_image = ImageGrab.grab()
-            # Check for `white` (text) or `purple` (string input background)
-            if color_in_coords(image=color_check_image,
-                               color=(85, 96, 120),
-                               coordinates=color_checking_coords,
-                               tolerance=60):
+            if color_checking:
+                color_check_image = ImageGrab.grab()
+                # Check for `purple` (string input background)
+                if color_in_coords(image=color_check_image,
+                                   color=(157, 145, 187),
+                                   coordinates=color_checking_coords,
+                                   tolerance=60):
+                    break
+                print("Failed")
+                time.sleep(delay)
+            else:
                 break
-            print("Failed")
-            time.sleep(delay)
 
         # Move down using trigger handle in right hand
         pyautogui.click(button='right')

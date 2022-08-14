@@ -109,31 +109,27 @@ If you get any messages/errors saying to calibrate your coordinates [follow this
 Unlike the _**Variable**_ import method, using the _**List Create**_ import method you can save the imported image data as an invention, spawn it and connect it to the printer for easy repeated and remote printing.
 
 Unlike the printer itself, this invention _**does not work in your dorm**_.\
-Create a room (or use an existing one) and follow these steps:
-* Spawn the invention called `List Create Importing`
+Go to [^ListCreateImporting](https://rec.net/room/ListCreateImporting) and follow these steps:
 * Grab the `Trigger Handle` with your _**RIGHT HAND**_ (and do not let go of it)
+![Trigger Handle](Tutorials/TriggerHandle.png)
 * Grab your maker-pen with your _**LEFT HAND**_ 
 * In the maker-pen menu (F), select `Edit`
 * Edit the circuit board named `List Create Data`
+![List Create Data](Tutorials/ListCreateData.png)
 * Take a seat
 * In the maker-pen menu (F), select `Wire`
-* Look at the **center of the first string input** (see image and [video](Tutorials/ListCreateImportingSetup.mp4) below for example) ![First string input](Tutorials/ListCreateImportStringInput.png)
-
-
-[Video: How to prepare for List Create Importing](https://user-images.githubusercontent.com/76653181/182598067-d859d649-65d3-4742-92c4-75e64d01c3f4.mp4)
+* Look at the **center of the first string input**
+![First Input](Tutorials/ListCreateInput.png)
 
 
 * `Alt - Tab` back into the script window, and do as instructed
 * When the importing is done, save the `List Create Data` circuit board *(you can ignore the others)* as an invention
+![List Create Data](Tutorials/ListCreateData.png)
 * Go back to your dorm room and spawn the newly created invention
 * Wire `List Create Data` to the `Image Data Input`
 * Wire `Run` from the delay at the bottom to `Load Data`
 * Wire `Data Loaded` to `Load` in the `Shirt Printer` circuit board
 * On the `Shirt Printer` circuit board, change `Variable Import` from `True` to `False` 
-
-> NOTE: In the newest version, there's color-checking to ensure all the data gets copied successfully.\
-> Due to this, it is recommended you have a **white** background behind **all the `List Create` chips**.\
-> Alternatively you could use the `Skydome Chip` and `Sunlight Gadget` to change the background of your world to white.
 
 
 [Video: How to connect the List Create Imported data](https://user-images.githubusercontent.com/76653181/182651483-7bc7728c-663a-405d-aa40-be7bb896ce89.mp4)
