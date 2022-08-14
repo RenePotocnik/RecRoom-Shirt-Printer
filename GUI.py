@@ -1,4 +1,5 @@
 import os
+import time
 from pathlib import Path
 from tkinter import *
 
@@ -14,6 +15,7 @@ DITHERED_IMAGE = None
 IMG_DATA = []
 PATH = None
 DATA_PATH = None
+warned = False
 
 
 image_button = None
@@ -21,8 +23,7 @@ d_image_button = None
 
 
 def importing():
-    global importing_, tab_to_recroom
-    pass
+    global importing_, warned
 
     if importing_.get() == 0:
         messagebox.showerror("No Selection", "You must select one of the two ways of importing.")
@@ -30,25 +31,38 @@ def importing():
 
     elif importing_.get() == 1:
         print("Variable importing")
-        tab_to_recroom.grid(row=9, column=1, columnspan=5, sticky=W)
+        try:
+            with open("coordinates.json", "r"):
+                pass
+        except FileNotFoundError:
+            if not warned:
+                messagebox.showwarning("Coordinates Not Calibrated",
+                                       "It seems that you haven't calibrated your coordinates yet.\n"
+                                       "If you proceed, the default coordinates will be used - only for 16:9 monitors.")
+                warned = True
+                return
         IMG_DATA.insert(0, "BEGIN")
         IMG_DATA.append("END")
-        # Importing.copy_into_rr_variable(IMG_DATA)
+        time.sleep(1)
+        Importing.copy_into_rr_variable(IMG_DATA, ask_for_coords_calibration=False, ask_to_continue=False)
 
     elif importing_.get() == 2:
         print("List Create importing")
-        tab_to_recroom.grid(row=9, column=1, columnspan=5, sticky=W)
-        # List_Create_Importing.copy_to_recroom(IMG_DATA)
+        if List_Create_Importing.monitor_check() == -1:
+            messagebox.showerror("Monitor Size Not Compatible", "A monitor with a 16:9 aspect ratio is needed for"
+                                                                "List Create Importing.\n"
+                                                                "Use Variable Importing instead.")
+            return
+        List_Create_Importing.copy_to_recroom(IMG_DATA, ask_to_continue=False)
 
 
 def encoding():
-    global IMG_DATA, save_data, empty2, variable_import, list_create_import, import_data, data_info
+    global IMG_DATA, save_data, empty2, variable_import, list_create_import, import_data, data_info, tab_to_recroom
 
     IMG_DATA = Encoding.encode(img=DITHERED_IMAGE, dither_=False)
 
     data_info["text"] = f"Generated {len(IMG_DATA)} strings ({len(IMG_DATA) // 64 + 1} List Creates)"
     data_info.grid(row=4, column=1, columnspan=5, sticky=W)
-
     save_data.grid(row=5, column=0, sticky=W)
 
     empty2.grid(row=6, columnspan=4)
@@ -56,9 +70,11 @@ def encoding():
     list_create_import.grid(row=8, column=0, columnspan=3, sticky=W)
     import_data.grid(row=9, column=0, sticky=W)
 
+    tab_to_recroom.grid(row=9, column=1, columnspan=4)
+
     if len(IMG_DATA) // 64 > 40:
         list_create_import["text"] = f"List Create Importing\n" \
-                                     f"Space Needed: {len(IMG_DATA) // 64} Lists\n" \
+                                     f"Space Needed: {len(IMG_DATA) // 64 + 1} Lists\n" \
                                      f"Available Space: 40 Lists"
 
 
@@ -115,10 +131,11 @@ def dither_image():
 
 
 def image():
-    global IMAGE, keep_detail, keep_detail, dither_button, image_button, load_image, image_info
+    global IMAGE, keep_detail, keep_detail, dither_button, image_button, load_image, image_info, load_from_txt_file
 
     IMAGE = Encoding.get_image(check_palette=False)
     load_image.grid(row=0, column=0, sticky=W, padx=0, pady=0)
+    load_from_txt_file.destroy()
 
     if not IMAGE:
         messagebox.showinfo("No Image Selected", "Select an image in order to proceed.")
@@ -147,17 +164,58 @@ def image():
     image_info.grid(row=1, column=2, sticky=N)
 
 
+def load_from_file():
+    global IMG_DATA, load_image, txt_data_info, empty2, variable_import, list_create_import, import_data
+    print("Select TXT file.", end="\r")
+    root = Tk()
+    root.withdraw()
+    txt_file_path = filedialog.askopenfilename(filetypes=[("Image Data", "*.txt")])
+    root.destroy()
+
+    try:
+        with open(txt_file_path, "r") as strings:
+            IMG_DATA = strings.readlines()
+    except FileNotFoundError:
+        messagebox.showerror("FIle Not Found", "The file does not exist. Please select a different file.")
+        return
+
+    load_image.destroy()
+    load_from_txt_file["text"] = "Loaded"
+    load_from_txt_file.grid(row=0, padx=0, pady=0)
+
+    txt_data_info["text"] = f"Found {len(IMG_DATA)} strings ({len(IMG_DATA) // 64 + 1} Lists)"
+    txt_data_info.grid(row=0, column=1)
+
+    empty2.grid(row=6, columnspan=4)
+    variable_import.grid(row=7, column=0, sticky=W)
+    list_create_import.grid(row=8, column=0, columnspan=3, sticky=W)
+    import_data.grid(row=9, column=0, sticky=W)
+    tab_to_recroom.grid(row=9, column=1, columnspan=4)
+
+    if len(IMG_DATA) // 64 > 40:
+        list_create_import["text"] = f"List Create Importing\n" \
+                                     f"Space Needed: {len(IMG_DATA) // 64 + 1} Lists\n" \
+                                     f"Available Space: 40 Lists"
+
+
 # Create the main window, add title, make it un-resizable, put it on top, place in center of screen
 win: Tk = Tk()
-win.title("Rec Room Printer")
+win.title("RecRoom Printer")
 win.resizable(False, False)
 win.attributes('-topmost')
 win.eval('tk::PlaceWindow . center')
-win.attributes("-alpha", 0.9)
+# win.attributes("-alpha", 0.9)
 
 # Create a button to load the image
 load_image: Button = Button(text="Load Image", width=25, command=image)
 load_image.grid(row=0, column=0, sticky=W, padx=20, pady=20)
+
+# Create button to load image data from txt file
+load_from_txt_file = Button(win, text="Load From TXT File", width=25, command=load_from_file)
+load_from_txt_file.grid(row=1, column=0, padx=20, pady=20)
+
+# Display info about the txt file including the data
+txt_data_info = Label(win)
 
 # Create button to save the encoded image data to a .txt file
 save_data: Button = Button(win, text="Save Encoded Data", width=25, command=save_image_data)
@@ -193,7 +251,8 @@ list_create_import = Radiobutton(win, text="List Create Importing", variable=imp
 import_data = Button(win, text="Begin Import", width=25, command=importing)
 
 # Tell user to alt-tab back into RecRoom fto start importing
-tab_to_recroom = Label(win, text="Importing Will Start Once You ALT-TAB Back Into RecRoom", fg="#f00",
+tab_to_recroom = Label(win, text="Importing Will Start Once You Press 'Begin Import'\n"
+                                 " and ALT-TAB Back Into RecRoom", fg="#f00",
                        font="Helvetica 10 bold")
 
 # Label to show info about the encoded image
