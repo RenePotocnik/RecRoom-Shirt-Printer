@@ -9,7 +9,6 @@ from PIL import ImageGrab
 import Encoding
 from common import setup_logger, is_window_active, color_in_coords
 
-
 SCREEN_DIMENSIONS = []
 
 
@@ -43,10 +42,10 @@ def copy_to_recroom(img_data: list[str], delay: float = 0.3, last_successful_str
     input_field: Coords = (int(SCREEN_DIMENSIONS[0] * 0.5), int(SCREEN_DIMENSIONS[1] * 0.34))
     done_button: Coords = (int(SCREEN_DIMENSIONS[0] * 0.11), int(SCREEN_DIMENSIONS[1] * 0.52))
 
-    color_checking_coords: List[Tuple[int, int]] = [(int(SCREEN_DIMENSIONS[0] * 0.29),
+    color_checking_coords: List[Tuple[int, int]] = [(int(SCREEN_DIMENSIONS[0] * 0.25),
                                                      int(SCREEN_DIMENSIONS[1] * 0.5)),
-                                                    (int(SCREEN_DIMENSIONS[0] * 0.33),
-                                                     int(SCREEN_DIMENSIONS[1] * 0.5) + 1)]
+                                                    (int(SCREEN_DIMENSIONS[0] * 0.35),
+                                                     int(SCREEN_DIMENSIONS[1] * 0.5) + 5)]
 
     if input(f"\nProceed to copy all {num_strings} strings to {window_title}? [y/n] ").lower().find("y") != -1:
         time_at_start = time.time()
@@ -96,13 +95,9 @@ def copy_to_recroom(img_data: list[str], delay: float = 0.3, last_successful_str
                 color_check_image = ImageGrab.grab()
                 # Check for `white` (text) or `purple` (string input background)
                 if color_in_coords(image=color_check_image,
-                                   color=(210, 210, 205),
+                                   color=(85, 96, 120),
                                    coordinates=color_checking_coords,
-                                   tolerance=50) or \
-                        color_in_coords(image=color_check_image,
-                                        color=(85, 96, 120),
-                                        coordinates=color_checking_coords,
-                                        tolerance=50):
+                                   tolerance=60):
                     break
                 print("Failed")
                 time.sleep(delay)
