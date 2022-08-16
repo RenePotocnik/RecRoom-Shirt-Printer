@@ -124,9 +124,10 @@ def color_in_coords(image: Image, color: Tuple[int, int, int], coordinates: List
                 and (abs(compare_color_[1] - color[1]) < tolerance)
                 and (abs(compare_color_[2] - color[2]) < tolerance))
 
+    image_colors = image.load()
     for y in range(coordinates[0][1], coordinates[1][1], 1):
         for x in range(coordinates[0][0], coordinates[1][0], 1):
-            compare_color: Tuple[int, int, int] = image.getpixel((x, y))
+            compare_color: Tuple[int, int, int] = image_colors[x, y]
             if is_color(compare_color_=compare_color):
                 return True
     return False
