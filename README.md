@@ -2,7 +2,7 @@
 The repository you're currently viewing is an experimental version.\
 If you decide to download it and try it, join [this discord server](https://discord.gg/GuzwRMsyW8) and give feedback and report and problems you may experience.
 
-If you want the stable release, tested by hundreds or people, go to [this release](https://github.com/RenePotocnik/RecRoom-Shirt-Printer/tree/v1.0)
+If you want the stable release, tested by hundreds or people, go to [this release](https://github.com/RenePotocnik/RecRoom-Shirt-Printer/tree/v1.1.6)
 
 # Shirt Printer
 
@@ -81,6 +81,8 @@ When spawning the invention you must **spawn it from your watch** and **not** yo
 
 Download the ZIP file containing all scripts.\
 Run `Shirt-Printer.py`.
+
+Alternatively, you could run `GUI.py`, which gives you an experimental *User Interface*.
 
 In the newly opened window, open a PNG image you want to print.\
 I suggest the image is already converted into a RecRoom color palette
