@@ -17,9 +17,96 @@ PATH = None
 DATA_PATH = None
 warned = False
 
-
 image_button = None
 d_image_button = None
+
+
+def update_image_button():
+    global image_button
+    height = (300 / IMAGE.width) * IMAGE.height
+    tk_image = ImageTk.PhotoImage(IMAGE.resize((300, int(height))))
+    image_button["image"] = tk_image
+    image_button.image = tk_image
+    image_info["text"] = f"Width: {IMAGE.width}\nHeight: {IMAGE.height}"
+
+
+def scale():
+    # Create a new window and buttons
+    win2 = Toplevel(win)
+    win2.title("Scale Image")
+    win2.resizable(False, False)
+    win2.attributes('-topmost')
+    x, y = (win.winfo_x(), win.winfo_y())
+    win2.geometry(f"+{x}+{y}")
+
+    scaled: bool = False
+
+    def scale_to_w_h_():
+        global IMAGE
+        try:
+            w: int = int(scale_to_w_in.get())
+            h: int = int(scale_to_h_in.get())
+        except ValueError:
+            return
+        IMAGE = IMAGE.resize((w, h))
+        update_image_button()
+        win2.destroy()
+
+    def fit_to_width_():
+        global IMAGE
+        try:
+            w: int = int(fit_to_width_in.get())
+            h: int = int(w / IMAGE.width * IMAGE.height)
+        except ValueError:
+            return
+        IMAGE = IMAGE.resize((w, h))
+        update_image_button()
+        win2.destroy()
+
+    def fit_to_height_():
+        global IMAGE
+        try:
+            h: int = int(fit_to_height_in.get())
+            w: int = int(h / IMAGE.height * IMAGE.width)
+        except ValueError:
+            return
+        IMAGE = IMAGE.resize((w, h))
+        update_image_button()
+        win2.destroy()
+
+    # Scale to WIDTH and HEIGHT
+    scale_to_w_h = Button(win2, text="Scale To Width & Height", width=25, command=scale_to_w_h_)
+    scale_to_w_l = Label(win2, text="Width:")
+    scale_to_w_in = Entry(win2, width=5)
+    scale_to_h_l = Label(win2, text="Height:")
+    scale_to_h_in = Entry(win2, width=5)
+
+    scale_to_w_h_row: int = 0
+    scale_to_w_h.grid(row=scale_to_w_h_row, column=0, padx=10, pady=10)
+    scale_to_w_l.grid(row=scale_to_w_h_row, column=1)
+    scale_to_w_in.grid(row=scale_to_w_h_row, column=2, padx=10)
+    scale_to_h_l.grid(row=scale_to_w_h_row, column=3)
+    scale_to_h_in.grid(row=scale_to_w_h_row, column=4, padx=10)
+
+    # Fit to WIDTH
+    fit_to_width = Button(win2, text="Fit To Width", width=25, command=fit_to_width_)
+    fit_to_width_l = Label(win2, text="Width:")
+    fit_to_width_in = Entry(win2, width=5)
+
+    fit_to_width_row: int = 1
+    fit_to_width.grid(row=fit_to_width_row, column=0, pady=10)
+    fit_to_width_l.grid(row=fit_to_width_row, column=1)
+    fit_to_width_in.grid(row=fit_to_width_row, column=2, padx=10)
+
+    # Fit to HEIGHT
+    fit_to_height = Button(win2, text="Fit To Height", width=25, command=fit_to_height_)
+    fit_to_height_l = Label(win2, text="Height:")
+    fit_to_height_in = Entry(win2, width=5)
+
+    fit_to_height_row: int = 2
+    fit_to_height.grid(row=fit_to_height_row, column=0, pady=10)
+    fit_to_height_l.grid(row=fit_to_height_row, column=1)
+    fit_to_height_in.grid(row=fit_to_height_row, column=2, padx=10)
 
 
 def importing():
@@ -62,15 +149,15 @@ def encoding():
     IMG_DATA = Encoding.encode(img=DITHERED_IMAGE, dither_=False)
 
     data_info["text"] = f"Generated {len(IMG_DATA)} strings ({len(IMG_DATA) // 64 + 1} List Creates)"
-    data_info.grid(row=4, column=1, columnspan=5, sticky=W)
-    save_data.grid(row=5, column=0, sticky=W)
+    data_info.grid(row=7, column=1, columnspan=5, sticky=W)
+    save_data.grid(row=7, column=0, sticky=W)
 
-    empty2.grid(row=6, columnspan=4)
-    variable_import.grid(row=7, column=0, sticky=W)
-    list_create_import.grid(row=8, column=0, columnspan=3, sticky=W)
-    import_data.grid(row=9, column=0, sticky=W)
+    empty2.grid(row=8, columnspan=4)
+    variable_import.grid(row=9, column=0, sticky=W)
+    list_create_import.grid(row=10, column=0, columnspan=3, sticky=W)
+    import_data.grid(row=11, column=0, sticky=W)
 
-    tab_to_recroom.grid(row=9, column=1, columnspan=4)
+    tab_to_recroom.grid(row=11, column=1, columnspan=4)
 
     if len(IMG_DATA) // 64 > 40:
         list_create_import["text"] = f"List Create Importing\n" \
@@ -90,7 +177,7 @@ def save_image_data():
 
     save_data["text"] = "Saved"
 
-    open_encoded_data.grid(row=5, column=0, columnspan=2, sticky=E)
+    open_encoded_data.grid(row=7, column=0, columnspan=2, sticky=E)
 
 
 def save_new_image():
@@ -120,18 +207,19 @@ def dither_image():
     tk_image = ImageTk.PhotoImage(DITHERED_IMAGE.resize((300, int(height))))
     d_image_button = Button(win, image=tk_image, command=DITHERED_IMAGE.show)
     d_image_button.image = tk_image
-    d_image_button.grid(row=1, column=4, rowspan=2)
+    d_image_button.grid(row=1, column=4, rowspan=5, sticky=N)
 
     save_image.grid(row=0, column=4, sticky=E)
-    empty.grid(row=3, columnspan=4, sticky=W)
-    encode.grid(row=4, column=0, sticky=W)
+    empty.grid(row=6, columnspan=4, sticky=W)
+    encode.grid(row=7, column=0, sticky=W)
 
     if save_data:
         save_data["text"] = "Save Encoded Data"
 
 
 def image():
-    global IMAGE, keep_detail, keep_detail, dither_button, image_button, load_image, image_info, load_from_txt_file
+    global IMAGE, keep_detail, keep_detail, dither_button, image_button, load_image, image_info, load_from_txt_file, \
+        scale_image
 
     IMAGE = Encoding.get_image(check_palette=False)
     load_image.grid(row=0, column=0, sticky=W, padx=0, pady=0)
@@ -155,13 +243,15 @@ def image():
     tk_image = ImageTk.PhotoImage(IMAGE.resize((300, int(height))))
     image_button = Button(win, image=tk_image, command=IMAGE.show)
     image_button.image = tk_image
-    image_button.grid(row=1, column=0, columnspan=2, sticky=W, rowspan=2)
-    
-    dither_button.grid(row=2, column=2, sticky=N)
-    keep_detail_button.grid(row=2, column=2, pady=50, sticky=N)
+    image_button.grid(row=1, column=0, columnspan=2, sticky=N, rowspan=5)
+
+    dither_button.grid(row=3, column=2, sticky=S)
+    keep_detail_button.grid(row=4, column=2, sticky=N)
 
     image_info["text"] = f"Width: {IMAGE.width}\nHeight: {IMAGE.height}"
-    image_info.grid(row=1, column=2, sticky=N)
+    image_info.grid(row=1, column=2, sticky=S)
+
+    scale_image.grid(row=2, column=2, sticky=N)
 
 
 def load_from_file():
@@ -261,5 +351,8 @@ data_info = Label(win)
 
 # Display image info: width and height
 image_info = Label(win)
+
+# Create button to scale the image
+scale_image = Button(win, text="Scale Image", command=scale)
 
 win.mainloop()
