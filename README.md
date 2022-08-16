@@ -117,7 +117,7 @@ Go to [^ListCreateImporting](https://rec.net/room/ListCreateImporting) and follo
 * Edit the circuit board named `List Create Data`
 ![List Create Data](Tutorials/ListCreateData.png)
 * Take a seat
-* In the maker-pen menu (F), select `Wire`
+* In the maker-pen menu (F), select `Connect`
 * Look at the **center of the first string input**
 ![First Input](Tutorials/ListCreateInput.png)
 
@@ -126,9 +126,9 @@ Go to [^ListCreateImporting](https://rec.net/room/ListCreateImporting) and follo
 * When the importing is done, save the `List Create Data` circuit board *(you can ignore the others)* as an invention
 ![List Create Data](Tutorials/ListCreateData.png)
 * Go back to your dorm room and spawn the newly created invention
-* Wire `List Create Data` to the `Image Data Input`
-* Wire `Run` from the delay at the bottom to `Load Data`
-* Wire `Data Loaded` to `Load` in the `Shirt Printer` circuit board
+* Connect `List Create Data` to the `Image Data Input`
+* Connect `Run` from the delay at the bottom to `Load Data`
+* Connect `Data Loaded` to `Load` in the `Shirt Printer` circuit board
 * On the `Shirt Printer` circuit board, change `Variable Import` from `True` to `False` 
 
 
