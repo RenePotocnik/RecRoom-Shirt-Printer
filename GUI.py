@@ -150,9 +150,9 @@ def encoding():
 
     data_info["text"] = f"Generated {len(IMG_DATA)} strings ({len(IMG_DATA) // 64 + 1} List Creates)"
     data_info.grid(row=7, column=1, columnspan=5, sticky=W)
-    save_data.grid(row=7, column=0, sticky=W)
+    save_data.grid(row=8, column=0, sticky=W)
 
-    empty2.grid(row=8, columnspan=4)
+    empty2.grid(row=9, columnspan=4)
     variable_import.grid(row=9, column=0, sticky=W)
     list_create_import.grid(row=10, column=0, columnspan=3, sticky=W)
     import_data.grid(row=11, column=0, sticky=W)
@@ -177,7 +177,7 @@ def save_image_data():
 
     save_data["text"] = "Saved"
 
-    open_encoded_data.grid(row=7, column=0, columnspan=2, sticky=E)
+    open_encoded_data.grid(row=8, column=0, columnspan=2, sticky=E)
 
 
 def save_new_image():
