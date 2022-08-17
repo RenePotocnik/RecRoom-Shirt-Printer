@@ -60,14 +60,16 @@ def copy_into_rr_variable(img_data: list[str], delay: float = 0.3, pause_at_50: 
 
     except FileNotFoundError:
         if ask_for_coords_calibration:
-            # If there's no file, the user hasn't calibrated coordinates yet. Ask to continue using preset or exit.
-            if input("`coordinates.json` file not found.\n"
-                     "You didn't calibrate the button coordinates yet.\n"
-                     "Run `Coordinate_Calibration` if you wish to calibrate.\n"
-                     'Enter "y" to exit this script,\n'
-                     'or enter "n" to continue with preset coordinates (only for monitors with a 16:9 aspect ratio)\n'
-                     '[default: y] > ').lower().find("n") == -1:
-                exit()
+            if round(SCREEN_DIMENSIONS[0] / SCREEN_DIMENSIONS[1], 2) != 1.78:
+                # If there's no file, the user hasn't calibrated coordinates yet. Ask to continue using preset or exit.
+                if input("`coordinates.json` file not found.\n"
+                         "You didn't calibrate the button coordinates yet.\n"
+                         "Run `Coordinate_Calibration` if you wish to calibrate.\n"
+                         'Enter "y" to exit this script,\n'
+                         'or enter "n" to continue with preset coordinates '
+                         '(only for monitors with a 16:9 aspect ratio)\n'
+                         '[default: y] > ').lower().find("n") == -1:
+                    exit()
 
     num_strings: int = len(img_data)
     sec_to_import: float = delay * 3 * num_strings
