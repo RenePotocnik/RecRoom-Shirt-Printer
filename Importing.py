@@ -120,6 +120,8 @@ def copy_into_rr_variable(img_data: list[str], delay: float = 0.3, pause_at_50: 
         for _ in range(10):
             # Click on the "confirm" area
             pyautogui.click(confirm_expand_button)
+            time.sleep(delay / 2)
+            pyautogui.scroll(-50, x=confirm_expand_button[0], y=int(SCREEN_DIMENSIONS[1] / 2))
             time.sleep(delay)
             if color_in_coords(image=ImageGrab.grab(),
                                color=Colors.text,
