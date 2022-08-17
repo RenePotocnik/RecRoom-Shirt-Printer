@@ -1,13 +1,14 @@
 import ctypes
 import json
 import time
-from typing import NamedTuple, Tuple, Dict
+from typing import NamedTuple, Tuple, Dict, List
 
 import pyautogui
 import pyperclip
+from PIL import ImageGrab
 
 import Encoding
-from common import ImageCoords, is_window_active, found_colors
+from common import is_window_active, color_in_coords
 
 # Check if the users monitor is 1440p or 1080p
 user32 = ctypes.windll.user32
@@ -43,10 +44,8 @@ def copy_into_rr_variable(img_data: list[str], delay: float = 0.3, pause_at_50: 
     confirm_expand_button: Tuple[int, int] = (int(SCREEN_DIMENSIONS[0] * 0.841015),
                                               int(SCREEN_DIMENSIONS[1] * 0.083333))
 
-    color_check = ImageCoords(min_y=int(SCREEN_DIMENSIONS[1] * 0.4611),
-                              min_x=int(SCREEN_DIMENSIONS[0] * 0.1121),
-                              max_x=int(SCREEN_DIMENSIONS[0] * 0.1953),
-                              max_y=int(SCREEN_DIMENSIONS[1] * 0.5208))
+    color_check: List[Tuple[int, int]] = [(int(SCREEN_DIMENSIONS[0] * 0.1121), int(SCREEN_DIMENSIONS[1] * 0.4611)),
+                                          (int(SCREEN_DIMENSIONS[0] * 0.1953), int(SCREEN_DIMENSIONS[1] * 0.5208))]
 
     # Check if there's a `coordinates.json` file; if there is -> use the coords written in there
     try:
@@ -55,10 +54,9 @@ def copy_into_rr_variable(img_data: list[str], delay: float = 0.3, pause_at_50: 
             coords: Dict[str, Tuple[int, int]] = json.load(coords_file)
             input_field = coords["InputField"]
             confirm_expand_button = coords["DoneButton"]
-            color_check = ImageCoords(min_x=coords["InputField"][0] - 10,
-                                      max_x=coords["InputField"][0] + 300,
-                                      min_y=coords["InputField"][1] - 10,
-                                      max_y=coords["InputField"][1] + 200, )
+            color_check: List[Tuple[int, int]] = [(coords["InputField"][0] - 10, coords["InputField"][1] - 10),
+                                                  (coords["InputField"][0] + 300, coords["InputField"][1] + 200)]
+            print("Reading coordinates from `coordinates.json`...")
 
     except FileNotFoundError:
         if ask_for_coords_calibration:
@@ -109,8 +107,9 @@ def copy_into_rr_variable(img_data: list[str], delay: float = 0.3, pause_at_50: 
             # Paste the string into input
             pyautogui.hotkey("ctrl", "v")
             time.sleep(delay)
-            if found_colors(main_color=(55, 57, 61),
-                            coordinates=color_check):
+            if color_in_coords(image=ImageGrab.grab(),
+                               color=Colors.text,
+                               coordinates=color_check):
                 break
             print("Failed copy")
             pyautogui.click(input_field)
@@ -122,8 +121,9 @@ def copy_into_rr_variable(img_data: list[str], delay: float = 0.3, pause_at_50: 
             # Click on the "confirm" area
             pyautogui.click(confirm_expand_button)
             time.sleep(delay)
-            if not found_colors(main_color=(55, 57, 61),
-                                coordinates=color_check):
+            if color_in_coords(image=ImageGrab.grab(),
+                               color=Colors.text,
+                               coordinates=color_check):
                 break
             print("Failed confirm")
             time.sleep(delay * 2)
