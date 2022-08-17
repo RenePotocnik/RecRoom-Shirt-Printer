@@ -112,7 +112,7 @@ def copy_into_rr_variable(img_data: list[str], delay: float = 0.3, pause_at_50: 
                                coordinates=color_check):
                 break
             print("Failed copy")
-            pyautogui.scroll(-50)
+            pyautogui.scroll(-500)
             pyautogui.click(input_field)
             pyautogui.hotkey("ctrl", "a")
             time.sleep(delay * 2)
@@ -123,7 +123,7 @@ def copy_into_rr_variable(img_data: list[str], delay: float = 0.3, pause_at_50: 
             pyautogui.click(confirm_expand_button)
             time.sleep(delay / 2)
             pyautogui.move(0, int(SCREEN_DIMENSIONS[1] / 3))
-            pyautogui.scroll(-50)
+            pyautogui.scroll(-500)
             time.sleep(delay)
             if not color_in_coords(image=ImageGrab.grab(),
                                    color=Colors.text,
