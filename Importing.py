@@ -123,9 +123,9 @@ def copy_into_rr_variable(img_data: list[str], delay: float = 0.3, pause_at_50: 
             time.sleep(delay / 2)
             pyautogui.scroll(-50, x=confirm_expand_button[0], y=int(SCREEN_DIMENSIONS[1] / 2))
             time.sleep(delay)
-            if color_in_coords(image=ImageGrab.grab(),
-                               color=Colors.text,
-                               coordinates=color_check):
+            if not color_in_coords(image=ImageGrab.grab(),
+                                   color=Colors.text,
+                                   coordinates=color_check):
                 break
             print("Failed confirm")
             time.sleep(delay * 2)
