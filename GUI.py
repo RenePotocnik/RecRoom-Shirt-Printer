@@ -153,16 +153,15 @@ def encoding():
     save_data.grid(row=8, column=0, sticky=W)
 
     empty2.grid(row=9, columnspan=4)
-    variable_import.grid(row=9, column=0, sticky=W)
+    variable_import.grid(row=9, column=0, sticky=W, pady=(20, 0))
     list_create_import.grid(row=10, column=0, columnspan=3, sticky=W)
     import_data.grid(row=11, column=0, sticky=W)
 
     tab_to_recroom.grid(row=11, column=1, columnspan=4)
 
-    if len(IMG_DATA) // 64 > 40:
-        list_create_import["text"] = f"List Create Importing\n" \
-                                     f"Space Needed: {len(IMG_DATA) // 64 + 1} Lists\n" \
-                                     f"Available Space: 40 Lists"
+    list_create_import["text"] = f"List Create Importing\n" \
+                                 f"Space Needed: {len(IMG_DATA) // 64 + 1} Lists\n" \
+                                 f"Available Space: 40 Lists"
 
 
 def save_image_data():
@@ -278,15 +277,14 @@ def load_from_file():
     txt_data_info.grid(row=0, column=1)
 
     empty2.grid(row=6, columnspan=4)
-    variable_import.grid(row=7, column=0, sticky=W)
+    variable_import.grid(row=7, column=0, sticky=W, pady=(20, 0))
     list_create_import.grid(row=8, column=0, columnspan=3, sticky=W)
     import_data.grid(row=9, column=0, sticky=W)
     tab_to_recroom.grid(row=9, column=1, columnspan=4)
 
-    if len(IMG_DATA) // 64 > 40:
-        list_create_import["text"] = f"List Create Importing\n" \
-                                     f"Space Needed: {len(IMG_DATA) // 64 + 1} Lists\n" \
-                                     f"Available Space: 40 Lists"
+    list_create_import["text"] = f"List Create Importing\n" \
+                                 f"Space Needed: {len(IMG_DATA) // 64 + 1} Lists\n" \
+                                 f"Available Space: 40 Lists"
 
 
 # Create the main window, add title, make it un-resizable, put it on top, place in center of screen
