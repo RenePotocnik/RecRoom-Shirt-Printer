@@ -71,6 +71,14 @@ previous saves of the room in your watch;\
 
 [Video: How to delete everything in a room using the makerpen](https://user-images.githubusercontent.com/76653181/179421434-a57c714e-b90f-4bf7-a618-e6614ed1c789.mp4)
 
+## Optional modules/add-ons
+These are inventions, that are not mandatory, but can make your life easier.
+
+* [Board Placement Seat](https://rec.net/invention/10736042) - Easier way to place the *Clothing Customizer*
+* ~~[List Create Importing v2](https://rec.net/invention/10967839) - Import data, and save it as an invention for later use~~ _**FOR OLDER RELEASE OF THE IMPORTING SCRIPT: [Older release](https://github.com/RenePotocnik/RecRoom-Shirt-Printer/tree/v1.1.6)**_
+* [_**^ListCreateImporting**_](https://rec.net/room/ListCreateImporting) - Room for importing data and saving it as an invention (supports color checking for successful data import)
+* [Canvas Printer Module](https://rec.net/invention/11258483) - Print images on a canvas
+
 ## Spawning the invention
 
 When spawning the invention you must **spawn it from your watch** and **not** your maker-pen.
