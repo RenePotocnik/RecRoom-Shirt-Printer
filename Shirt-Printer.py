@@ -1,8 +1,11 @@
-import logging
+try:
+    import logging
 
-import Encoding
-import Importing
-from common import setup_logger
+    import Encoding
+    import Importing
+    from common import setup_logger
+except:
+    exit(input("Failure While Importing Modules."))
 
 
 def main():
