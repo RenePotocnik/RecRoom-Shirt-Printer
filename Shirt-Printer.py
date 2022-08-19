@@ -4,8 +4,8 @@ try:
     import Encoding
     import Importing
     from common import setup_logger
-except:
-    exit(input("Failure While Importing Modules."))
+except Exception as e:
+    exit(input(f"ERROR: {e}"))
 
 
 def main():
