@@ -88,6 +88,7 @@ When spawning the invention you must **spawn it from your watch** and **not** yo
 ## Running the script
 
 Download the ZIP file containing all scripts.\
+**All the files (scripts) have to be in the same folder.** Best to just **unzip** the downloaded ZIP file, and run the scripts from there.\
 Run `Shirt-Printer.py`.
 
 Alternatively, you could run `GUI.py`, which gives you an experimental *User Interface*.
