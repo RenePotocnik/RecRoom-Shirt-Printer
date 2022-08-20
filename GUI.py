@@ -2,17 +2,19 @@ import os
 import time
 from pathlib import Path
 from tkinter import *
+from tkinter import messagebox, filedialog, Button, IntVar, Tk
+from typing import List, Tuple
 
 from PIL import ImageTk
 
 import Encoding
 import Importing
 import List_Create_Importing
-from tkinter import messagebox, filedialog, ttk, Button, IntVar, Tk
 
 IMAGE = None
 DITHERED_IMAGE = None
 IMG_DATA = []
+IMG_DATA_UNCUT: List[Tuple[int, str]]
 PATH = None
 DATA_PATH = None
 warned = False
@@ -144,13 +146,21 @@ def importing():
 
 
 def encoding():
-    global IMG_DATA, save_data, empty2, variable_import, list_create_import, import_data, data_info, tab_to_recroom
+    global IMG_DATA, save_data, empty2, variable_import, list_create_import, import_data, data_info, tab_to_recroom, \
+        IMG_DATA_UNCUT, time_for_print
 
     IMG_DATA = Encoding.encode(img=DITHERED_IMAGE, dither_=False)
 
     data_info["text"] = f"Generated {len(IMG_DATA)} strings ({len(IMG_DATA) // 64 + 1} List Creates)"
-    data_info.grid(row=7, column=1, columnspan=5, sticky=W)
+    data_info.grid(row=7, column=1, columnspan=2, sticky=W)
     save_data.grid(row=8, column=0, sticky=W)
+
+    main_delay: float = 0.025
+    min_for_print: float = (len(''.join(IMG_DATA)) * (main_delay * 2 + main_delay / 2)) / 60
+    time_for_print["text"] = f"EST. time needed to print (delay: {main_delay}):\n" \
+                             f"{int(min_for_print // 60)} hours,\n" \
+                             f"{round(min_for_print % 60, 1)} minutes."
+    time_for_print.grid(row=7, column=3, columnspan=2, rowspan=3, sticky=N)
 
     empty2.grid(row=9, columnspan=4)
     variable_import.grid(row=9, column=0, sticky=W, pady=(20, 0))
@@ -346,6 +356,7 @@ tab_to_recroom = Label(win, text="Importing Will Start Once You Press 'Begin Imp
 
 # Label to show info about the encoded image
 data_info = Label(win)
+time_for_print = Label(win)
 
 # Display image info: width and height
 image_info = Label(win)
