@@ -13,6 +13,7 @@ import List_Create_Importing
 
 IMAGE = None
 DITHERED_IMAGE = None
+IMAGE_PATH = None
 IMG_DATA = []
 IMG_DATA_UNCUT: List[Tuple[int, str]]
 PATH = None
@@ -193,7 +194,7 @@ def save_new_image():
     global save_image, PATH
     root = Tk()
     root.withdraw()
-    PATH = filedialog.askdirectory() + "/converted_" + str(IMAGE.filename.split("/")[-1])
+    PATH = filedialog.askdirectory() + "/converted_" + str(IMAGE_PATH.stem.split("/")[-1]) + ".png"
     print(PATH)
     root.destroy()
 
@@ -228,9 +229,10 @@ def dither_image():
 
 def image():
     global IMAGE, keep_detail, keep_detail, dither_button, image_button, load_image, image_info, load_from_txt_file, \
-        scale_image
+        scale_image, IMAGE_PATH
 
     IMAGE = Encoding.get_image(check_palette=False)
+    IMAGE_PATH = Path(IMAGE.filename)
     load_image.grid(row=0, column=0, sticky=W, padx=0, pady=0)
     load_from_txt_file.destroy()
 
