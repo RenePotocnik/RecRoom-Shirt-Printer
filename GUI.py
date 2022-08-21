@@ -179,11 +179,13 @@ def save_image_data():
     global IMG_DATA, save_data, open_encoded_data, DATA_PATH
     root = Tk()
     root.withdraw()
-    DATA_PATH = filedialog.askdirectory() + "/encoded_" + str(Path(IMAGE.filename).stem) + ".txt"
+    DATA_PATH = filedialog.askdirectory() + "/encoded_" + str(IMAGE_PATH.stem) + ".txt"
     root.destroy()
 
+    img_data_new = [f"#{n} - " + s for n, s in enumerate(IMG_DATA)]
+
     with open(DATA_PATH, "w") as strings_file:
-        strings_file.writelines("\n".join(IMG_DATA))
+        strings_file.writelines("\n".join(img_data_new))
 
     save_data["text"] = "Saved"
 
@@ -276,7 +278,8 @@ def load_from_file():
     try:
         with open(txt_file_path, "r") as strings:
             temp: list[str] = strings.readlines()
-            IMG_DATA = [line.strip() for line in temp]
+            IMG_DATA = [line.strip().split(" ")[2:] for line in temp]
+            print(IMG_DATA)
     except FileNotFoundError:
         messagebox.showerror("FIle Not Found", "The file does not exist. Please select a different file.")
         return
