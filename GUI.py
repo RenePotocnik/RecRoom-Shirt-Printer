@@ -279,7 +279,6 @@ def load_from_file():
         with open(txt_file_path, "r") as strings:
             temp: list[str] = strings.readlines()
             IMG_DATA = [line.strip().split(" ")[2:] for line in temp]
-            print(IMG_DATA)
     except FileNotFoundError:
         messagebox.showerror("FIle Not Found", "The file does not exist. Please select a different file.")
         return
