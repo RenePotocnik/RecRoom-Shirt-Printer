@@ -4,6 +4,14 @@ If you decide to download it and try it, join [this discord server](https://disc
 
 If you want the stable release, tested by hundreds or people, go to [this release](https://github.com/RenePotocnik/RecRoom-Shirt-Printer/tree/v1.1.6)
 
+# Video Tutorial
+Many people refuse to use the printer because they get startled by the mountain of text below.\
+Well, thanks to [JavierFML](https://www.youtube.com/c/JavierFML) for the amazing tutorial, which should get you started with *most* of the stuff needed.
+
+*I still recommend reading the written tutorial, because you might find some things you missed in the video*
+
+[![Video Tutorial](https://img.youtube.com/vi/SWv9tlETVkw/0.jpg)](https://www.youtube.com/watch?v=SWv9tlETVkw)
+
 # Shirt Printer
 
 This repository is for converting, encoding and importing a PNG image into a RecRoom invention (`Shirt Printer - Dorm`)
