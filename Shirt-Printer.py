@@ -1,9 +1,17 @@
+import subprocess
+import sys
+
 try:
     import logging
 
     import Encoding
     import Importing
     from common import setup_logger
+except AttributeError:
+    input("Lower version of module 'pyscreeze' found.\n"
+          "Press enter to update it, them run this script again.\n"
+          "> ")
+    subprocess.call(f"{sys.executable} -m pip3 install pyscreeze -U")
 except Exception as e:
     exit(input(f"ERROR: {e}"))
 
