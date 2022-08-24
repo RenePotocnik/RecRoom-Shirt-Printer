@@ -4,6 +4,9 @@ If you decide to download it and try it, join [this discord server](https://disc
 
 If you want the stable release, tested by hundreds or people, go to [this release](https://github.com/RenePotocnik/RecRoom-Shirt-Printer/tree/v1.1.6)
 
+Make sure to `Watch` and `Star` this repository to get notified when new updates come out\
+![Watch Repository](Tutorials/WatchAndStarRepo.png)
+
 # Video Tutorial
 Many people refuse to use the printer because they get startled by the mountain of text below.\
 Well, thanks to [JavierFML](https://www.youtube.com/c/JavierFML) for the amazing tutorial, which should get you started with *most* of the stuff needed.
