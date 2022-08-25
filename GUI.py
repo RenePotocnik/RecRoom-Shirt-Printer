@@ -170,6 +170,10 @@ def encoding():
 
     tab_to_recroom.grid(row=11, column=1, columnspan=4)
 
+    variable_import["text"] = f"Variable Importing\n" \
+                              f"Space Needed:{len(IMG_DATA)} Strings\n" \
+                              f"Available Space: 2500 Strings"
+
     list_create_import["text"] = f"List Create Importing\n" \
                                  f"Space Needed: {len(IMG_DATA) // 64 + 1} Lists\n" \
                                  f"Available Space: 40 Lists"
@@ -295,6 +299,10 @@ def load_from_file():
     list_create_import.grid(row=8, column=0, columnspan=3, sticky=W)
     import_data.grid(row=9, column=0, sticky=W)
     tab_to_recroom.grid(row=9, column=1, columnspan=4)
+
+    variable_import["text"] = f"Variable Importing\n" \
+                              f"Space Needed:{len(IMG_DATA)} Strings\n" \
+                              f"Available Space: 2500 Strings"
 
     list_create_import["text"] = f"List Create Importing\n" \
                                  f"Space Needed: {len(IMG_DATA) // 64 + 1} Lists\n" \
