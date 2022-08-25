@@ -171,7 +171,7 @@ def encoding():
     tab_to_recroom.grid(row=11, column=1, columnspan=4)
 
     variable_import["text"] = f"Variable Importing\n" \
-                              f"Space Needed:{len(IMG_DATA)} Strings\n" \
+                              f"Space Needed: {len(IMG_DATA)} Strings\n" \
                               f"Available Space: 2500 Strings"
 
     list_create_import["text"] = f"List Create Importing\n" \
