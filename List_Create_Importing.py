@@ -1,13 +1,17 @@
-import ctypes
-import time
-from typing import Tuple, List
+try:
+    import ctypes
+    import time
+    from typing import Tuple, List
 
-import pyautogui
-import pyperclip
-from PIL import ImageGrab
+    import pyautogui
+    import pyperclip
+    from PIL import ImageGrab
 
-import Encoding
-from common import setup_logger, is_window_active, color_in_coords
+    import Encoding
+    from common import setup_logger, is_window_active, color_in_coords
+except Exception as e:
+    exit(input(f"ERROR: {e}"))
+
 
 SCREEN_DIMENSIONS = []
 
