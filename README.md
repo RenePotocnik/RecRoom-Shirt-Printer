@@ -86,6 +86,7 @@ previous saves of the room in your watch;\
 These are inventions, that are not mandatory, but can make your life easier.
 
 * [Board Placement Seat](https://rec.net/invention/10736042) - Easier way to place the *Clothing Customizer*
+* [Board Placement Seat V2](https://rec.net/invention/11398905) - Easier way to place the *Clothing Customizer*. Placed using the makerpen
 * ~~[List Create Importing v2](https://rec.net/invention/10967839) - Import data, and save it as an invention for later use~~ _**FOR OLDER RELEASE OF THE IMPORTING SCRIPT: [Older release](https://github.com/RenePotocnik/RecRoom-Shirt-Printer/tree/v1.1.6)**_
 * [_**^ListCreateImporting**_](https://rec.net/room/ListCreateImporting) - Room for importing data and saving it as an invention (supports color checking for successful data import)
 * [Canvas Printer Module](https://rec.net/invention/11258483) - Print images on a canvas
