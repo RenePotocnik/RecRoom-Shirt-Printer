@@ -139,7 +139,7 @@ def main(from_file: bool = False):
         image, img_data = Encoding.main(list_size=64)
     else:
         try:
-            with open("image_data.txt", "r") as f:
+            with open("image_data.txt", "r", encoding="UTF-8") as f:
                 temp: list[str] = f.readlines()
                 img_data = [line.strip() for line in temp]
         except FileNotFoundError:

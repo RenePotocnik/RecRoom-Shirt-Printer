@@ -273,7 +273,7 @@ def main(list_size: int, output_strings: bool = False, wait_for_input: bool = Fa
 
     img_data: list[str] = encode(img)
 
-    with open("image_data.txt", "w") as strings_file:
+    with open("image_data.txt", "w", encoding="UTF-8") as strings_file:
         strings_file.writelines("\n".join(img_data))
 
     if output_strings:
