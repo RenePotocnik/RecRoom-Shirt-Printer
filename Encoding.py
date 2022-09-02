@@ -1,10 +1,3 @@
-"""
-Converts a PNG image into strings of predefined length
-How is it encoded:
-    the number in front of a char represents how many pixels of the same color are in a row,
-    chars !#$%&()*+,./:;<=>?@[Ñ]^_{|}~¢£¤¥¦§¨©ª«¬Ö®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÈÌÐ represent the color.
-    There's 62 colors including eraser and tan, eraser is not recommended as it leaves an edge
-"""
 import os
 import subprocess
 import sys
@@ -13,7 +6,9 @@ import tkinter
 from math import sqrt
 from pathlib import Path
 from tkinter import filedialog
-from typing import Tuple, List
+from typing import Tuple, List, Dict
+
+from PIL.Image import Quantize
 
 try:
     import pyautogui
@@ -28,76 +23,13 @@ except ModuleNotFoundError:
     exit()
 
 MaxStringLength: int = 280  # Maximum length string
+ColorCount: int = 128  # Amount of possible colors - magic markers
 
 # Typing alias for color
 PixelColor = Tuple[int, int, int]
 
-# All of RecRoom color in order + tan marker + eraser
-RR_PALETTE: dict = {
-    (228, 80, 80): "!",
-    (211, 23, 24): "#",
-    (117, 7, 6): "$",
-    (123, 47, 47): "%",
-    (239, 127, 79): "&",
-    (245, 92, 25): "(",
-    (193, 55, 9): ")",
-    (127, 66, 47): "*",
-    (247, 215, 106): "+",
-    (244, 197, 31): ",",
-    (181, 99, 0): ".",
-    (130, 97, 56): "/",
-    (137, 177, 81): ":",
-    (105, 161, 24): ";",
-    (47, 76, 9): "<",
-    (66, 82, 43): "=",
-    (103, 190, 122): ">",
-    (16, 101, 34): "?",
-    (6, 59, 17): "@",
-    (51, 76, 55): "[",
-    (103, 218, 205): "Ñ",
-    (0, 155, 137): "]",
-    (0, 80, 71): "^",
-    (51, 86, 82): "_",
-    (101, 199, 236): "{",
-    (2, 172, 234): "|",
-    (6, 87, 117): "}",
-    (49, 91, 105): "~",
-    (100, 161, 244): "¢",
-    (23, 107, 221): "£",
-    (7, 57, 128): "¤",
-    (50, 79, 121): "¥",
-    (165, 133, 242): "¦",
-    (80, 24, 221): "§",
-    (46, 18, 120): "¨",
-    (86, 72, 121): "©",
-    (225, 148, 242): "ª",
-    (121, 66, 131): "«",
-    (66, 24, 74): "¬",
-    (88, 61, 92): "Ö",
-    (238, 120, 178): "®",
-    (234, 46, 79): "¯",
-    (130, 9, 63): "°",
-    (104, 56, 78): "±",
-    (126, 64, 25): "²",
-    (69, 40, 22): "³",
-    (61, 29, 14): "´",
-    (36, 16, 5): "µ",
-    (197, 132, 92): "¶",
-    (143, 99, 72): "·",
-    (90, 62, 48): "¸",
-    (37, 28, 21): "¹",
-    (246, 239, 233): "º",
-    (192, 188, 185): "»",
-    (153, 149, 146): "¼",
-    (124, 120, 119): "½",
-    (99, 100, 102): "¾",
-    (73, 74, 78): "¿",
-    (45, 46, 50): "À",
-    (25, 23, 24): "È",
-}
-
-# All the RecRoom colors in one list. [R, G, B, R, G, B,...]
-ALL_COLORS = [num for tup in RR_PALETTE.keys() for num in tup]
+marker_colors: List[PixelColor] = []
+color_char_dict: Dict[PixelColor, str] = {}
 
 
 def get_image(check_palette: bool = True) -> Image:
@@ -107,6 +39,7 @@ def get_image(check_palette: bool = True) -> Image:
     """
     print("Open image", end="\r")
     root = tkinter.Tk()
+    root.attributes("-topmost", 1)
     root.withdraw()
     img_path = filedialog.askopenfilename(filetypes=[("Image", "*.png")])
     root.destroy()
@@ -124,25 +57,6 @@ def get_image(check_palette: bool = True) -> Image:
             return None
 
     return img
-
-
-def closest_color(pixel_color: PixelColor) -> PixelColor:
-    """
-    Take an RGB value and find the closest color in `RR_PALETTE`
-
-    It is recommended you use external programs to convert and dither images.
-    2 ACO (swatch) files are included if you're using Photoshop
-
-    :param pixel_color: The color of the pixel of the image
-    :return: The color from `RR_PALETTE` that is closest to `pixel_color`
-    """
-    r, g, b = pixel_color
-    color_diffs: List[tuple[float, PixelColor]] = []
-    for key in RR_PALETTE:
-        cr, cg, cb = key
-        color_diff = sqrt((r - cr) ** 2 + (g - cg) ** 2 + (b - cb) ** 2)
-        color_diffs.append((color_diff, key))
-    return min(color_diffs)[1]
 
 
 def progress_update(y: int, img: Image, prefix='Progress', suffix='', length=50) -> None:
@@ -165,43 +79,25 @@ def progress_update(y: int, img: Image, prefix='Progress', suffix='', length=50)
         print(" " * (length + 30), end="\r")
 
 
-def quantize(img, ask_for_dither: bool = True, dither: int = 0, open_image: bool = True) -> Image:
-    img = img.convert("RGB")
-
-    if ask_for_dither:
-        dither = 0 if "n" in input("Dither the image? [y/n] ").lower() else 1
-
-    palette_image = Image.new("P", img.size)
-    palette_image.putpalette(ALL_COLORS)
-    new_image = img.quantize(palette=palette_image,
-                             dither=dither).convert("RGB")
-
-    if open_image:
-        print("Opening the final image...")
-        new_image.show()
-
-    return new_image
-
-
-def encode(img: Image, vertical_print: bool = False, dither_: bool = True) -> list[str] or None:
+def color_to_chars(img: Image) -> None:
     """
-    Take an image and encode it into a list of {`MaxStringLength`}-char strings.
-    ...[number of pixels][color]...
+    Function assigns a char to each RGB value, and creates a list of all the marker colors
 
-    :param img: The image to be encoded.
-    :param vertical_print: Encode the image vertically (for Ashers printer)
-    :param dither_: Should the image be dithered
-    :return: List of {`MaxStringLength`} char long strings
+    :param img: The image, converted into `len(chars)` colors (128)
+    :return: Returns to global variables: `marker_colors` and `color_char_dict`
     """
+    global marker_colors, color_char_dict
+
+    chars: str = "!#$%&'()*+,-./:;<=>?@[]^_`{|}~¡¢£¤¥¦§¨©ª«¬®¯°±²³´µ¶·¸" \
+                 "¹º»¼½¾¿ÀÁÂÃÄÅÇÈÉÊÆËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿIiMm"
+    colors: List[int, PixelColor] = img.getcolors()
+    for n, (amount, color) in enumerate(colors):
+        color_char_dict[color] = chars[n]
+        marker_colors.append(color)
+
+
+def encode(img: Image, vertical_print: bool = False) -> list[str] or None:
     pixel_color: List[str] = []
-    full_image = Image.new("RGB", img.size)
-    dither = False
-
-    # Just so pycharm doesn't complain
-    x, y = 0, 0
-
-    if dither_:
-        img = quantize(img)
 
     # `vertical_print` just changes the orientation of the encoding process.
     for y in range(img.height):
@@ -209,21 +105,9 @@ def encode(img: Image, vertical_print: bool = False, dither_: bool = True) -> li
             p = img.getpixel((y, x) if vertical_print else (x, y))  # Gets the color of the pixel at `x, y`
             if len(p) == 4:  # If the value is RGBA, the last `int` is removed
                 p = p[:3]
-            try:
-                # Check if the image has already been dithered, else find the closest color
-                p = RR_PALETTE[p]
-            except KeyError:
-                dither = True
-                p = closest_color(p)
-                full_image.putpixel((y, x) if vertical_print else (x, y), p)
-                p = RR_PALETTE[p]
-                # closest_color(p)
-            pixel_color.append(p)
+            pixel_color.append(color_char_dict[p])
         # Print the progress
         progress_update(y + 1, img, "Encoding")
-
-    if dither and dither_:
-        full_image.show()
 
     colors: List[Tuple[int, str]] = []
     count: int = 0
@@ -257,6 +141,34 @@ def encode(img: Image, vertical_print: bool = False, dither_: bool = True) -> li
     return img_data
 
 
+def recolor_markers(delay: float = 0.3) -> None:
+    """
+    Function recolors the magic markers to their needed color.
+
+    Sequence of events:
+
+    > Press "F" - open the makerpen menu
+
+    > Click on "Color" in the `Recolor Tool Settings`
+
+    > Click on "Custom" in the `Color` menu
+
+    > Click on the HEX color value input field
+
+    > Paste the HEX color
+
+    > Click "Done"
+
+    > Press "F" - close the makerpen menu
+
+    > Left Click - recolor
+
+    > Right Click - moveto the next marker
+    """
+    global marker_colors
+    pyautogui.press("f")
+
+
 def main(list_size: int, output_strings: bool = False, wait_for_input: bool = False):
     """
     Function to tie together all others.
@@ -270,7 +182,12 @@ def main(list_size: int, output_strings: bool = False, wait_for_input: bool = Fa
     img: Image = get_image()
     if not img:
         exit()
-
+    img = img.convert("RGB").quantize(colors=ColorCount,
+                                      method=Quantize.MEDIANCUT,
+                                      kmeans=1,
+                                      palette=None,
+                                      dither=Image.Dither.FLOYDSTEINBERG).convert("RGB")
+    color_to_chars(img=img)
     img_data: list[str] = encode(img)
 
     with open("image_data.txt", "w") as strings_file:
