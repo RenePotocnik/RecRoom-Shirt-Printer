@@ -223,6 +223,7 @@ def main(list_size: int, output_strings: bool = False, wait_for_input: bool = Fa
                                       kmeans=1,
                                       palette=None,
                                       dither=Image.Dither.FLOYDSTEINBERG).convert("RGB")
+    img.show()
     color_to_chars(img=img)
     img_data: list[str] = encode(img)
 
