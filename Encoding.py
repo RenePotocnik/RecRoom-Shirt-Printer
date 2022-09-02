@@ -1,3 +1,4 @@
+import ctypes
 import os
 import subprocess
 import sys
@@ -141,6 +142,24 @@ def encode(img: Image, vertical_print: bool = False) -> list[str] or None:
     return img_data
 
 
+def is_window_active(window_title: str = "Rec Room") -> bool:
+    """
+    Does not return before `window_title` becomes the active window
+    Returns true when `window_title` becomes the active window
+
+    :param window_title: The title of the window
+    :return: When the window becomes active
+    """
+    if window_title not in (pyautogui.getActiveWindowTitle() or ""):  # getActiveWindowTitle is sometimes `None`
+        print(f"Waiting for {window_title} to become the active window... ", end="\r", flush=True)
+        # While RecRoom window is not active, sleep
+        while window_title not in (pyautogui.getActiveWindowTitle() or ""):
+            time.sleep(0.1)
+        print(" " * 70, end="\r")  # Empty the last line in the console
+        time.sleep(0.5)
+    return True
+
+
 def recolor_markers(delay: float = 0.3) -> None:
     """
     Function recolors the magic markers to their needed color.
@@ -166,7 +185,41 @@ def recolor_markers(delay: float = 0.3) -> None:
     > Right Click - moveto the next marker
     """
     global marker_colors
-    pyautogui.press("f")
+
+    user32 = ctypes.windll.user32
+    user32.SetProcessDPIAware()
+    screen_dimensions: Tuple[int, int] = user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)
+
+    color_button: Tuple[int, int] = (int(screen_dimensions[0] * 0.5796), int(screen_dimensions[1] * 0.4319))
+    custom_color_button: Tuple[int, int] = (int(screen_dimensions[0] * 0.7179), int(screen_dimensions[1] * 0.8173))
+    color_input_field: Tuple[int, int] = (int(screen_dimensions[0] * 0.7023), int(screen_dimensions[1] * 0.6347))
+    done_button: Tuple[int, int] = (int(screen_dimensions[0] * 0.7183), int(screen_dimensions[1] * 0.7361))
+
+    print("_" * 27, "\nStarting Recoloring Process")
+    time.sleep(1)
+
+    for color in marker_colors:
+        is_window_active()
+
+        pyperclip.copy(color)
+        pyautogui.press("f")
+        time.sleep(delay)
+        pyautogui.press(color_button)
+        time.sleep(delay)
+        pyautogui.press(custom_color_button)
+        time.sleep(delay)
+        pyautogui.press(color_input_field)
+        time.sleep(delay)
+        pyautogui.hotkey("ctrl", "v")
+        time.sleep(delay)
+        pyautogui.press(done_button)
+        time.sleep(delay)
+        pyautogui.press("f")
+        time.sleep(delay)
+        pyautogui.leftClick()
+        time.sleep(delay)
+        pyautogui.rightClick()
+        time.sleep(delay)
 
 
 def main(list_size: int, output_strings: bool = False, wait_for_input: bool = False):
@@ -190,8 +243,8 @@ def main(list_size: int, output_strings: bool = False, wait_for_input: bool = Fa
     color_to_chars(img=img)
     img_data: list[str] = encode(img)
 
-    with open("image_data.txt", "w") as strings_file:
-        strings_file.writelines("\n".join(img_data))
+    input("Press enter to tart recoloring markers.\n> ")
+    recolor_markers()
 
     if output_strings:
         print("Copying strings\n_______________\n")
