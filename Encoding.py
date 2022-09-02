@@ -197,7 +197,7 @@ def recolor_markers(delay: float = 0.3) -> None:
         time.sleep(delay)
         pyautogui.click(done_button[0], done_button[1])
         time.sleep(delay)
-        pyautogui.click("f")
+        pyautogui.press("f")
         time.sleep(delay)
         pyautogui.leftClick()
         time.sleep(delay)
