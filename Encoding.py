@@ -181,10 +181,10 @@ def recolor_markers(delay: float = 0.3) -> None:
     print("_" * 27, "\nStarting Recoloring Process")
     time.sleep(1)
 
-    for color in marker_colors:
+    for r, g, b in marker_colors:
         is_window_active()
 
-        pyperclip.copy(color)
+        pyperclip.copy(f"#{r:02x}{g:02x}{b:02x}")
         pyautogui.press("f")
         time.sleep(delay)
         pyautogui.press(color_button)
