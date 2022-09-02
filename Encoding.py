@@ -4,12 +4,13 @@ import subprocess
 import sys
 import time
 import tkinter
-from math import sqrt
 from pathlib import Path
 from tkinter import filedialog
 from typing import Tuple, List, Dict
 
 from PIL.Image import Quantize
+
+from common import is_window_active
 
 try:
     import pyautogui
@@ -140,24 +141,6 @@ def encode(img: Image, vertical_print: bool = False) -> list[str] or None:
 
     img_data.append(s)
     return img_data
-
-
-def is_window_active(window_title: str = "Rec Room") -> bool:
-    """
-    Does not return before `window_title` becomes the active window
-    Returns true when `window_title` becomes the active window
-
-    :param window_title: The title of the window
-    :return: When the window becomes active
-    """
-    if window_title not in (pyautogui.getActiveWindowTitle() or ""):  # getActiveWindowTitle is sometimes `None`
-        print(f"Waiting for {window_title} to become the active window... ", end="\r", flush=True)
-        # While RecRoom window is not active, sleep
-        while window_title not in (pyautogui.getActiveWindowTitle() or ""):
-            time.sleep(0.1)
-        print(" " * 70, end="\r")  # Empty the last line in the console
-        time.sleep(0.5)
-    return True
 
 
 def recolor_markers(delay: float = 0.3) -> None:
