@@ -38,6 +38,8 @@ If none of the steps above work, you can message me on:
 * Discord Server: [**Rec Room Printing**](https://discord.gg/GuzwRMsyW8)
 * RecRoom: [**@McReny**](https://rec.net/user/McReny)
 
+[![Discord Server Image](Tutorials/DiscordServerImage.png)](https://discord.gg/GuzwRMsyW8)
+
 **Respect the [Code of Conduct](https://recroom.com/code-of-conduct)**\
 I am not responsible for any bans that may occur as a result of using my invention.
 
