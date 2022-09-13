@@ -91,7 +91,7 @@ def copy_to_recroom(img_data: list[str], delay: float = 0.3, last_successful_str
 
             # Click on the input field
             pyautogui.click(input_field)
-            time.sleep(delay)
+            time.sleep(delay / 2)
 
             # Paste the string into input field
             pyautogui.hotkey("ctrl", "v")
@@ -103,7 +103,7 @@ def copy_to_recroom(img_data: list[str], delay: float = 0.3, last_successful_str
 
             # Exit out of the input field menu
             pyautogui.press("esc")
-            time.sleep(delay * 2)
+            time.sleep(delay / 2)
 
             if color_checking:
                 color_check_image = ImageGrab.grab()
@@ -114,13 +114,13 @@ def copy_to_recroom(img_data: list[str], delay: float = 0.3, last_successful_str
                                    tolerance=60):
                     break
                 print("Failed")
-                time.sleep(delay)
+                # time.sleep(delay)
             else:
                 break
 
         # Move down using trigger handle in right hand
         pyautogui.click(button='right')
-        time.sleep(delay / 2)
+        time.sleep(delay / 3)
 
     # Print out the time used for importing
     time_to_copy = time.time() - time_at_start
