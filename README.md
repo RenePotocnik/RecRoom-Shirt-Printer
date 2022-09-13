@@ -1,3 +1,9 @@
+<p align="center">
+  <img width="300" src="Tutorials/RecRoomPrinting.png" alt="RecRoom Printing Image">
+</p>
+
+----
+
 # About this release
 The repository you're currently viewing is an experimental version.\
 If you decide to download it and try it, join [this discord server](https://discord.gg/GuzwRMsyW8) and give feedback and report and problems you may experience.
