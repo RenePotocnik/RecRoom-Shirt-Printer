@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="300" src="Tutorials/RecRoomPrinting.png" alt="RecRoom Printing Image">
+  <img width="300" src="Resources/RecRoomPrinting.png" alt="RecRoom Printing Image">
 </p>
 
 ----
@@ -11,7 +11,7 @@ If you decide to download it and try it, join [this discord server](https://disc
 If you want the stable release, tested by hundreds or people, go to [this release](https://github.com/RenePotocnik/RecRoom-Shirt-Printer/tree/v1.1.6)
 
 Make sure to `Watch` and `Star` this repository to get notified when new updates come out\
-![Watch Repository](Tutorials/WatchAndStarRepo.png)
+![Watch Repository](Resources/WatchAndStarRepo.png)
 
 # Video Tutorial
 Many people refuse to use the printer because they get startled by the mountain of text below.\
@@ -44,7 +44,7 @@ If none of the steps above work, you can message me on:
 * Discord Server: [**Rec Room Printing**](https://discord.gg/GuzwRMsyW8)
 * RecRoom: [**@McReny**](https://rec.net/user/McReny)
 
-[![Discord Server Image](Tutorials/DiscordServerImage.png)](https://discord.gg/GuzwRMsyW8)
+[![Discord Server Image](Resources/DiscordServerImage.png)](https://discord.gg/GuzwRMsyW8)
 
 **Respect the [Code of Conduct](https://recroom.com/code-of-conduct)**\
 I am not responsible for any bans that may occur as a result of using my invention.
@@ -69,11 +69,11 @@ To calibrate successfully, follow all of these steps **exactly**:
 5. When prompted: *"Press ENTER to open RecRoom and press on the "Value" box (TOP-LEFT corner)."*
    1. Press ENTER
    2. The RecRoom window will be brought back into focus
-   3. **Click in the TOP-LEFT corner of the white square UNDER _"Value"_ text**. ![Where to click in the Value input box](Tutorials/ClickHere.png)
+   3. **Click in the TOP-LEFT corner of the white square UNDER _"Value"_ text**. ![Where to click in the Value input box](Resources/ClickHere.png)
 6. When prompted: *"Press ENTER to open RecRoom and press the two arrows facing away from each-other."*
    1. Press ENTER
    2. The RecRoom window will be brought back into focus
-   3. **Click on the two arrows aiming away from each other ↕ (second from the right at the top)** ![Where to click on the done button](Tutorials/ClickHere_DoneButton.png)
+   3. **Click on the two arrows aiming away from each other ↕ (second from the right at the top)** ![Where to click on the done button](Resources/ClickHere_DoneButton.png)
 
 
 https://user-images.githubusercontent.com/76653181/182597821-a03e5a8b-de1b-4bb6-baab-a938ecc22ab9.mp4
@@ -142,20 +142,20 @@ Unlike the _**Variable**_ import method, using the _**List Create**_ import meth
 Unlike the printer itself, this invention _**does not work in your dorm**_.\
 Go to [^ListCreateImporting](https://rec.net/room/ListCreateImporting) and follow these steps:
 * Grab the `Trigger Handle` with your _**RIGHT HAND**_ (and do not let go of it)
-![Trigger Handle](Tutorials/TriggerHandle.png)
+![Trigger Handle](Resources/TriggerHandle.png)
 * Grab your maker-pen with your _**LEFT HAND**_ 
 * In the maker-pen menu (F), select `Edit`
 * Edit the circuit board named `List Create Data`
-![List Create Data](Tutorials/ListCreateData.png)
+![List Create Data](Resources/ListCreateData.png)
 * Take a seat
 * In the maker-pen menu (F), select `Connect`
 * Look at the **center of the first string input**
-![First Input](Tutorials/ListCreateInput.png)
+![First Input](Resources/ListCreateInput.png)
 
 
 * `Alt - Tab` back into the script window, and do as instructed
 * When the importing is done, save the `List Create Data` circuit board *(you can ignore the others)* as an invention
-![List Create Data](Tutorials/ListCreateData.png)
+![List Create Data](Resources/ListCreateData.png)
 * Go back to your dorm room and spawn the newly created invention
 * Connect `List Create Data` to the `Image Data Input`
 * Connect `Run` from the delay at the bottom to `Load Data`
