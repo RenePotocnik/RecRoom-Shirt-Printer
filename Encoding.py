@@ -107,6 +107,7 @@ def get_image(check_palette: bool = True) -> Image:
     """
     print("Open image", end="\r")
     root = tkinter.Tk()
+    root.attributes("-topmost", 1)
     root.withdraw()
     img_path = filedialog.askopenfilename(filetypes=[("Image", "*.png")])
     root.destroy()
