@@ -5,7 +5,7 @@ try:
     import logging
 
     import Encoding
-    import Importing
+    import Variable_Importing
     from common import setup_logger
 except AttributeError:
     input("Lower version of module 'pyscreeze' found.\n"
