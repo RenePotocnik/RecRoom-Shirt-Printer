@@ -1,16 +1,9 @@
-import ctypes
-import os
 import subprocess
 import sys
 import time
 import tkinter
-from pathlib import Path
 from tkinter import filedialog
 from typing import Tuple, List, Dict
-
-from PIL.Image import Quantize
-
-from common import is_window_active
 
 try:
     import pyautogui
@@ -25,16 +18,14 @@ except ModuleNotFoundError:
     exit()
 
 MaxStringLength: int = 280  # Maximum length string
-ColorCount: int = 128  # Amount of possible colors - magic markers
 
 # Typing alias for color
 PixelColor = Tuple[int, int, int]
 
-marker_colors: List[PixelColor] = []
-color_char_dict: Dict[PixelColor, str] = {}
+COLOR_CHAR_DICT: Dict[PixelColor, str] = {}
 
 
-def get_image(check_palette: bool = True) -> Image:
+def get_image() -> Image:
     """
     Open file explorer, wait for user to open a PNG image
     :return: The image
@@ -49,15 +40,6 @@ def get_image(check_palette: bool = True) -> Image:
     img = None
     if img_path:
         img = Image.open(img_path)
-
-    if check_palette:
-        # If the image has attributed `palette` its metadata is a bit different.
-        # To solve this just open the image in paint and save it
-        if img.palette:
-            print("Image has `Palette` attribute. Open it in Paint and save.")
-            os.system(f'mspaint.exe "{Path(img_path)}"')
-            return None
-
     return img
 
 
@@ -85,17 +67,19 @@ def color_to_chars(img: Image) -> None:
     """
     Function assigns a char to each RGB value, and creates a list of all the marker colors
 
-    :param img: The image, converted into `len(chars)` colors (128)
+    :param img: The image, converted into `len(chars)` colors
     :return: Returns to global variables: `marker_colors` and `color_char_dict`
     """
-    global marker_colors, color_char_dict
+    global COLOR_CHAR_DICT
 
-    chars: str = "!#$%&'()*+,-./:;<=>?@[]^_`{|}~¡¢£¤¥¦§¨©ª«¬®¯°±²³´µ¶·¸" \
-                 "¹º»¼½¾¿ÀÁÂÃÄÅÇÈÉÊÆËÌÍÎÏÐÑÒÓÔÕÖ×ØÙÚÛÜÝÞßàáâãäåæçèéêëìíîïðñòóôõö÷øùúûüýþÿIiMm"
-    colors: List[int, PixelColor] = img.getcolors()
-    for n, (amount, color) in enumerate(colors):
-        color_char_dict[color] = chars[n]
-        marker_colors.append(color)
+    chars: str = r"!#$%&()*+,./:;<=>?@[Ñ]^_{|}~¢£¤¥¦§¨©ª«¬Ö®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÈ"
+    try:
+        colors: List[int, PixelColor] = img.getcolors(60)
+        for n, (amount, color) in enumerate(colors):
+            COLOR_CHAR_DICT[color] = chars[n]
+    except TypeError:
+        exit(input("Your image contains too many colors! Choose a different image.\n"
+                   "Press enter to exit."))
 
 
 def encode(img: Image, vertical_print: bool = False) -> list[str] or None:
@@ -107,7 +91,7 @@ def encode(img: Image, vertical_print: bool = False) -> list[str] or None:
             p = img.getpixel((y, x) if vertical_print else (x, y))  # Gets the color of the pixel at `x, y`
             if len(p) == 4:  # If the value is RGBA, the last `int` is removed
                 p = p[:3]
-            pixel_color.append(color_char_dict[p])
+            pixel_color.append(COLOR_CHAR_DICT[p])
         # Print the progress
         progress_update(y + 1, img, "Encoding")
 
@@ -143,66 +127,13 @@ def encode(img: Image, vertical_print: bool = False) -> list[str] or None:
     return img_data
 
 
-def recolor_markers(delay: float = 0.3) -> None:
-    """
-    Function recolors the magic markers to their needed color.
+def print_marker_colors():
+    global COLOR_CHAR_DICT
 
-    Sequence of events:
-
-    > Press "F" - open the makerpen menu
-
-    > Click on "Color" in the `Recolor Tool Settings`
-
-    > Click on "Custom" in the `Color` menu
-
-    > Click on the HEX color value input field
-
-    > Paste the HEX color
-
-    > Click "Done"
-
-    > Press "F" - close the makerpen menu
-
-    > Left Click - recolor
-
-    > Right Click - moveto the next marker
-    """
-    global marker_colors
-
-    user32 = ctypes.windll.user32
-    user32.SetProcessDPIAware()
-    screen_dimensions: Tuple[int, int] = user32.GetSystemMetrics(0), user32.GetSystemMetrics(1)
-
-    color_button: Tuple[int, int] = (int(screen_dimensions[0] * 0.5796), int(screen_dimensions[1] * 0.4319))
-    custom_color_button: Tuple[int, int] = (int(screen_dimensions[0] * 0.7179), int(screen_dimensions[1] * 0.8173))
-    color_input_field: Tuple[int, int] = (int(screen_dimensions[0] * 0.7023), int(screen_dimensions[1] * 0.6347))
-    done_button: Tuple[int, int] = (int(screen_dimensions[0] * 0.7183), int(screen_dimensions[1] * 0.7361))
-
-    print("_" * 27, "\nStarting Recoloring Process")
-    time.sleep(1)
-
-    for r, g, b in marker_colors:
-        is_window_active()
-
-        pyperclip.copy(f"#{r:02x}{g:02x}{b:02x}")
-        pyautogui.press("f")
-        time.sleep(delay)
-        pyautogui.click(color_button[0], color_button[1])
-        time.sleep(delay)
-        pyautogui.click(custom_color_button[0], custom_color_button[1])
-        time.sleep(delay)
-        pyautogui.click(color_input_field[0], color_input_field[1])
-        time.sleep(delay)
-        pyautogui.hotkey("ctrl", "v")
-        time.sleep(delay)
-        pyautogui.click(done_button[0], done_button[1])
-        time.sleep(delay)
-        pyautogui.press("f")
-        time.sleep(delay)
-        pyautogui.leftClick()
-        time.sleep(delay)
-        pyautogui.rightClick()
-        time.sleep(delay)
+    for color in COLOR_CHAR_DICT:
+        print(f"{'%02x%02x%02x' % color} - ", end="")
+        for marker in COLOR_CHAR_DICT[color]:
+            print(marker)
 
 
 def main(list_size: int, output_strings: bool = False, wait_for_input: bool = False):
@@ -215,20 +146,14 @@ def main(list_size: int, output_strings: bool = False, wait_for_input: bool = Fa
     :param wait_for_input: Wait for the user to continue. Useful when running this file directly so that it stays open
     """
 
-    img: Image = get_image()
-    if not img:
-        exit()
-    img = img.convert("RGB").quantize(colors=ColorCount,
-                                      method=Quantize.MEDIANCUT,
-                                      kmeans=1,
-                                      palette=None,
-                                      dither=Image.Dither.FLOYDSTEINBERG).convert("RGB")
+    img = None
+    while not img:
+        img: Image = get_image()
+    img = img.convert("RGB")
+
     img.show()
     color_to_chars(img=img)
     img_data: list[str] = encode(img)
-
-    input("Press enter to tart recoloring markers.\n> ")
-    recolor_markers()
 
     if output_strings:
         print("Copying strings\n_______________\n")
@@ -239,9 +164,10 @@ def main(list_size: int, output_strings: bool = False, wait_for_input: bool = Fa
     # Print amount of {`MaxStringLength`} char long strings, image dimensions and total `List Create`s needed.
     print(f"\nGenerated {len(img_data) + 2} strings for image WxH {img.width}x{img.height}")
     print(f"Space needed: {len(img_data) // list_size} Lists (+ {len(img_data) % list_size})")
+    print_marker_colors()
 
     if wait_for_input:
-        input("Press enter to continue")
+        input("Press enter to continue.")
 
     return img, img_data
 
