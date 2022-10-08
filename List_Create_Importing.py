@@ -1,4 +1,7 @@
+from tkinter import filedialog
+
 try:
+    import tkinter
     import ctypes
     import time
     from typing import Tuple, List
@@ -138,12 +141,17 @@ def main(from_file: bool = False):
         # Call function for encoding an image
         image, img_data = Encoding.main(list_size=64)
     else:
+        root = tkinter.Tk()
+        root.attributes("-topmost", 1)
+        root.withdraw()
+        txt_file_path = filedialog.askopenfilename(filetypes=[("Image Data", "*.txt")])
+        root.destroy()
         try:
-            with open("image_data.txt", "r") as f:
-                temp: list[str] = f.readlines()
-                img_data = [line.strip() for line in temp]
+            with open(txt_file_path, "r") as strings:
+                temp: list[str] = strings.readlines()
+                img_data = [line.strip().split(" ")[-1] for line in temp]
         except FileNotFoundError:
-            print("The file `image_data.txt` was not found. ")
+            print("File not found.")
             image, img_data = Encoding.main(list_size=64)
 
     "########### GLOBAL IMPORTING DELAY ############"
@@ -167,6 +175,6 @@ log = setup_logger()
 
 if __name__ == "__main__":
     try:
-        main(from_file="y" in input("Use the encoded data in `image_data.txt`? [yes/no]\n > "))
+        main(from_file="y" in input("Use the encoded data from a `.txt` file? [y/n]\n> ").lower())
     except (Exception, KeyboardInterrupt):
         log.exception("ERROR", exc_info=True)
