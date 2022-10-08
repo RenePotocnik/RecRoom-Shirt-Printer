@@ -1,3 +1,4 @@
+import datetime
 import subprocess
 import sys
 import time
@@ -165,6 +166,16 @@ def main(list_size: int, output_strings: bool = False, wait_for_input: bool = Fa
     print(f"\nGenerated {len(img_data) + 2} strings for image WxH {img.width}x{img.height}")
     print(f"Space needed: {len(img_data) // list_size} Lists (+ {len(img_data) % list_size})")
     print_marker_colors()
+
+    if "y" in input("Save the image data? [y/n]\n> ").lower():
+        root = tkinter.Tk()
+        root.attributes("-topmost", 1)
+        root.withdraw()
+        data_path = filedialog.askdirectory() + f"/encoded_image{datetime.datetime.now():%m-%d-%m-%S}" + ".txt"
+        root.destroy()
+        with open(data_path, "w") as strings_file:
+            strings_file.writelines("\n".join(img_data))
+        print(f"Saved strings to '{data_path}'")
 
     if wait_for_input:
         input("Press enter to continue.")
