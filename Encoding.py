@@ -75,7 +75,7 @@ def color_to_chars(img: Image) -> None:
 
     chars: str = r"!#$%&()*+,./:;<=>?@[Ñ]^_{|}~¢£¤¥¦§¨©ª«¬Ö®¯°±²³´µ¶·¸¹º»¼½¾¿ÀÈ"
     try:
-        colors: List[int, PixelColor] = img.getcolors(60)
+        colors: List[int, PixelColor] = img.getcolors(61)
         for n, (amount, color) in enumerate(colors):
             COLOR_CHAR_DICT[color] = chars[n]
     except TypeError:
