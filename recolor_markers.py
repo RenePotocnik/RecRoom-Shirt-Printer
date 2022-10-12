@@ -36,11 +36,11 @@ CUSTOM_BUTTON: tuple[int, int] = (
 )
 COLOR_INPUT: tuple[int, int] = (
     int(SCREEN_DIMENSIONS[0] * (1830 / 2560)),
-    int(SCREEN_DIMENSIONS[0] * (910 / 1440))
+    int(SCREEN_DIMENSIONS[1] * (910 / 1440))
 )
 DONE_BUTTON: tuple[int, int] = (
     int(SCREEN_DIMENSIONS[0] * (1830 / 2560)),
-    int(SCREEN_DIMENSIONS[0] * (1050 / 1440)),
+    int(SCREEN_DIMENSIONS[1] * (1050 / 1440)),
 )
 
 
@@ -55,7 +55,7 @@ def get_file() -> str:
     return file_path
 
 
-def recolor(color: str, delay: float = 0.2) -> None:
+def recolor(color: str, delay: float = 0.4) -> None:
     """
     Starting from the marker's configure menu;
         > Click "Color" button
