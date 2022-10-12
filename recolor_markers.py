@@ -145,13 +145,4 @@ def main():
 
 
 if __name__ == '__main__':
-    version: str = "0.1 - Beta"
-    print(f"""
-    ##########################
-            McPrinter
-    Marker Recoloring Software
-    {" " * (25 - len(version))}v{version}
-    ##########################
-    \n\n\n
-    """)
     main()
