@@ -148,7 +148,7 @@ def save_file(data: list[str], prefix: str, include_datetime: bool = True, suffi
     root.attributes("-topmost", 1)
     root.withdraw()
     # Include datetime if `include_datetime` set to true
-    dt: str = f"{datetime.datetime.now():%m-%d-%m-%S}" if include_datetime else ""
+    dt: str = f"{datetime.datetime.now():%d-%H-%M-%S}" if include_datetime else ""
     # Prompt user to select a file, add the prefix, datetime and suffix (add . if not already present)
     data_path = filedialog.askdirectory() + f"/{prefix}_{dt}{'' if suffix[0] == '.' else '.'}{suffix}"
     root.destroy()
