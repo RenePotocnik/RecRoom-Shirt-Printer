@@ -132,9 +132,29 @@ def print_marker_colors():
     global COLOR_CHAR_DICT
 
     for color in COLOR_CHAR_DICT:
-        print(f"{'%02x%02x%02x' % color} - ", end="")
-        for marker in COLOR_CHAR_DICT[color]:
-            print(marker)
+        print(f"{'%02x%02x%02x' % color} - {COLOR_CHAR_DICT[color]}")
+
+
+def save_file(data: list[str], prefix: str, include_datetime: bool = True, suffix: str = "txt") -> None:
+    """
+    Prompt user to select a directory where to save `data`
+
+    :param data: The list of strings to put into a file, joined by a new line
+    :param prefix: The file name
+    :param include_datetime: Include the date and time after `prefix`
+    :param suffix: The file ending. Default: `.str`
+    """
+    root = tkinter.Tk()
+    root.attributes("-topmost", 1)
+    root.withdraw()
+    # Include datetime if `include_datetime` set to true
+    dt: str = f"{datetime.datetime.now():%m-%d-%m-%S}" if include_datetime else ""
+    # Prompt user to select a file, add the prefix, datetime and suffix (add . if not already present)
+    data_path = filedialog.askdirectory() + f"/{prefix}_{dt}{'' if suffix[0] == '.' else '.'}{suffix}"
+    root.destroy()
+    with open(data_path, "w") as strings_file:
+        strings_file.writelines("\n".join(data))
+    print(f"Saved strings to '{data_path}'")
 
 
 def main(list_size: int, output_strings: bool = False, wait_for_input: bool = False):
@@ -167,16 +187,11 @@ def main(list_size: int, output_strings: bool = False, wait_for_input: bool = Fa
     print(f"Space needed: {len(img_data) // list_size} Lists (+ {len(img_data) % list_size})")
     print_marker_colors()
 
-    if "y" in input("Save the image data? [y/n]\n> ").lower():
-        root = tkinter.Tk()
-        root.attributes("-topmost", 1)
-        root.withdraw()
-        data_path = filedialog.askdirectory() + f"/encoded_image{datetime.datetime.now():%m-%d-%m-%S}" + ".txt"
-        root.destroy()
-        with open(data_path, "w") as strings_file:
-            strings_file.writelines("\n".join(img_data))
-        print(f"Saved strings to '{data_path}'")
+    if "y" in input("Save marker color data? [y/n]\n> ").lower():
+        save_file(data=[f"{'%02x%02x%02x' % color}" for color in COLOR_CHAR_DICT], prefix="marker_colors")
 
+    if "y" in input("Save image data? [y/n]\n> ").lower():
+        save_file(data=img_data, prefix="encoded_image")
     if wait_for_input:
         input("Press enter to continue.")
 
