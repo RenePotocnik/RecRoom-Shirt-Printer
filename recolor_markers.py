@@ -55,7 +55,7 @@ def get_file() -> str:
     return file_path
 
 
-def recolor(color: str, delay: float = 0.4) -> None:
+def recolor(color: str, delay: float = 0.5) -> None:
     """
     Starting from the marker's configure menu;
         > Click "Color" button
@@ -92,12 +92,14 @@ def await_config_menu(interval: float = 0.2) -> bool:
     pyautogui.scroll(20, x=SCREEN_CENTER[0], y=SCREEN_CENTER[1])
 
     while True:
+        common.is_window_active()
         scr: Image = ImageGrab.grab()
         if (
                 common.color_in_coords(image=scr, color=TOP_COLOR, coordinates=TOP_COLOR_COORDS, tolerance=20)
                 and
                 common.color_in_coords(image=scr, color=MIDDLE_COLOR, coordinates=MIDDLE_COLOR_COORDS, tolerance=20)
         ):
+            time.sleep(interval)
             return True
         time.sleep(interval)
 
@@ -133,18 +135,17 @@ def main():
         common.is_window_active()  # Do not continue if Rec Room is not the window in focus
         print(f"Waiting for marker {n + 1} configure menu...", end=" ")
         await_config_menu()  # Don't continue if the configure menu is not open
+        print("DONE")
         common.is_window_active()  # Do not continue if Rec Room is not the window in focus
-        print("✓")
         print(f"Recoloring marker {n + 1} to '#{color}'...", end=" ")
-        common.is_window_active()  # Do not continue if Rec Room is not the window in focus
         recolor(color)
-        print("✓")
+        print("DONE")
 
     input("\nDONE\nPress enter to close\n> ")
 
 
 if __name__ == '__main__':
-    version: str = "1.0"
+    version: str = "0.1 - Beta"
     print(f"""
     ##########################
             McPrinter
