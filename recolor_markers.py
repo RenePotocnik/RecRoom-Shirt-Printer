@@ -170,9 +170,14 @@ def main(print_with_colors: bool = True):
     Now move to the next marker, and repeat the process.
     
     The image that opened shows all marker colors in the same order as in RecRoom 
-    (starting from the BOTTOM LEFT corner, moving UP and resetting back down, one the RIGHT)
-    
-    """)
+    (starting from the BOTTOM LEFT corner, moving UP and resetting back down, one the RIGHT)""")
+
+    if print_with_colors:
+        print("""
+    If colors don't work in this window (if \033[92mthis\033[0m is not green) run the following command in CMD:
+        'reg add HKEY_CURRENT_USER\\Console /v VirtualTerminalLevel /t REG_DWORD /d 0x00000001 /f'
+    After this you will have to restart the script.
+        """)
     create_color_template(colors=marker_colors).show()
     input("Press ENTER, Open RecRoom and configure the first marker.")
     for n, color in enumerate(marker_colors):
