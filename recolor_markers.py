@@ -4,20 +4,23 @@ import sys
 import time
 import tkinter
 from tkinter import filedialog
+import common
 try:
     import pyautogui
     import pyperclip
     from PIL import Image, ImageGrab
     from PIL.Image import Transform, Resampling
 except ModuleNotFoundError:
-    print(f'Please execute the following line and run the script again:\n'
-          f'{sys.executable} -m pip install -U PyAutoGUI pyperclip Pillow')
+    print(f"""
+    \033[91mMandatory modules are missing/not yet installed!\033[0m
+    Please execute the following line in `CMD` and run the script again:
+        '{sys.executable} -m pip install -U PyAutoGUI pyperclip Pillow'
+        """)
     # Ask the user to install all the necessary packages automatically
     if input("Proceed to run the command automatically? [yes/no] ").find("yes") != -1:
         subprocess.call(f"{sys.executable} -m pip install -U PyAutoGUI pyperclip Pillow")
     exit()
 
-import common
 
 # Get the monitor dimensions
 user32 = ctypes.windll.user32
@@ -161,6 +164,9 @@ def main():
     After configuring the marker, the script will recolor the marker and exit the config menu;
     During this time, try NOT to move your mouse or press any buttons on your keyboard.
     Now move to the next marker, and repeat the process.
+    
+    The image that opened shows all marker colors in the same order as in RecRoom 
+    (starting from the BOTTOM LEFT corner, moving UP and resetting back down, one the RIGHT)
     
     """)
     create_color_template(colors=marker_colors).show()
