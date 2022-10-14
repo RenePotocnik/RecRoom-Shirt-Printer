@@ -8,6 +8,7 @@ try:
     import pyautogui
     import pyperclip
     from PIL import Image, ImageGrab
+    from PIL.Image import Transform, Resampling
 except ModuleNotFoundError:
     print(f'Please execute the following line and run the script again:\n'
           f'{sys.executable} -m pip install -U PyAutoGUI pyperclip Pillow')
@@ -113,6 +114,29 @@ def await_config_menu(interval: float = 0.2) -> bool:
         time.sleep(interval)
 
 
+def hex_to_rgb(hex):
+    rgb = []
+    [rgb.append(int(hex[i:i + 2], 16)) for i in (0, 2, 4)]
+    return tuple(rgb)
+
+
+def create_color_template(colors: list[str]) -> Image:
+    template_dimensions: tuple[int, int] = (4, 15)  # [0] markers down, [1] markers right
+    img: Image = Image.new(mode="RGBA",
+                           size=(template_dimensions[0], template_dimensions[1]),
+                           color=(0, 0, 0, 0))
+    img_data = img.load()
+    y: int = 0
+    for n, color in enumerate(colors):
+        if n and n % template_dimensions[0] == 0:
+            y += 1
+        rgb_color = hex_to_rgb(color)
+        img_data[n % template_dimensions[0], y] = rgb_color
+
+    return img.resize((template_dimensions[0] * 100, template_dimensions[1] * 100),
+                      resample=Transform.AFFINE).rotate(90, Resampling.NEAREST, expand=True)
+
+
 def main():
     marker_colors: list[str] = []
     try:
@@ -139,6 +163,7 @@ def main():
     Now move to the next marker, and repeat the process.
     
     """)
+    create_color_template(colors=marker_colors).show()
     input("Press ENTER, Open RecRoom and configure the first marker.")
     for n, color in enumerate(marker_colors):
         common.is_window_active()  # Do not continue if Rec Room is not the window in focus
