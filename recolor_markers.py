@@ -144,7 +144,7 @@ def create_color_template(colors: list[str]) -> Image:
                       resample=Transform.AFFINE).rotate(90, Resampling.NEAREST, expand=True)
 
 
-def main():
+def main(print_with_colors: bool = True):
     marker_colors: list[str] = []
     try:
         with open(get_file(), "r") as file:
@@ -177,6 +177,9 @@ def main():
     input("Press ENTER, Open RecRoom and configure the first marker.")
     for n, color in enumerate(marker_colors):
         common.is_window_active()  # Do not continue if Rec Room is not the window in focus
+        rgb_c = hex_to_rgb(color)
+        if print_with_colors:
+            print(f"\033[38;2;{rgb_c[0]};{rgb_c[1]};{rgb_c[2]}m")
         print(f"Waiting for marker {n + 1} configure menu...", end=" ")
         await_config_menu()  # Don't continue if the configure menu is not open
         print("DONE")
@@ -184,9 +187,10 @@ def main():
         print(f"Recoloring marker {n + 1} to '#{color}'...", end=" ")
         recolor(color)
         print("DONE")
-
+    if print_with_colors:
+        print("\033[0m")
     input("\nDONE\nPress enter to close\n> ")
 
 
 if __name__ == '__main__':
-    main()
+    main(print_with_colors="y" in input("Print Colored Text (Experimental) - does not affect performance? [y/n]\n> "))
