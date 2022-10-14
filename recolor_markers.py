@@ -1,11 +1,20 @@
 import ctypes
+import subprocess
+import sys
 import time
 import tkinter
 from tkinter import filedialog
-
-import pyautogui
-import pyperclip
-from PIL import Image, ImageGrab
+try:
+    import pyautogui
+    import pyperclip
+    from PIL import Image, ImageGrab
+except ModuleNotFoundError:
+    print(f'Please execute the following line and run the script again:\n'
+          f'{sys.executable} -m pip install -U PyAutoGUI pyperclip Pillow')
+    # Ask the user to install all the necessary packages automatically
+    if input("Proceed to run the command automatically? [yes/no] ").find("yes") != -1:
+        subprocess.call(f"{sys.executable} -m pip install -U PyAutoGUI pyperclip Pillow")
+    exit()
 
 import common
 
