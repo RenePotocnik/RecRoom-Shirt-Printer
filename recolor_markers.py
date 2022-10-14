@@ -5,6 +5,10 @@ import time
 import tkinter
 from tkinter import filedialog
 import common
+
+# Enable color support in a CMD window
+# subprocess.call(r"reg add HKEY_CURRENT_USER\Console /v VirtualTerminalLevel /t REG_DWORD /d 0x00000001 /f")
+
 try:
     import pyautogui
     import pyperclip
