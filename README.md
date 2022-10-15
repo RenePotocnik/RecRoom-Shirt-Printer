@@ -19,11 +19,7 @@ Well, thanks to [JavierFML](https://www.youtube.com/c/JavierFML) for the amazing
 
 *I still recommend reading the written tutorial, because you might find some things you missed in the video*
 
-
-[![New Video Tutorial](https://img.youtube.com/vi/tUwJHC74-a0/0.jpg)](https://www.youtube.com/watch?v=tUwJHC74-a0&t)
-
-*Older video:*\
-[![Old Video Tutorial](https://img.youtube.com/vi/SWv9tlETVkw/0.jpg)](https://www.youtube.com/watch?v=SWv9tlETVkw)
+[![Old Video Tutorial](https://img.youtube.com/vi/EZR3KmJVEu4/0.jpg)](https://www.youtube.com/watch?v=EZR3KmJVEu4)
 
 # Shirt Printer
 
