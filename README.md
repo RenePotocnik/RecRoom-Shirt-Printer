@@ -1,5 +1,5 @@
 <p align="center">
-  <img width="300" src="Resources/RecRoomPrinting.png" alt="RecRoom Printing Image">
+  <img src="Resources/RecRoomPrintingBanner.png" alt="RecRoom Printing Image">
 </p>
 
 ----
