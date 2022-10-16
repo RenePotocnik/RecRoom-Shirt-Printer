@@ -11,7 +11,7 @@ except AttributeError:
     input("Lower version of module 'pyscreeze' found.\n"
           "Press enter to update it, them run this script again.\n"
           "> ")
-    subprocess.call(f"{sys.executable} -m pip3 install pyscreeze -U")
+    subprocess.call(f"{sys.executable} -m pip install -U pyscreeze")
 except Exception as e:
     exit(input(f"ERROR: {e}"))
 
