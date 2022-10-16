@@ -185,13 +185,10 @@ def main(print_with_colors: bool = True):
         rgb_c = hex_to_rgb(color)
         if print_with_colors:
             print(f"\033[38;2;{rgb_c[0]};{rgb_c[1]};{rgb_c[2]}m")
-        print(f"Waiting for marker {n + 1} configure menu...", end=" ")
+        print(f"Recoloring marker {n + 1} to '#{color}'")
         await_config_menu()  # Don't continue if the configure menu is not open
-        print("DONE")
         common.is_window_active()  # Do not continue if Rec Room is not the window in focus
-        print(f"Recoloring marker {n + 1} to '#{color}'...", end=" ")
         recolor(color)
-        print("DONE")
     if print_with_colors:
         print("\033[0m")
     input("\nDONE\nPress enter to close\n> ")
