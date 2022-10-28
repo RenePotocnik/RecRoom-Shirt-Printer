@@ -195,7 +195,7 @@ If you get any messages/errors saying to calibrate your coordinates [follow this
 [Video: replacing the variable and preparing for importing](https://user-images.githubusercontent.com/76653181/179419753-4981f9bb-0b66-47bb-8796-cbedddf5ef56.mp4)
 
 
-## Spawning the shirt customizer
+# Spawning the shirt customizer
 
 When the importing process is finished, you will have to spawn in your **Shirt Customizer**.\
 The placement is very important! If the canvas is not flush with the wall the print might not work at all.\
@@ -207,7 +207,7 @@ It should look like the picture below.
 
 ![ShrtCutomizerInTheCorner](https://user-images.githubusercontent.com/76653181/179421185-9eff3a75-6e41-43d8-a1ca-a811894f8304.png)
 
-### Alternative method of placing the shirt customizer
+## Alternative method of placing the shirt customizer
 Spawn the invention `Board Placement Seat` (**from your watch, not your makerpen**)\
 This will place a seat in the exact position for optimal board placement.\
 **Spawning the invention has a chance of spawning it at the incorrect angle (it is supposed to be rotated)**
@@ -218,7 +218,7 @@ Then navigate to your backpack and spawn the Shirt Customizer. You can then leav
 ![Invention image](https://user-images.githubusercontent.com/76653181/180603926-e4006af3-8395-43eb-b3aa-844328399fdd.png)
 
 
-## Adjusting printer settings
+# Adjusting printer settings
 
 Next step is on the circuit board named `Shirt Printer`.\
 You will have to change those inputs to suit your imported image\
@@ -235,15 +235,16 @@ There's comments to help you understand better;
 
 ![ShirtPrinterCircuitboardInputs](https://user-images.githubusercontent.com/76653181/179420840-0fd58e89-7a05-41b3-a81f-efd2e614c3dc.png)
 
-##
+----
+
 Now press the `Start` button and wait. Preferably alone.
 
 ----
 
 If you have any problems with the scripts, the invention or anything else, you can contact me on:
 
-- [Discord: **McRen#2940**](https://discordapp.com/users/236809680947511297/)
-- [RecRoom: **@McReny**](https://rec.net/user/McReny)
+- Discord: [**McRen#2940**](https://discordapp.com/users/236809680947511297/)
+- RecRoom: [**@McReny**](https://rec.net/user/McReny)
 
 ----
 
