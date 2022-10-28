@@ -37,7 +37,9 @@ Make sure to `Watch` and `Star` this repository to get notified when new updates
 Many people refuse to use the printer because they get startled by the mountain of text below.\
 Well, thanks to [JavierFML](https://www.youtube.com/c/JavierFML) for the amazing tutorial, which should get you started with *most* of the stuff needed.
 
-*I still recommend reading the written tutorial, because you might find some things you missed in the video*
+*I still recommend looking through the written tutorial, because you might find some things you missed in the video*
+
+[~***Link To The Video***](https://youtu.be/EZR3KmJVEu4)
 
 [![New Video Tutorial](https://img.youtube.com/vi/EZR3KmJVEu4/0.jpg)](https://www.youtube.com/watch?v=EZR3KmJVEu4)
 
