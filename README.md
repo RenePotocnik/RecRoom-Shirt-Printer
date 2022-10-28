@@ -4,6 +4,26 @@
 
 ----
 
+# Table of Contents
+* [About this release](#about-this-release)
+* [Video Tutorial](#video-tutorial)
+* [Shirt Printer](#shirt-printer)
+* [Getting the right coordinates for importing](#getting-the-right-coordinates-for-importing)
+    * [Prepare for successful calibration](#prepare-for-successful-calibration)
+* [The Invention](#the-invention)
+    * [Optional modules/add-ons](#optional-modulesadd-ons)
+    * [Spawning the invention](#spawning-the-invention)
+* [Running the script](#running-the-script)
+* [Importing](#importing)
+    * [Importing using ***List Create*** (*recommended*)](#importing-using-list-create)
+        * [Connecting List Create Data](#connecting-list-create-data)
+    * [Importing using ***String Variable***](#importing-using-string-variable)
+* [Spawning the shirt customizer](#spawning-the-shirt-customizer)
+    * [Alternative method of placing the shirt customizer](#alternative-method-of-placing-the-shirt-customizer)
+* [Adjusting printer settings](#adjusting-printer-settings)
+
+----
+
 # About this release
 The repository you're currently viewing is an experimental version.\
 If you decide to download it and try it, join [this discord server](https://discord.gg/GuzwRMsyW8) and give feedback and report and problems you may experience.
@@ -19,7 +39,7 @@ Well, thanks to [JavierFML](https://www.youtube.com/c/JavierFML) for the amazing
 
 *I still recommend reading the written tutorial, because you might find some things you missed in the video*
 
-[![Old Video Tutorial](https://img.youtube.com/vi/EZR3KmJVEu4/0.jpg)](https://www.youtube.com/watch?v=EZR3KmJVEu4)
+[![New Video Tutorial](https://img.youtube.com/vi/EZR3KmJVEu4/0.jpg)](https://www.youtube.com/watch?v=EZR3KmJVEu4)
 
 # Shirt Printer
 
@@ -52,14 +72,14 @@ I am not responsible for any bans that may occur as a result of using my inventi
 
 ----
 
-## Getting the right coordinates for importing
+# Getting the right coordinates for importing
 
-If you have a monitor with a **16:9 aspect ratio** you can skip the calibration, by just entering "n" when prompted to calibrate.
+> If you have a monitor with a **16:9 aspect ratio** you can skip the calibration.
 
 If your monitor is not a _16:9_ ratio, or if you are not sure about it, calibrate/set your own coordinates by running 
 `Coordinate_Calibration.py` and [following the steps bellow](#prepare-for-successful-calibration).
 
-### Prepare for successful calibration
+## Prepare for successful calibration
 
 To calibrate successfully, follow all of these steps **exactly**:
 1. Spawn a `String Variable` using your makerpen.
@@ -105,7 +125,7 @@ When spawning the invention you must **spawn it from your watch** and **not** yo
 ![InventionStore](https://user-images.githubusercontent.com/76653181/179567901-62f7d174-b256-40df-ad33-be1a6f080abe.png)
 ![SpawnInvention](https://user-images.githubusercontent.com/76653181/179421897-ecddd84d-d33b-4b5d-aa27-9e1b5735ebed.png)
 
-## Running the script
+# Running the script
 
 Download the ZIP file containing all scripts.\
 **All the files (scripts) have to be in the same folder.** Best to just **unzip** the downloaded ZIP file, and run the scripts from there.\
@@ -119,22 +139,13 @@ I suggest the image is already converted into a RecRoom color palette
 If the image is not converted it will automatically get converted and dithered.\
 Templates for the shirt are in the included `Shirt_Templates` map.
 
-## Importing using `String Variable`
-
-After the data has been encoded, you will be prompted to import it to RecRoom.\
-For this you'll have to **Configure** the `String Variable`. You will have to **replace** the existing one with a new
-one (see video below)\
-When you see the white `Value` input field, enter `y` in the script.\
-Tab back into RecRoom and _wait_...\
-I strongly recommend doing this step last, because all data gets erased if you save the room or `Reset Components`
-
-If you want a more robust way of importing, go to [this part](#importing-using-list-create)
-
-If you get any messages/errors saying to calibrate your coordinates [follow this tutorial](#prepare-for-successful-calibration)
-
-
-[Video: replacing the variable and preparing for importing](https://user-images.githubusercontent.com/76653181/179419753-4981f9bb-0b66-47bb-8796-cbedddf5ef56.mp4)
-
+# Importing 
+Importing the encoded image into Rec Room is one of the most important steps of image printing.\
+For the current printer there are **two** ways to import;\
+`"Variable Importing"` is a faster, yet more risky method - 
+if you save or leave your dorm in any way, **all** imported data will be erased.\
+`"List Create Importing"` takes *slightly* longer but comes with the ability to **save** the imported image data 
+which you can use multiple times, or even give to your friend to print.
 
 ## Importing using `List Create`
 Unlike the _**Variable**_ import method, using the _**List Create**_ import method you can save the imported image data as an invention, spawn it and connect it to the printer for easy repeated and remote printing.
@@ -162,8 +173,26 @@ Go to [^ListCreateImporting](https://rec.net/room/ListCreateImporting) and follo
 * Connect `Data Loaded` to `Load` in the `Shirt Printer` circuit board
 * On the `Shirt Printer` circuit board, change `Variable Import` from `True` to `False` 
 
+### Connecting `List Create Data`
 
 [Video: How to connect the List Create Imported data](https://user-images.githubusercontent.com/76653181/182651483-7bc7728c-663a-405d-aa40-be7bb896ce89.mp4)
+
+
+## Importing using `String Variable`
+
+After the data has been encoded, you will be prompted to import it to RecRoom.\
+For this you'll have to **Configure** the `String Variable`. You will have to **replace** the existing one with a new
+one (see video below)\
+When you see the white `Value` input field, enter `y` in the script.\
+Tab back into RecRoom and _wait_...\
+I strongly recommend doing this step last, because all data gets erased if you save the room or `Reset Components`
+
+If you want a more robust way of importing, go to [this part](#importing-using-list-create)
+
+If you get any messages/errors saying to calibrate your coordinates [follow this tutorial](#prepare-for-successful-calibration)
+
+
+[Video: replacing the variable and preparing for importing](https://user-images.githubusercontent.com/76653181/179419753-4981f9bb-0b66-47bb-8796-cbedddf5ef56.mp4)
 
 
 ## Spawning the shirt customizer
