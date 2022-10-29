@@ -25,6 +25,7 @@
     * [Invention](#invention)
     * [Placing a new canvas](#placing-a-new-canvas)
     * [Pixel Size](#pixel-size)
+    * [Board settings](#board-settings)
 
 ----
 
