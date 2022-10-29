@@ -21,6 +21,10 @@
 * [Spawning the shirt customizer](#spawning-the-shirt-customizer)
     * [Alternative method of placing the shirt customizer](#alternative-method-of-placing-the-shirt-customizer)
 * [Adjusting printer settings](#adjusting-printer-settings)
+* [Printing on a canvas](#printing-on-a-canvas)
+    * [Invention](#invention)
+    * [Placing a new canvas](#placing-a-new-canvas)
+    * [Pixel Size](#pixel-size)
 
 ----
 
@@ -207,7 +211,7 @@ Spawn the shirt customizer, grab it and push it into the corner _as shown in the
 
 It should look like the picture below.
 
-![ShrtCutomizerInTheCorner](https://user-images.githubusercontent.com/76653181/179421185-9eff3a75-6e41-43d8-a1ca-a811894f8304.png)
+![Shirt Customizer Placement](https://user-images.githubusercontent.com/76653181/179421185-9eff3a75-6e41-43d8-a1ca-a811894f8304.png)
 
 ## Alternative method of placing the shirt customizer
 Spawn the invention `Board Placement Seat` (**from your watch, not your makerpen**)\
@@ -235,11 +239,54 @@ There's comments to help you understand better;
   it's off even by one it **will mess up**
 * `Image Height` - not as important as width; it only affects the progress display
 
-![ShirtPrinterCircuitboardInputs](https://user-images.githubusercontent.com/76653181/179420840-0fd58e89-7a05-41b3-a81f-efd2e614c3dc.png)
+![Shirt Printer Circuit Board](https://user-images.githubusercontent.com/76653181/179420840-0fd58e89-7a05-41b3-a81f-efd2e614c3dc.png)
 
 ----
 
 Now press the `Start` button and wait. Preferably alone.
+
+----
+
+# Printing on a canvas
+
+## Invention
+Invention store: [***Canvas Printer Module***](https://rec.net/invention/11258483)
+![Canvas Printer Module in the invention store](Resources/CanvasPrinterModule_InventionStore.png)
+When spawning the invention, make sure to spawn it from your **watch menu** and **not** your makerpen - 
+this way it spawns with the correct placement.
+
+## Placing a new canvas
+The canvas that is included with the invention functions as a *reference* - if you print on it, you **won't be able to 
+save the canvas as an invention.**\
+Delete this canvas and spawn a new one using your makerpen.\
+Make sure you're using ***Surface Snapping***, look at the wall next to the *Rec Center* door and place it.
+
+Press the "***Place Canvas***" button on the wall on your right.\
+![Place Canvas button](Resources/PlaceCanvas_Button.png)
+This button **does not create a canvas for you**,
+it just takes the nearest *canvas* and sets its position to the correct position for printing.\
+It also **does not *scale*** the canvas, thus after pressing the button you'll have to **scale** the canvas to fit
+inside the *white and yellow* border. You can/should press the button as many times as you want.\
+![Canvas Alignment](Resources/CanvasAligment.png)
+***If the canvas is too small, the image might not get drawn correctly! It's better to make it larger than smaller.***
+
+## Pixel Size
+On the left side of the canvas are 3 buttons:
+* Manual Pixel Size
+* Increase Pixel Size
+* Decrease Pixel Size
+
+This will **increase** and **decrease** the size of the pixels on the canvas. It takes some *trial and error* to 
+figure it out.\
+Usually it's best to adjust this while the printer is printing, **listen** for the markers hitting the board and 
+pressing "***Decrease Pixel Size***" until you can't hear the marker anymore (not good) - 
+press "***Increase Pixel Size***", until you hear the markers again.
+![Pixel Size buttons](Resources/PixelSize.png)
+
+## Board settings
+* `Front And Back` must be set to `True`
+* `Image Width` and `Image Height` must be set to the same size as the imported image
+![Shirt Printer Circuit board](https://user-images.githubusercontent.com/76653181/179420840-0fd58e89-7a05-41b3-a81f-efd2e614c3dc.png)
 
 ----
 
