@@ -30,14 +30,29 @@
 
 ----
 
+<div align="center">
+
+**Respect the [Code of Conduct](https://recroom.com/code-of-conduct)**\
+**_I am not responsible for any bans that may occur as a result of using my invention._**
+
+</div>
+
+
+----
+
 # About this release
-The repository you're currently viewing is an experimental version.\
-If you decide to download it and try it, join [this discord server](https://discord.gg/GuzwRMsyW8) and give feedback and report and problems you may experience.
+This is the latest release of the printing script. Here is where you will find **all** necessary files for successful 
+shirt/canvas printing.\
+I am updating the scripts here constantly so make sure to join 
+[this discord server](https://discord.gg/GuzwRMsyW8)
+for notifications about **new features**, **help with the printer**, and showcase from other users.
 
-If you want the stable release, tested by hundreds or people, go to [this release](https://github.com/RenePotocnik/RecRoom-Shirt-Printer/tree/v1.1.6)
+Make sure to `Watch` and `Star` this repository to get notified when new updates come out.
+<div align="center">
 
-Make sure to `Watch` and `Star` this repository to get notified when new updates come out\
 ![Watch Repository](Resources/WatchAndStarRepo.png)
+
+</div>
 
 # Video Tutorial
 Many people refuse to use the printer because they get startled by the mountain of text below.\
@@ -47,7 +62,11 @@ Well, thanks to [JavierFML](https://www.youtube.com/c/JavierFML) for the amazing
 
 [~***Link To The Video***](https://youtu.be/EZR3KmJVEu4)
 
+<div align="center">
+
 [![Printing Video Tutorial](https://img.youtube.com/vi/EZR3KmJVEu4/0.jpg)](https://www.youtube.com/watch?v=EZR3KmJVEu4)
+
+</div>
 
 # Shirt Printer
 
@@ -72,11 +91,11 @@ If none of the steps above work, you can message me on:
 * Discord Server: [**Rec Room Printing**](https://discord.gg/GuzwRMsyW8)
 * RecRoom: [**@McReny**](https://rec.net/user/McReny)
 
+<div style="width: 50%">
+
 [![Discord Server Image](Resources/DiscordServerImage.png)](https://discord.gg/GuzwRMsyW8)
 
-**Respect the [Code of Conduct](https://recroom.com/code-of-conduct)**\
-I am not responsible for any bans that may occur as a result of using my invention.
-
+</div>
 
 ----
 
@@ -295,20 +314,28 @@ press "***Increase Pixel Size***", until you hear the markers again.
 # Printing with custom colors
 Video tutorial:
 
+<div align="center">
+
 [![Custom Colors Video Tutorial](https://img.youtube.com/vi/rkJos4NgEIc/0.jpg)](https://youtu.be/rkJos4NgEIc)
 
-Rec Room invention you will need: 
-[79 Shirt Recolorable](https://rec.net/invention/3886690226106314110)
+</div>
+
+Rec Room invention: 
+[***79 Shirt Recolorable***](https://rec.net/invention/3886690226106314110)
 
 ----
 
-If you have any problems with the scripts, the invention or anything else, you can contact me on:
+<div align="center">
 
-- Discord: [**McRen#2940**](https://discordapp.com/users/236809680947511297/)
-- RecRoom: [**@McReny**](https://rec.net/user/McReny)
+If you have any problems with the scripts, the invention or anything else, you can contact me on:\
+Discord: [**McRen#2940**](https://discordapp.com/users/236809680947511297/)\
+RecRoom: [**@McReny**](https://rec.net/user/McReny)
 
 ----
 
-If you like the printer and would like to support/motivate me to keep updating it, you can:
-* Donate on [my PayPal](https://paypal.me/mcrenRR)
-* Or [buy me a coffee](https://www.buymeacoffee.com/mcren)
+
+If you like the printer and would like to support/motivate me to keep updating it, you can:\
+Donate on [ PayPal](https://paypal.me/mcrenRR)\
+Or [Buy Me a Coffee](https://www.buymeacoffee.com/mcren)
+
+</div>
