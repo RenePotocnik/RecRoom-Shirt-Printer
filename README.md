@@ -26,6 +26,7 @@
     * [Placing a new canvas](#placing-a-new-canvas)
     * [Pixel Size](#pixel-size)
     * [Board settings](#board-settings)
+* [Printing with custom colors](#printing-with-custom-colors)
 
 ----
 
@@ -46,7 +47,7 @@ Well, thanks to [JavierFML](https://www.youtube.com/c/JavierFML) for the amazing
 
 [~***Link To The Video***](https://youtu.be/EZR3KmJVEu4)
 
-[![New Video Tutorial](https://img.youtube.com/vi/EZR3KmJVEu4/0.jpg)](https://www.youtube.com/watch?v=EZR3KmJVEu4)
+[![Printing Video Tutorial](https://img.youtube.com/vi/EZR3KmJVEu4/0.jpg)](https://www.youtube.com/watch?v=EZR3KmJVEu4)
 
 # Shirt Printer
 
@@ -288,6 +289,16 @@ press "***Increase Pixel Size***", until you hear the markers again.
 * `Front And Back` must be set to `True`
 * `Image Width` and `Image Height` must be set to the same size as the imported image
 ![Shirt Printer Circuit board](https://user-images.githubusercontent.com/76653181/179420840-0fd58e89-7a05-41b3-a81f-efd2e614c3dc.png)
+
+----
+
+# Printing with custom colors
+Video tutorial:
+
+[![Custom Colors Video Tutorial](https://img.youtube.com/vi/rkJos4NgEIc/0.jpg)](https://youtu.be/rkJos4NgEIc)
+
+Rec Room invention you will need: 
+[79 Shirt Recolorable](https://rec.net/invention/3886690226106314110)
 
 ----
 
