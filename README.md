@@ -1,6 +1,4 @@
-<p align="center">
-  <img src="Resources/RecRoomPrintingBanner.png" alt="RecRoom Printing Image">
-</p>
+[<p align="center"><img src="Resources/RecRoomPrintingBanner.png" alt="RecRoom Printing Image"></p>](https://discord.gg/GuzwRMsyW8)
 
 ----
 
@@ -50,7 +48,7 @@ for notifications about **new features**, **help with the printer**, and showcas
 Make sure to `Watch` and `Star` this repository to get notified when new updates come out.
 <div align="center">
 
-![Watch Repository](Resources/WatchAndStarRepo.png)
+[![Watch Repository](Resources/WatchAndStarRepo.png)](https://docs.github.com/en/get-started/exploring-projects-on-github/saving-repositories-with-stars)
 
 </div>
 
