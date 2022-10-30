@@ -1,4 +1,8 @@
-[<p align="center"><img src="Resources/RecRoomPrintingBanner.png" alt="RecRoom Printing Image"></p>](https://discord.gg/GuzwRMsyW8)
+<div align="center">
+
+[![Print Your Own Custom Shirt](Resources/RecRoomPrintingBanner.png)](https://discord.gg/GuzwRMsyW8)
+
+</div>
 
 ----
 
