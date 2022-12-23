@@ -62,11 +62,11 @@ Well, thanks to [JavierFML](https://www.youtube.com/c/JavierFML) for the amazing
 
 *I still recommend looking through the written tutorial, because you might find some things you missed in the video*
 
-[~***Link To The Video***](https://youtu.be/EZR3KmJVEu4)
+[~***Link To The Video***](https://youtu.be/n0PO6MqDhpo)
 
 <div align="center">
 
-[![Printing Video Tutorial](https://img.youtube.com/vi/EZR3KmJVEu4/0.jpg)](https://www.youtube.com/watch?v=EZR3KmJVEu4)
+[![Printing Video Tutorial](https://img.youtube.com/vi/n0PO6MqDhpo/0.jpg)](https://youtu.be/n0PO6MqDhpo)
 
 </div>
 
