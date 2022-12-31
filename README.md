@@ -32,15 +32,20 @@
 
 ----
 
-<div align="center">
+<div align="center" style="background-color: black; border-radius: 10px">
 
 **Respect the [Code of Conduct](https://recroom.com/code-of-conduct)**\
 **_I am not responsible for any bans that may occur as a result of using my invention._**
 
-</div>
 
 
 ----
+
+***If you sell or distribute any products made with this printer, please credit us - even a mention is appreciated.***
+
+----
+
+</div>
 
 # About this release
 This is the latest release of the printing script. Here is where you will find **all** necessary files for successful 
