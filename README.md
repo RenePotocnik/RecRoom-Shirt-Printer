@@ -34,12 +34,12 @@
 
 <div align="center">
 
-## **Respect the [Code of Conduct](https://recroom.com/code-of-conduct)**
-### **_I am not responsible for any bans that may occur as a result of using my invention._**
+**Respect the [RecRoom Code of Conduct](https://recroom.com/code-of-conduct)**
+**_I am not responsible for any bans that may occur as a result of using my inventions._**
 
 ----
 
-## ***If you sell or distribute any products made with this printer, please credit us - even a mention is appreciated.***
+***If you sell or distribute any products made with this printer, please credit us - even a mention is appreciated.***
 
 ----
 
