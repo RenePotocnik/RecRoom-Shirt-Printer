@@ -34,8 +34,8 @@
 
 <div align="center">
 
-**Respect the [RecRoom Code of Conduct](https://recroom.com/code-of-conduct)**
-**_I am not responsible for any bans that may occur as a result of using my inventions._**
+**Respect the [Code of Conduct](https://recroom.com/code-of-conduct)**\
+**_I am not responsible for any bans that may occur as a result of using my invention._**
 
 ----
 
