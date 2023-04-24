@@ -40,12 +40,12 @@ def copy_into_rr_variable(img_data: list[str], delay: float = 0.3, pause_at_50: 
 
     # These are the old, pre-made button coordinates only meant for 16:9 display aspect ratios
     input_field: Tuple[int, int] = (int(SCREEN_DIMENSIONS[0] * 0.5),
-                                    int(SCREEN_DIMENSIONS[1] * 0.5625))
-    confirm_expand_button: Tuple[int, int] = (int(SCREEN_DIMENSIONS[0] * 0.841015),
-                                              int(SCREEN_DIMENSIONS[1] * 0.083333))
+                                    int(SCREEN_DIMENSIONS[1] * 0.4763))
+    confirm_expand_button: Tuple[int, int] = (int(SCREEN_DIMENSIONS[0] * 0.8589),
+                                              int(SCREEN_DIMENSIONS[1] * 0.0631))
 
-    color_check: List[Tuple[int, int]] = [(int(SCREEN_DIMENSIONS[0] * 0.1121), int(SCREEN_DIMENSIONS[1] * 0.4611)),
-                                          (int(SCREEN_DIMENSIONS[0] * 0.1953), int(SCREEN_DIMENSIONS[1] * 0.5208))]
+    color_check: List[Tuple[int, int]] = [(int(SCREEN_DIMENSIONS[0] * 0.0933), int(SCREEN_DIMENSIONS[1] * 0.3638)),
+                                          (int(SCREEN_DIMENSIONS[0] * 0.1046), int(SCREEN_DIMENSIONS[1] *   0.3777))]
 
     # Check if there's a `coordinates.json` file; if there is -> use the coords written in there
     try:
