@@ -40,7 +40,7 @@ def copy_into_rr_variable(img_data: list[str], delay: float = 0.3, pause_at_50: 
 
     # These are the old, pre-made button coordinates only meant for 16:9 display aspect ratios
     input_field: Tuple[int, int] = (int(SCREEN_DIMENSIONS[0] * 0.5),
-                                    int(SCREEN_DIMENSIONS[1] * 0.4763))
+                                    int(SCREEN_DIMENSIONS[1] * 0.56))  # Previously 0.4763
     confirm_expand_button: Tuple[int, int] = (int(SCREEN_DIMENSIONS[0] * 0.8589),
                                               int(SCREEN_DIMENSIONS[1] * 0.0631))
 
