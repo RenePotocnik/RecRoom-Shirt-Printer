@@ -27,7 +27,7 @@ except ModuleNotFoundError:
         subprocess.call(f"{sys.executable} -m pip install -U PyAutoGUI pyperclip Pillow")
     exit()
 
-MaxStringLength: int = 280  # Maximum length string
+MaxStringLength: int = 512  # Maximum length string
 
 # Typing alias for color
 PixelColor = Tuple[int, int, int]
