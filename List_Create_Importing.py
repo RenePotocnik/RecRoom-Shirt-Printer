@@ -51,7 +51,8 @@ def copy_to_recroom(img_data: list[str], delay: float = 0.3, last_successful_str
 
     # Coordinates for all the buttons
     input_field: Coords = (int(SCREEN_DIMENSIONS[0] * 0.5), int(SCREEN_DIMENSIONS[1] * 0.34))
-    done_button: Coords = (int(SCREEN_DIMENSIONS[0] * 0.11), int(SCREEN_DIMENSIONS[1] * 0.52))
+    # done_button: Coords = (int(SCREEN_DIMENSIONS[0] * 0.11), int(SCREEN_DIMENSIONS[1] * 0.52))  # Old coordinates
+    done_button: Coords = (int(SCREEN_DIMENSIONS[0] * 0.08), int(SCREEN_DIMENSIONS[1] * 0.45))  # New coordinates
 
     color_checking_coords: List[Tuple[int, int]] = [(int(SCREEN_DIMENSIONS[0] * 0.25),
                                                      int(SCREEN_DIMENSIONS[1] * 0.5)),
